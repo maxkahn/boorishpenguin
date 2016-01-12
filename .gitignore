@@ -9,5 +9,6 @@ dist/
 node_modules/
 bower_components/
 lib/
+client/lib
 
 */.DS_Store
