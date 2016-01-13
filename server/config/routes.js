@@ -24,6 +24,22 @@ module.exports = function(app, express, ensureAuth) {
 
   app.get('/api/users', userControllers.allUsers);
   app.get('/api/users/:id', userControllers.oneUser);
+  // app.get('/api/questions', ensureAuth, questionControllers.allQuestions);
+  // app.post('/api/questions', ensureAuth, questionControllers.newQuestion);
+  // app.delete('/api/questions/:id', ensureAuth, questionControllers.deleteQuestion);
+
+  // app.get('/api/questions/:id', ensureAuth, questionControllers.readQuestion);
+  // //note: the following route is to modify a question. We have to distinguish
+  //   //between two things; so we can do that in the route or in the method
+  // //route is more elegant, but I'm not sure how to do that
+  // app.post('/api/questions/:id', ensureAuth, questionControllers.modQuestion);
+
+  // app.post('/api/answers', ensureAuth, answerControllers.newAnswer);
+  // app.post('/api/answers/:id', ensureAuth, answerControllers.modAnswer);
+  // app.delete('/api/answers/:id', ensureAuth, answerControllers.deleteAnswer);
+
+  // app.get('/api/users', ensureAuth, userControllers.allUsers);
+  // app.get('/api/users/:id', ensureAuth, userControllers.oneUser);
   app.post('/api/signup', userControllers.newUser);
 
   app.get('/api/courses', courseControllers.allCourses);
