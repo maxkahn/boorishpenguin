@@ -19,7 +19,7 @@ module.exports = {
         .then(function(user) {
           db.Post.create({
             text: txt,
-            isAnAnswer: true,
+            isCorrectAnswer: true,
             UserId: uid,
             QuestionId: qid,
             CourseId: question.CourseId,

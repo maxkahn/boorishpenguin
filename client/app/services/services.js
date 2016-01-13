@@ -9,7 +9,7 @@ angular.module('boorish.services', [])
 
       return $http({
         method: 'POST',
-        url: '/townhall/questions',
+        url: '/api/questions',
         data: JSON.stringify({
           text: question.text,
           id_user: question.userId,
@@ -32,7 +32,11 @@ angular.module('boorish.services', [])
 
       return $http({
         method: 'GET',
+<<<<<<< 07b0f2b13693673630d8c756805176d5ee9e27bb
         url: '/townhall/test/'
+=======
+        url: '/api/questions/'
+>>>>>>> Refactored the schema as well as beginning to refactor the controllers.
       })
       .then(function(res) {
         return [{
@@ -256,7 +260,7 @@ angular.module('boorish.services', [])
     allUsers: function(){
       return $http({
         method: 'GET',
-        url: '/townhall/users'
+        url: '/api/users'
       })
       .then(function(res){
         return res.data;
@@ -268,7 +272,7 @@ angular.module('boorish.services', [])
       var userID = $window.localStorage.getItem('com.boorish');
       return $http({
         method: 'GET',
-        url: '/townhall/users/' + userID
+        url: '/api/users/' + userID
       }).then(function(res) {
         return res.data.results.id;
       })
@@ -277,7 +281,7 @@ angular.module('boorish.services', [])
     addUser: function(user) {
       return $http({
         method: 'POST',
-        url: '/townhall/users',
+        url: '/api/users',
         data: JSON.stringify({
           username: user.username,
           password: user.password,
@@ -302,7 +306,7 @@ angular.module('boorish.services', [])
     getTags: function() {
       return $http({
         method: 'GET',
-        url: '/townhall/tags'
+        url: '/api/tags'
       })
       .then(function(res) {
         return res.data;
@@ -319,7 +323,11 @@ angular.module('boorish.services', [])
     getCourses: function() {
       return $http({
         method: 'GET',
+<<<<<<< 07b0f2b13693673630d8c756805176d5ee9e27bb
         url: '/townhall/test' //courses
+=======
+        url: '/api/courses'
+>>>>>>> Refactored the schema as well as beginning to refactor the controllers.
 
       })
       .then(function(res) {
@@ -359,7 +367,7 @@ angular.module('boorish.services', [])
 
         return $http({
           method: 'GET',
-          url: '/townhall/users'
+          url: '/api/users'
         })
         .then(function(res) {
           var users = res.data.results;
