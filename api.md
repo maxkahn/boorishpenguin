@@ -37,22 +37,13 @@ Requests from client (services.js):
   /api/courses  GET (getCourses) (exists on server)
 
   /user GET (setUser) (exists on server)
-<<<<<<< HEAD
     expects .data.email field or .data.profile.emails array
-
-=======
->>>>>>> Preparing for merge with Eric's serverControllers branch.
   /api/users  GET (anonymous)
   /api/users  GET (signin, in auth.js)
 
 Routes on server:
   /api/questions    GET   (exists on client)
-<<<<<<< HEAD
     returns data with results field an array of objects. Each object {id:, title:, text:, isCorrectAnswer:, points:, responses:, isAnswered:, isGood:, isClosed:, createdAt:, coursename:, tagname:, user:, imgUrl:, updatedAt:}
-
-
-=======
->>>>>>> Preparing for merge with Eric's serverControllers branch.
   /api/questions    POST  (exists on client)
   /api/questions/:id  DELETE (exists on client)
   /api/questions/:id  GET (exists on client)
