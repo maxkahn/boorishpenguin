@@ -66,12 +66,7 @@ var Post = db.define('Post', {
     allowNull: false,
     defaultValue: false
   },
-  upvotes: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    defaultValue: 0
-  },
-  downvotes: {
+  votes: {
     type: Sequelize.INTEGER,
     allowNull: false,
     defaultValue: 0
