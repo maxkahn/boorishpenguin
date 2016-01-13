@@ -50,3 +50,36 @@
           <!--coursename: question.Course.name,-->
           <!--tagname: question.Tag.name,-->
           <!--user: question.User.name-->
+
+
+
+
+          <h1>questions view</h1>
+
+          <div ng-repeat='question in questions'>
+            <div>
+              <div>
+                <img ng-src="{{ question.imgUrl }}" width="50">
+              </div>
+              <!-- number of points current on question -->
+
+              <!-- number of answers current on question -->
+              <div>
+                <span></span>
+                <span>{{ question.responses }}</span>
+                <span>Answers</span>
+              </div>
+              <!-- link to question id. Title is currently the first 60 characters in the text -->
+            </div>
+            <div>
+              <h3>
+                <a ng-href='#/questions/{{ question.id }}'>{{ question.title }}</a>
+                <span class="glyphicon glyphicon-ok-sign" ng-if="question.isGood == true"></span>
+              </h3>
+
+              <div class="course">{{ question.coursename }}</div>
+              <div class="tag">{{ question.tagname }}</div>
+              <div>- asked by {{ question.user }} at {{ question.createdAt }}</div>
+            </div>
+            <hr>
+          </div>

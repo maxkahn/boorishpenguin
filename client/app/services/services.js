@@ -22,13 +22,56 @@ angular.module('boorish.services', [])
 
     getAllQuestions: function() {
 
+      // return $http({
+      //   method: 'GET',
+      //   url: '/townhall/questions/'
+      // })
+      // .then(function(res) {
+      //   return res.data; // returns all questions
+      // });
+
       return $http({
         method: 'GET',
-        url: '/townhall/questions/'
+        url: '/townhall/test/'
       })
       .then(function(res) {
-        return res.data; // returns all questions
-      })
+        return [{
+          user: "cpenarrieta",
+          coursename: "math",
+          tagname: "homework",
+          title: "question title",
+          imgUrl: "http://images.apple.com/pr/bios/images/1501cue_thumb.jpg",
+          createdAt: '04/07/2016'
+        },{
+          user: "ranjit",
+          coursename: "history",
+          tagname: "quiz",
+          title: "question title 2",
+          imgUrl: "http://images.apple.com/pr/bios/images/cook_thumb.jpg",
+          createdAt: '04/07/2016'
+        },{
+          user: "ranjit",
+          coursename: "history",
+          tagname: "quiz",
+          title: "question title 2",
+          imgUrl: "http://images.apple.com/pr/bios/images/cook_thumb.jpg",
+          createdAt: '04/07/2016'
+        },{
+          user: "ranjit",
+          coursename: "history",
+          tagname: "quiz",
+          title: "question title 2",
+          imgUrl: "http://images.apple.com/pr/bios/images/cook_thumb.jpg",
+          createdAt: '04/07/2016'
+        },{
+          user: "ranjit",
+          coursename: "history",
+          tagname: "quiz",
+          title: "question title 2",
+          imgUrl: "http://images.apple.com/pr/bios/images/cook_thumb.jpg",
+          createdAt: '04/07/2016'
+        }];
+      });
     },
 
     getQuestion: function(path) { 
