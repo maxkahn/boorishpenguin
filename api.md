@@ -37,19 +37,16 @@ Requests from client (services.js):
   /api/courses  GET (getCourses) (exists on server)
 
   /user GET (setUser) (exists on server)
-<<<<<<< HEAD
+
     expects .data.email field or .data.profile.emails array
-=======
->>>>>>> Preparing for merge with Eric's serverControllers branch.
+
   /api/users  GET (anonymous)
   /api/users  GET (signin, in auth.js)
 
 Routes on server:
   /api/questions    GET   (exists on client)
-<<<<<<< HEAD
+
     returns data with results field an array of objects. Each object {id:, title:, text:, isCorrectAnswer:, points:, responses:, isAnswered:, isGood:, isClosed:, createdAt:, coursename:, tagname:, user:, imgUrl:, updatedAt:}
-=======
->>>>>>> Preparing for merge with Eric's serverControllers branch.
   /api/questions    POST  (exists on client)
   /api/questions/:id  DELETE (exists on client)
   /api/questions/:id  GET (exists on client)
@@ -69,4 +66,17 @@ Routes on server:
   /api/tags GET   (exists on client)
 
   /auth/google  GET
+
   /auth/google/callback GET
+
+  /user  GET (exists on server)
+
+
+  Notes on features:
+    adding comments
+    adding unit tests, integration tests, end-to-end tests
+    adding upvote/downvote system
+    adding logout functionality
+    (we could add some other oauth system, maybe facebook)
+    tons of css / user experience
+    how are we  going to tie things together? we have to change: routes (easy, one man job); methods (harder, also one-man-job); controllers and Angular front-end (harder, probably also one-man-job)
