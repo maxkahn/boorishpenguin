@@ -9,7 +9,7 @@ angular.module('boorish.services', [])
 
       return $http({
         method: 'POST',
-        url: '/townhall/questions',
+        url: '/api/questions',
         data: JSON.stringify({
           text: question.text,
           id_user: question.userId,
@@ -24,7 +24,7 @@ angular.module('boorish.services', [])
 
       return $http({
         method: 'GET',
-        url: '/townhall/questions/'
+        url: '/api/questions/'
       })
       .then(function(res) {
         return res.data; // returns all questions
@@ -34,7 +34,7 @@ angular.module('boorish.services', [])
     getQuestion: function(path) { 
       return $http({
         method: 'GET',
-        url: '/townhall' + path
+        url: '/api' + path
       })
       .then(function(res) {
         return res; // returns question and related answers
@@ -45,7 +45,7 @@ angular.module('boorish.services', [])
     updateQuestion: function(id, mod) {
       return $http({
         method: 'POST',
-        url: 'townhall/questions/' + id,
+        url: 'api/questions/' + id,
         data: { mod: mod } // possible mods = 'like' to increase like points, 'good' to mark as good (by teacher), 'answered', 'closed'
       })
     },
@@ -54,7 +54,7 @@ angular.module('boorish.services', [])
     removeQuestion: function(questionID) {
       return $http({
         method: 'DELETE',
-        url: 'townhall/questions/' + questionID
+        url: 'api/questions/' + questionID
       })
     }
   }
@@ -69,7 +69,7 @@ angular.module('boorish.services', [])
     getAnswers: function() {
       return $http({
         method: 'GET',
-        url: 'townhall/answers',
+        url: 'api/answers',
       })
       .then(function(res) {
         return res.data;
@@ -81,7 +81,7 @@ angular.module('boorish.services', [])
 
       return $http({
         method: 'POST',
-        url: 'townhall/answers',
+        url: 'api/answers',
         data: JSON.stringify({
           text: answer.text,
           id_question: questionID,
@@ -94,7 +94,7 @@ angular.module('boorish.services', [])
     updateAnswer: function(answerID, mod) {
       return $http({
         method: 'POST',
-        url: 'townhall/answers/' + answerID,
+        url: 'api/answers/' + answerID,
         data: JSON.stringify({
           id_answer: answerID,
           mod: mod // possible mods: 'like' to increase the number of points on a question, 'good' to mark as good
@@ -106,7 +106,7 @@ angular.module('boorish.services', [])
     removeAnswer: function(answerID) {
       return $http({
         method: 'DELETE',
-        url: 'townhall/answers/' + answerID
+        url: 'api/answers/' + answerID
       })
     }
 
@@ -122,7 +122,7 @@ angular.module('boorish.services', [])
     allUsers: function(){
       return $http({
         method: 'GET',
-        url: '/townhall/users'
+        url: '/api/users'
       })
       .then(function(res){
         return res.data;
@@ -134,7 +134,7 @@ angular.module('boorish.services', [])
       var userID = $window.localStorage.getItem('com.boorish');
       return $http({
         method: 'GET',
-        url: '/townhall/users/' + userID
+        url: '/api/users/' + userID
       }).then(function(res) {
         return res.data.results.id;
       })
@@ -143,7 +143,7 @@ angular.module('boorish.services', [])
     addUser: function(user) {
       return $http({
         method: 'POST',
-        url: '/townhall/users',
+        url: '/api/users',
         data: JSON.stringify({
           username: user.username,
           password: user.password,
@@ -168,7 +168,7 @@ angular.module('boorish.services', [])
     getTags: function() {
       return $http({
         method: 'GET',
-        url: '/townhall/tags'
+        url: '/api/tags'
       })
       .then(function(res) {
         return res.data;
@@ -185,7 +185,7 @@ angular.module('boorish.services', [])
     getCourses: function() {
       return $http({
         method: 'GET',
-        url: '/townhall/courses'
+        url: '/api/courses'
 
       })
       .then(function(res) {
@@ -211,7 +211,7 @@ angular.module('boorish.services', [])
 
         return $http({
           method: 'GET',
-          url: '/townhall/users'
+          url: '/api/users'
         })
         .then(function(res) {
           var users = res.data.results;
