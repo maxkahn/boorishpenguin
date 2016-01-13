@@ -7,7 +7,6 @@ var dbPass = process.env.DBPASS;
 // var database = process.env.DATABASE || 'jmuspkeyvjzsvvwp';
 // var dbUser = process.env.DBUSER || 'htmaaabw4pe3k9ja';
 var dbHost = 'localhost';
-// var dbHost = process.env.DBHOST || 'jw0ch9vofhcajqg7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
 
 var db = new Sequelize(database, dbUser, dbPass, {
   host: dbHost,
