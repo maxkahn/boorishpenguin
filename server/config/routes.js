@@ -16,6 +16,7 @@ module.exports = function(app, express) {
   app.post('/api/questions', questionControllers.newQuestion);
   app.delete('/api/questions/:id', questionControllers.deleteQuestion);
 
+
   app.get('/api/questions/:id', questionControllers.renderQuestion);
   app.put('/api/questions/changeStatus/:id', questionControllers.toggleCloseQuestion);
   app.put('/api/questions/markAsGood/:id' , questionControllers.markAsGoodQuestion);
