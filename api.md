@@ -77,5 +77,5 @@ Routes on server:
     adding logout functionality
     (we could add some other oauth system, maybe facebook)
     tons of css / user experience
-    how are we  going to tie things together? we have to change: routes (easy, one man job); methods (harder, also one-man-job); controllers and Angular front-end (harder, probably also one-man-job)
 
+    how are we  going to tie things together? we have to change: routes (easy, one man job); methods (harder, also one-man-job); controllers and Angular front-end (harder, probably also one-man-job)
