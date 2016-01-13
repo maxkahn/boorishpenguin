@@ -1,9 +1,12 @@
 var Sequelize = require('sequelize');
 
-var database = process.env.DATABASE || 'jmuspkeyvjzsvvwp';
-var dbUser = process.env.DBUSER || 'htmaaabw4pe3k9ja';
-var dbPass = process.env.DBPASS;
-var dbHost = process.env.DBHOST || 'jw0ch9vofhcajqg7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
+// var database = process.env.DATABASE || 'jmuspkeyvjzsvvwp';
+var database = 'townhall';
+var dbUser = 'root';
+// var dbUser = process.env.DBUSER || 'htmaaabw4pe3k9ja';
+var dbPass = 'abc';
+var dbHost = 'localhost';
+// var dbHost = process.env.DBHOST || 'jw0ch9vofhcajqg7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
 
 var db = new Sequelize(database, dbUser, dbPass, {
   host: dbHost
@@ -75,12 +78,13 @@ var Post = db.define('Post', {
     allowNull: false,
     defaultValue: false
   },
-  createdAt: {
-    type: Sequelize.DATE,
-    defaultValue: Sequelize.fn('NOW')
-  },
-  updatedAt: Sequelize.DATE
-});
+//   createdAt: {
+//     type: Sequelize.DATE,
+//     defaultValue: db.fn('NOW')
+//   },
+//   updatedAt: Sequelize.DATE
+}
+);
 
 var Like = db.define('Like', {
   }, {
