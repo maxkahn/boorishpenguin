@@ -1,14 +1,14 @@
 var db = require('../db/index.js');
 module.exports = {
 
-	allPost: function(queryObject) {
+	allPost: function(queryObject, callback) {
 
 		db.Post.findAll({
 				where: queryObject,
 				include: [db.User, db.Course, db.Tag]
 			})
 			.then(function(posts) {
-				var formattedQs = posts.map(function(post) {
+				var formattedPosts = posts.map(function(post) {
 					return {
 						id: post.id,
 						title: post.title,
@@ -29,8 +29,8 @@ module.exports = {
 				});
 
 				data = {};
-				data.results = formattedQs;
-				res.json(data);
+				data.results = formattedPosts;
+				callback(data);
 			});
 	},
 	addPost: function(postData, callback) {
@@ -47,48 +47,34 @@ module.exports = {
 			.then(callback(result));
 	},
 
-
-	//TODO: move to votes controller
-	// upvotePost: function(queryObject) {
-
-	// 	db.Vote.create({
-	// 			where: queryObject,
-	// 			include: [db.User, db.Post]
-	// 		})
-	// 		.then()
-	// },
-
-	deletePost: function(postId, userId, callback) {
+	deletePost: function(deleteData, callback) {
 		// var postId = req.params.id;
 		// var reqName = req.user.profile.emails[0].value;
-		db.User.findById(userId)
+		db.User.findById(deleteData.userId)
 			.then(function(user) {
-				db.Post.findById(postId)
+				db.Post.findById(deleteData.postId)
 					.then(function(post) {
-						if (user.isAdmin || user.isTeacher || post.UserId === userId) {
+						if (user.isAdmin || user.isTeacher || post.UserId === deleteData.userId) {
 
 							db.Vote.destroy({
 									where: {
-										PostId: postId
+										PostId: deleteData.postId
 									}
 								})
 								.then(function() {
-									callback(post);
-								})
-								.then(function() {
-									res.sendStatus(204);
-								})
+									callback(204);
+								});
 						} else {
-							res.sendStatus(404);
+							callback(404);
 						}
 					});
 			});
 	},
 
-	markAsPreferred: function(postId, userId, callback) {
-		db.Post.findById(postId)
+	markAsPreferred: function(markData, callback) {
+		db.Post.findById(markData.postId)
 			.then(function(post) {
-				db.User.findById(userId)
+				db.User.findById(markData.userId)
 					.then(function(user) {
 						if (user.isTeacher) {
 							post.update({
