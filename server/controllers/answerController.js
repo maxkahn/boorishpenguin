@@ -1,5 +1,6 @@
 var db = require('../db/index.js');
 var PostCtrl = require('./postController.js');
+var CommentCtrl = require('./commentController.js');
 
 module.exports = {
 
@@ -10,7 +11,17 @@ module.exports = {
 			//data an array of answers
 				//add the question at the head of the array
 				//for each answer, attach an array of comments
-			callback(data);
+			var answerArray = data.map(function(answer) {
+				answer.body = {};
+				answer.body.responseId = answer.id;
+				CommentCtrl.allComments(answer, res, function(data) {
+					answer.comments = data;
+				});
+				return answer;
+			})
+			.then(function(){
+				callback(answerArray);
+			});
 		});
 	},
 

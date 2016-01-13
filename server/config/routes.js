@@ -3,6 +3,7 @@ var answerControllers = require ('../controllers/answerController.js');
 var userControllers = require ('../controllers/userControllers.js');
 var courseControllers = require ('../controllers/courseControllers.js');
 var tagControllers = require ('../controllers/tagControllers.js');
+var voteController = require ('../controllers/voteController.js');
 var passport = require('passport');
 
 
@@ -11,12 +12,16 @@ module.exports = function(app, express, ensureAuth) {
   app.post('/api/questions', ensureAuth, questionControllers.newQuestion);
   app.delete('/api/questions/:id', ensureAuth, questionControllers.deleteQuestion);
 
-  app.get('/api/questions/:id', ensureAuth, questionControllers.readQuestion);
-  app.post('/api/questions/:id', ensureAuth, questionControllers.modQuestion);
-
+  app.get('/api/questions/:id', ensureAuth, questionControllers.renderQuestion);
+  app.put('/api/questions/changeStatus/:id', ensureAuth, questionControllers.toggleCloseQuestion);
+  app.put('/api/questions/markAsGood/:id' , ensureAuth, questionControllers.markAsGoodQuestion);
+  app.put('/api/questions/vote/:id' , ensureAuth, voteController.votePost);
+  
   app.post('/api/answers', ensureAuth, answerControllers.newAnswer);
-  app.post('/api/answers/:id', ensureAuth, answerControllers.modAnswer);
+  app.put('/api/answers/markAsCorrect/:id', ensureAuth, answerControllers.markAsCorrectAnswer);
+  app.put('/api/answers/vote/:id' , ensureAuth, voteController.votePost);
   app.delete('/api/answers/:id', ensureAuth, answerControllers.deleteAnswer);
+
 
   app.get('/api/users', ensureAuth, userControllers.allUsers);
   app.get('/api/users/:id', ensureAuth, userControllers.oneUser);
