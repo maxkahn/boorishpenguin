@@ -5,7 +5,7 @@ module.exports = {
   allQuestions: function(req, res) {
     db.Post.findAll({
       where: {
-        isAnAnswer: false
+        isCorrectAnswer: false
       },
       include: [db.User, db.Course, db.Tag]
     })
@@ -15,7 +15,7 @@ module.exports = {
           id: question.id,
           title: question.title,
           text: question.text,
-          isAnAnswer: false,
+          isCorrectAnswer: false,
           points: question.points,
           responses: question.responses,
           isAnswered: question.isAnswered,
@@ -122,7 +122,7 @@ module.exports = {
         id: question.id,
         title: question.title,
         text: question.text,
-        isAnAnswer: false,
+        isCorrectAnswer: false,
         points: question.points,
         responses: question.responses,
         isAnswered: question.isAnswered,
@@ -148,7 +148,7 @@ module.exports = {
           return {
             id: answer.id,
             text: answer.text,
-            isAnAnswer: true,
+            isCorrectAnswer: true,
             points: answer.points,
             isGood: answer.isGood,
             QuestionId: qid,

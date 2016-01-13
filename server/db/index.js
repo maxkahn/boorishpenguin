@@ -3,7 +3,7 @@ var Sequelize = require('sequelize');
 var database = process.env.DATABASE || 'jmuspkeyvjzsvvwp';
 var dbUser = process.env.DBUSER || 'htmaaabw4pe3k9ja';
 var dbPass = process.env.DBPASS;
-var dbHost = process.env.DBHOST || 'jw0ch9vofhcajqg7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
+var dbHost = process.env.DBHOST || 'jw0ch9vofhcajqg7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com';
 
 var db = new Sequelize(database, dbUser, dbPass, {
   host: dbHost
@@ -19,7 +19,17 @@ var User = db.define('User', {
     allowNull: false,
     defaultValue: false
   },
-  points: {
+  pendingTeacher: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
+  reputation: {
     type: Sequelize.INTEGER,
     allowNull: false,
     defaultValue: 0
@@ -45,12 +55,23 @@ var Course = db.define('Course', {
 var Post = db.define('Post', {
   title: Sequelize.STRING,
   text: Sequelize.STRING,
-  isAnAnswer: {
+  //when teacher confirms answer is correct
+  isAnswerType: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
     defaultValue: false
   },
-  points: {
+  isQuestionType: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
+  upvotes: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    defaultValue: 0
+  },
+  downvotes: {
     type: Sequelize.INTEGER,
     allowNull: false,
     defaultValue: 0
@@ -65,7 +86,7 @@ var Post = db.define('Post', {
     allowNull: false,
     defaultValue: false
   },
-  isGood: {
+  isPreferred: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
     defaultValue: false
@@ -83,6 +104,11 @@ var Post = db.define('Post', {
 });
 
 var Like = db.define('Like', {
+  idPositive: {
+   type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+    }
   }, {
     timestamps: false
 });
@@ -101,7 +127,7 @@ Post.belongsTo(Tag);
 Course.hasMany(Post);
 Post.belongsTo(Course);
 Post.hasMany(Post, {as: 'Responses', foreignKey: 'QuestionId'});
-
+Post.hasMany(Post, {as: 'Comments', foreignKey: 'ResponseId'});
 Post.belongsToMany(User, {as: 'Vote', through: 'Like'});
 User.belongsToMany(Post, {through: 'Like'});
 
@@ -123,3 +149,4 @@ exports.User = User;
 exports.Course = Course;
 exports.Tag = Tag;
 exports.Post = Post;
+exprots.Like = Like;

@@ -9,7 +9,7 @@ angular.module('boorish.services', [])
 
       return $http({
         method: 'POST',
-        url: '/townhall/questions',
+        url: '/api/questions',
         data: JSON.stringify({
           text: question.text,
           id_user: question.userId,
@@ -24,7 +24,7 @@ angular.module('boorish.services', [])
 
       return $http({
         method: 'GET',
-        url: '/townhall/questions/'
+        url: '/api/questions/'
       })
       .then(function(res) {
         return res.data; // returns all questions
@@ -122,7 +122,7 @@ angular.module('boorish.services', [])
     allUsers: function(){
       return $http({
         method: 'GET',
-        url: '/townhall/users'
+        url: '/api/users'
       })
       .then(function(res){
         return res.data;
@@ -134,7 +134,7 @@ angular.module('boorish.services', [])
       var userID = $window.localStorage.getItem('com.boorish');
       return $http({
         method: 'GET',
-        url: '/townhall/users/' + userID
+        url: '/api/users/' + userID
       }).then(function(res) {
         return res.data.results.id;
       })
@@ -143,7 +143,7 @@ angular.module('boorish.services', [])
     addUser: function(user) {
       return $http({
         method: 'POST',
-        url: '/townhall/users',
+        url: '/api/users',
         data: JSON.stringify({
           username: user.username,
           password: user.password,
@@ -168,7 +168,7 @@ angular.module('boorish.services', [])
     getTags: function() {
       return $http({
         method: 'GET',
-        url: '/townhall/tags'
+        url: '/api/tags'
       })
       .then(function(res) {
         return res.data;
@@ -185,7 +185,7 @@ angular.module('boorish.services', [])
     getCourses: function() {
       return $http({
         method: 'GET',
-        url: '/townhall/courses'
+        url: '/api/courses'
 
       })
       .then(function(res) {
@@ -211,7 +211,7 @@ angular.module('boorish.services', [])
 
         return $http({
           method: 'GET',
-          url: '/townhall/users'
+          url: '/api/users'
         })
         .then(function(res) {
           var users = res.data.results;

@@ -7,24 +7,24 @@ var passport = require('passport');
 
 
 module.exports = function(app, express, ensureAuth) {
-  app.get('/townhall/questions', ensureAuth, questionControllers.allQuestions);
-  app.post('/townhall/questions', ensureAuth, questionControllers.newQuestion);
-  app.delete('/townhall/questions/:id', ensureAuth, questionControllers.deleteQuestion);
+  app.get('/api/questions', ensureAuth, questionControllers.allQuestions);
+  app.post('/api/questions', ensureAuth, questionControllers.newQuestion);
+  app.delete('/api/questions/:id', ensureAuth, questionControllers.deleteQuestion);
 
-  app.get('/townhall/questions/:id', ensureAuth, questionControllers.readQuestion);
-  app.post('/townhall/questions/:id', ensureAuth, questionControllers.modQuestion);
+  app.get('/api/questions/:id', ensureAuth, questionControllers.readQuestion);
+  app.post('/api/questions/:id', ensureAuth, questionControllers.modQuestion);
 
-  app.post('/townhall/answers', ensureAuth, answerControllers.newAnswer);
-  app.post('/townhall/answers/:id', ensureAuth, answerControllers.modAnswer);
-  app.delete('/townhall/answers/:id', ensureAuth, answerControllers.deleteAnswer);
+  app.post('/api/answers', ensureAuth, answerControllers.newAnswer);
+  app.post('/api/answers/:id', ensureAuth, answerControllers.modAnswer);
+  app.delete('/api/answers/:id', ensureAuth, answerControllers.deleteAnswer);
 
-  app.get('/townhall/users', ensureAuth, userControllers.allUsers);
-  app.get('/townhall/users/:id', ensureAuth, userControllers.oneUser);
-  app.post('/townhall/signup', userControllers.newUser);
+  app.get('/api/users', ensureAuth, userControllers.allUsers);
+  app.get('/api/users/:id', ensureAuth, userControllers.oneUser);
+  app.post('/api/signup', userControllers.newUser);
 
-  app.get('/townhall/courses', ensureAuth, courseControllers.allCourses);
+  app.get('/api/courses', ensureAuth, courseControllers.allCourses);
 
-  app.get('/townhall/tags', ensureAuth, tagControllers.allTags);
+  app.get('/api/tags', ensureAuth, tagControllers.allTags);
 
   // Client does get request to /auth/google on signin
   app.get('/auth/google',
@@ -43,4 +43,4 @@ module.exports = function(app, express, ensureAuth) {
     res.json(req.user);
   });
 
-}
+};
