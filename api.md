@@ -68,6 +68,7 @@ Routes on server:
 
   /auth/google/callback GET
 
+
   /user  GET (exists on server)
 
   Notes on features:
