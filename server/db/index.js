@@ -96,12 +96,13 @@ var Post = db.define('Post', {
     allowNull: false,
     defaultValue: false
   },
-  createdAt: {
-    type: Sequelize.DATE,
-    defaultValue: Sequelize.fn('NOW')
-  },
-  updatedAt: Sequelize.DATE
-});
+//   createdAt: {
+//     type: Sequelize.DATE,
+//     defaultValue: db.fn('NOW')
+//   },
+//   updatedAt: Sequelize.DATE
+}
+);
 
 var Votes = db.define('Votes', {
  
