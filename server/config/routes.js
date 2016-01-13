@@ -12,6 +12,9 @@ module.exports = function(app, express, ensureAuth) {
   app.delete('/api/questions/:id', ensureAuth, questionControllers.deleteQuestion);
 
   app.get('/api/questions/:id', ensureAuth, questionControllers.readQuestion);
+  //note: the following route is to modify a question. We have to distinguish
+    //between two things; so we can do that in the route or in the method
+  //route is more elegant, but I'm not sure how to do that
   app.post('/api/questions/:id', ensureAuth, questionControllers.modQuestion);
 
   app.post('/api/answers', ensureAuth, answerControllers.newAnswer);
