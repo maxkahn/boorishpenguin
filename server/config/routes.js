@@ -22,6 +22,7 @@ module.exports = function(app, express) {
   app.put('/api/questions/vote/:id' , voteController.votePost);
 
 
+
   app.post('/api/answers', answerControllers.newAnswer);
   app.put('/api/answers/markAsCorrect/:id', answerControllers.markAsCorrectAnswer);
   app.put('/api/answers/vote/:id' , voteController.votePost);
