@@ -44,7 +44,6 @@ Requests from client (services.js):
 Routes on server:
   /api/questions    GET   (exists on client)
     returns data with results field an array of objects. Each object {id:, title:, text:, isCorrectAnswer:, points:, responses:, isAnswered:, isGood:, isClosed:, createdAt:, coursename:, tagname:, user:, imgUrl:, updatedAt:}
-
   /api/questions    POST  (exists on client)
   /api/questions/:id  DELETE (exists on client)
   /api/questions/:id  GET (exists on client)
@@ -64,6 +63,7 @@ Routes on server:
   /api/tags GET   (exists on client)
 
   /auth/google  GET
+
   /auth/google/callback GET
 
   /user  GET (exists on server)
