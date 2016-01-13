@@ -1,7 +1,7 @@
 var db = require('../db/index.js');
 module.exports = {
 
-	allPost: function(queryObject, callback) {
+	allPosts: function(queryObject, callback) {
 
 		db.Post.findAll({
 				where: queryObject,

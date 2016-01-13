@@ -4,6 +4,7 @@
 
 ### SERVER ###
 server/controllers/oldquestionController.js
+server/controllers/oldAnswerController.js
 
 ### NODE ###
 build/

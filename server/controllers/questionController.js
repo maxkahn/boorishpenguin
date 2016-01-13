@@ -1,13 +1,26 @@
 var db = require('../db/index.js');
-var UCtrl = require('./userControllers.js');
 var PostCtrl = require('./postController.js');
+var AnswCtrl = require('./answerController.js');
 
 
 module.exports = {
 	allQuestions: function(req, res) {
 
-	PostCtrl.allPost({isQuestionType: true}, function(data) {
+	PostCtrl.allPosts({isQuestionType: true}, function(data) {
 			res.json(data);
+		});
+	},
+
+	renderQuestion: function(req, res) {
+		db.Post.findById(req.params.id)
+			.then(function(question){
+				var questionComponents = [];
+				AnswCtrl.allAnswers(req, res, function(data) {
+			})
+				.then(function(result){
+					res.json(result);
+				});
+
 		});
 	},
 
