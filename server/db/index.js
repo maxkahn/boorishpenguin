@@ -5,6 +5,7 @@ var dbUser = process.env.DBUSER || 'root';
 var dbHost = process.env.DBHOST || 'localhost';
 var dbPass = process.env.DBPASS;
 
+
 var db = new Sequelize(database, dbUser, dbPass, {
   host: dbHost,
   username: dbUser
@@ -96,12 +97,13 @@ var Post = db.define('Post', {
     allowNull: false,
     defaultValue: false
   },
-  createdAt: {
-    type: Sequelize.DATE,
-    defaultValue: Sequelize.fn('NOW')
-  },
-  updatedAt: Sequelize.DATE
-});
+//   createdAt: {
+//     type: Sequelize.DATE,
+//     defaultValue: db.fn('NOW')
+//   },
+//   updatedAt: Sequelize.DATE
+}
+);
 
 var Votes = db.define('Votes', {
  
