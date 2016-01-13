@@ -14,11 +14,16 @@ module.exports = {
 	renderQuestion: function(req, res) {
 		db.Post.findById(req.params.id)
 			.then(function(question){
-				var questionComponents = [];
-				AnswCtrl.allAnswers(req, res, function(data) {
+				var questionComponents = [question];
+				question.body = {};
+				question.body.questionId = req.params.id;
+				AnswCtrl.allAnswers(question, res, function(data) {
+					//data should ba an array of answer objects with a comments property
+					//which is an array of comment objects.
+					var questionData = questionComponents.concat(data);
 			})
 				.then(function(result){
-					res.json(result);
+					res.json(questionData);
 				});
 
 		});

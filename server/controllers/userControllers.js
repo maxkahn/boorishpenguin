@@ -71,28 +71,5 @@ module.exports = {
       callback(!!number);
       return;
     });
-  },
-
-  isUserTeacher: function(uname, callback) {
-    User.find({
-      where: {
-        username: uname
-      }
-    })
-    .then(function(user) {
-      callback(user.isTeacher);
-      return;
-    });
-  },
-  isUserAdmin: function(uname, callback) {
-    User.find({
-      where: {
-        username: uname
-      }
-    })
-    .then(function(user) {
-      callback(user.isAdmin);
-      return;
-    });
   }
 };
