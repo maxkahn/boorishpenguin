@@ -7,7 +7,6 @@ var dbPass = process.env.DBPASS;
 // var database = process.env.DATABASE || 'jmuspkeyvjzsvvwp';
 // var dbUser = process.env.DBUSER || 'htmaaabw4pe3k9ja';
 
-
 var db = new Sequelize(database, dbUser, dbPass, {
   host: dbHost,
   username: dbUser
