@@ -38,10 +38,7 @@ Requests from client (services.js):
 
   /user GET (setUser) (exists on server)
     expects .data.email field or .data.profile.emails array
-<<<<<<< HEAD
 
-=======
->>>>>>> Preparing for merge
   /api/users  GET (anonymous)
   /api/users  GET (signin, in auth.js)
 
