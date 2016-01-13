@@ -45,8 +45,6 @@ Requests from client (services.js):
 
 Routes on server:
   /api/questions    GET   (exists on client)
-
-
     returns data with results field an array of objects. Each object {id:, title:, text:, isCorrectAnswer:, points:, responses:, isAnswered:, isGood:, isClosed:, createdAt:, coursename:, tagname:, user:, imgUrl:, updatedAt:}
 
   /api/questions    POST  (exists on client)
