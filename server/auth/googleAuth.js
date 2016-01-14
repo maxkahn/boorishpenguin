@@ -2,8 +2,6 @@
 // var apikeys = require('../config/apikeys.js');
 // var controller = require('../controllers/userControllers.js');
 
-<<<<<<< HEAD
-
 exports.ensureAuth = function (req, res, next){
   // isAuthenticated is provided function that checks if the user is logged in to google
   if (req.isAuthenticated()) {return next(); }
