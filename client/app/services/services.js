@@ -49,9 +49,16 @@ angular.module('boorish.services', [])
       return $http({
         method: 'DELETE',
         url: 'api/questions/' + questionID
-      })
+      });
+    },
+
+    markGoodQuestion: function(questionId){
+      return $http({
+        method: 'POST',
+        url: '/api/questions/markAsGood/' + questionID
+      });
     }
-  }
+  };
 })
 
 // Answers factory handles all requests to add, retrieve, or modify answers in the database
@@ -90,7 +97,7 @@ angular.module('boorish.services', [])
           id_answer: answerID,
           mod: mod // possible mods: 'like' to increase the number of points on a question, 'good' to mark as good
         })
-      })
+      });
     },
 
     // removes an answer. requires the id of the answer
@@ -98,10 +105,17 @@ angular.module('boorish.services', [])
       return $http({
         method: 'DELETE',
         url: 'api/answers/' + answerID
-      })
+      });
+    },
+
+    markCorrectAnswer: function(answerId){
+      return $http({
+        method: 'PUT',
+        url: '/api/answers/markAsCorrect/' + answerId,
+      });
     }
 
-  }
+  };
 })
 
 // Users factory handles all requests to add and retrieve users in the database

@@ -13,7 +13,8 @@
           </md-card-header-text>
         </md-card-header>
       </div>
-      <div flex="40"></div>
+      <div flex="40">
+      </div>
       <div flex="10">
         <div layout="column">
           <md-button ng-click='upVote(question)' aria-label="up vote" style="margin-bottom: 0px">
@@ -49,7 +50,7 @@
 
     <md-card-actions layout="row" layout-align="end">
       <div flex="30">
-        <md-icon md-svg-icon="../../styles/checkbox-marked-circle.svg" ng-show="question.isPreferred" >
+        <md-icon md-svg-icon="../../styles/checkbox-marked-circle.svg" ng-show="question.isPreferred || true" ng-click="markGoodQuestion()" >
         </md-icon> <span ng-show="question.isPreferred"> Teacher Approved Question </span>
       </div>
       <div flex="40">
@@ -108,7 +109,7 @@
 
     <md-card-actions layout="row" layout-align="end">
       <div flex="30">
-        <md-icon md-svg-icon="../../styles/checkbox-marked-circle.svg" ng-show="answer.isPreferred" >
+        <md-icon md-svg-icon="../../styles/checkbox-marked-circle.svg" ng-show="answer.isPreferred || true" ng-click="markCorrectAnswer(answer)" >
         </md-icon > <span ng-show="answer.isPreferred" > Correct Answer</span>
       </div>
       <div flex="40">

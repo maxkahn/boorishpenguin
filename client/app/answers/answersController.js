@@ -58,6 +58,23 @@ angular.module('boorish.answers', [])
     console.log('submit comment');
   };
 
+  $scope.markGoodQuestion = function(){
+    Questions.markGoodQuestion(questionId)
+      .then(function(){
+        $scope.question.isPreferred = $scope.question.isPreferred ? false : true;
+        //TODO show messahe, Question updated
+      });
+  };
+
+  $scope.markCorrectAnswer = function(answer){
+    answer.isPreferred = answer.isPreferred ? false : true;
+    Answers.markCorrectAnswer(answer.id)
+      .then(function(){
+        // $scope.question.isPreferred = $scope.question.isPreferred ? false : true;
+        //TODO show messahe, Question updated
+      });
+  };
+
   if (questionId){
     getQuestion(questionId);
   }
