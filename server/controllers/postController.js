@@ -33,6 +33,7 @@ module.exports = {
 
 	allPosts: function(queryObject, callback) {
 
+
 		db.Post.findAll({
 				where: {isQuestionType: true},
 				include: [db.User, db.Course, db.Tag]
