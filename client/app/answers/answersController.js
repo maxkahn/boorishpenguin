@@ -1,5 +1,5 @@
 angular.module('boorish.answers', [])
-.controller('answersController', function($scope, $state, $window, $stateParams, Answers, Questions, Users, Auth) {
+.controller('answersController', function($scope, $state, $window, $stateParams, $mdToast, $document, Answers, Questions, Users, Auth) {
   var questionId = $stateParams.id;
 
   $scope.question = {};
@@ -26,7 +26,7 @@ angular.module('boorish.answers', [])
 
     Answers.addAnswer(answerToInsert)
       .then(function(newAnswer){
-        //TODO show a message that the answer was submitted
+        showAnswerSubmittedToast();
         $scope.answers.push({
           id: newAnswer.data.id,
           text: newAnswer.data.text,
@@ -39,6 +39,16 @@ angular.module('boorish.answers', [])
       });
 
     $scope.newAnswer.text = '';
+  };
+
+  var showAnswerSubmittedToast = function() {
+    $mdToast.show(
+      $mdToast.simple()
+        .textContent('Answer Submitted')
+        .position('top left')
+        .parent($document[0].querySelector('#answer_container_id'))
+        .hideDelay(2000)
+    );
   };
 
   $scope.submitComment = function(answerId){
