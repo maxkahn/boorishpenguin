@@ -32,12 +32,12 @@ function timeSince(date) {
 module.exports = {
 
 	allPosts: function(queryObject, callback) {
-    console.log('queryObject',queryObject);
 		db.Post.findAll({
-				where: queryObject,
+				where: {isQuestionType: true},
 				include: [db.User, db.Course, db.Tag]
 			})
 			.then(function(posts) {
+				console.log('inside database query in allPosts server');
 				var formattedPosts = posts.map(function(post) {
 					return {
 						id: post.id,
@@ -68,6 +68,7 @@ module.exports = {
 	addPost: function(postData, callback) {
 		db.Post.create({
 				title: postData.title,
+<<<<<<< HEAD
 				text: postData.text,
 				UserId: postData.userId,
 				QuestionId: postData.QuestionId,
@@ -80,6 +81,16 @@ module.exports = {
 			.then(function(result) {
 				callback(result);
 			});
+=======
+				text: postData.message,
+				// UserId: postData.userId,
+				// QuestionId: postData.questionId,
+				// ResponseId: postData.responseId,
+				// CourseId: postData.CourseId,
+				// TagId: postData.TagId
+			})
+			.then(callback);
+>>>>>>> preparing for rebase
 	},
 
 	deletePost: function(req, callback) {

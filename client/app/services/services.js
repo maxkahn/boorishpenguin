@@ -6,21 +6,45 @@ angular.module('boorish.services', [])
   return {
     // add a question from /ask
     addQuestion: function(question) {
+<<<<<<< HEAD
       return $http({
         method: 'POST',
         url: '/api/questions',
         data: question
+=======
+      console.log('client-side addQuestion invoked');
+      return $http({
+        method: 'POST',
+        url: '/api/questions',
+        data: JSON.stringify({
+          text: question.text,
+          id_user: question.userId,
+          course: question.course,  // these are not setup yet
+          tag: question.tag,  // these are not setup yet
+          title: question.title
+        })
+>>>>>>> preparing for rebase
       });
     },
 
     getAllQuestions: function() {
+<<<<<<< HEAD
+=======
+      console.log('client-side getAllQuestions invoked');
+>>>>>>> preparing for rebase
       return $http({
         method: 'GET',
-        url: '/api/questions/'
+        url: '/api/questions'
       })
       .then(function(res) {
+<<<<<<< HEAD
         return res.data.results;
       });
+=======
+        console.log('getAllQs data: ', res.data);
+        return res.data; // returns all questions
+      })
+>>>>>>> preparing for rebase
     },
 
     getQuestion: function(questionId) {
@@ -200,6 +224,7 @@ angular.module('boorish.services', [])
         url: '/user'
       })
       .then(function (res) {
+        console.log(res);
         user.google = res.data.email || res.data.profile.emails[0].value;
 
         return $http({
