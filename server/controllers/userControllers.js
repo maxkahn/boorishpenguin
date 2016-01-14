@@ -54,10 +54,11 @@ module.exports = {
     });
   },
 
-  newUser: function(user) {
+  newUser: function(req, res, next) {
+    var user = req.body;
     User.create(user)
     .then(function(newUser) {
-      return newUser;
+      res.status(200).json(newUser);
     });
   },
 

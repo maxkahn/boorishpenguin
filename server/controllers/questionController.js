@@ -32,7 +32,8 @@ module.exports = {
 	},
 
 	newQuestion: function(req, res) {
-		PostCtrl.addPost(req, function(data) {
+		console.log(req.body);
+		PostCtrl.addPost(req.body, function(data) {
 			res.status(201).json(data);
 		});
 

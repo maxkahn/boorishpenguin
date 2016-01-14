@@ -3,9 +3,8 @@ var Sequelize = require('sequelize');
 var database = process.env.DATABASE || 'townhall';
 var dbUser = process.env.DBUSER || 'root';
 var dbPass = process.env.DBPASS;
-//var dbHost = process.env.DBHOST || 'jw0ch9vofhcajqg7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com';
 
-var db = new Sequelize(database, dbUser, null, {
+var db = new Sequelize(database, dbUser, dbPass, {
   host: 'localhost',
   username: 'root'
 });

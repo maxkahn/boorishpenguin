@@ -36,10 +36,9 @@ module.exports = {
 			});
 	},
 	addPost: function(postData, callback) {
-
 		db.Post.create({
 				title: postData.title,
-				text: postData.message,
+				text: postData.text,
 				UserId: postData.userId,
 				QuestionId: postData.questionId,
 				ResponseId: postData.responseId,

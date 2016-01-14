@@ -22,16 +22,13 @@ angular.module('boorish.services', [])
     },
 
     getAllQuestions: function() {
-
       return $http({
         method: 'GET',
         url: '/api/questions/'
       })
       .then(function(res) {
-        return res.data; // returns all questions
+        return res.data.results;
       });
-
-     
     },
 
     getQuestion: function(questionId) {

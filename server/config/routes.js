@@ -8,19 +8,19 @@ var passport = require('passport');
 
 
 module.exports = function(app, express, ensureAuth) {
-  app.get('/api/questions', ensureAuth, questionControllers.allQuestions);
-  app.post('/api/questions', ensureAuth, questionControllers.newQuestion);
-  app.delete('/api/questions/:id', ensureAuth, questionControllers.deleteQuestion);
+  app.get('/api/questions', questionControllers.allQuestions);
+  app.post('/api/questions', questionControllers.newQuestion);
+  app.delete('/api/questions/:id', questionControllers.deleteQuestion);
 
-  app.get('/api/questions/:id', ensureAuth, questionControllers.renderQuestion);
-  app.put('/api/questions/changeStatus/:id', ensureAuth, questionControllers.toggleCloseQuestion);
-  app.put('/api/questions/markAsGood/:id' , ensureAuth, questionControllers.markAsGoodQuestion);
-  app.put('/api/questions/vote/:id' , ensureAuth, voteController.votePost);
+  app.get('/api/questions/:id', questionControllers.renderQuestion);
+  app.put('/api/questions/changeStatus/:id', questionControllers.toggleCloseQuestion);
+  app.put('/api/questions/markAsGood/:id' , questionControllers.markAsGoodQuestion);
+  app.put('/api/questions/vote/:id' , voteController.votePost);
 
-  app.post('/api/answers', ensureAuth, answerControllers.newAnswer);
-  app.put('/api/answers/markAsCorrect/:id', ensureAuth, answerControllers.markAsCorrectAnswer);
-  app.put('/api/answers/vote/:id' , ensureAuth, voteController.votePost);
-  app.delete('/api/answers/:id', ensureAuth, answerControllers.deleteAnswer);
+  app.post('/api/answers', answerControllers.newAnswer);
+  app.put('/api/answers/markAsCorrect/:id', answerControllers.markAsCorrectAnswer);
+  app.put('/api/answers/vote/:id' , voteController.votePost);
+  app.delete('/api/answers/:id', answerControllers.deleteAnswer);
 
   app.get('/api/users', userControllers.allUsers);
   app.get('/api/users/:id', userControllers.oneUser);
