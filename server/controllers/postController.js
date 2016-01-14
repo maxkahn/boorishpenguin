@@ -52,7 +52,7 @@ module.exports = {
 						createdAt: timeSince(post.createdAt),
 						course: post.CourseId,
 						coursename: post.Course ? post.Course.name : "",
-						tags: post.tags,
+						tags: post.tags ? post.tags.split(',') : [],
 						user: post.User ? post.User.name : "",
 						imgUrl: post.User ? post.User.picture : "",
 						updatedAt: post.updatedAt

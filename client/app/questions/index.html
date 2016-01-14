@@ -52,11 +52,11 @@
           <md-icon md-svg-icon="../../styles/checkbox-marked-circle.svg" ng-show="question.isPreferred" >
           </md-icon > <span ng-show="question.isPreferred"> Teacher Approved Question </span>
         </div>
-        <div flex="40">
+        <div flex="30">
         </div>
         <div flex>
-          <md-button ng-click="searchByText(question.tagname)" class="md-raised" ng-show="question.tagname" >{{ question.tagname }}</md-button>
           <md-button ng-click="searchByText(question.coursename)" class="md-raised" ng-show="question.coursename">{{ question.coursename }}</md-button>
+          <md-button ng-repeat="tag in question.tags" ng-click="searchByText(tag)" class="md-raised">{{ tag }}</md-button>
         </div>
       </md-card-actions>
     </md-card>
