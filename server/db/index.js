@@ -55,7 +55,11 @@ var Course = db.define('Course', {
 var Post = db.define('Post', {
   title: Sequelize.STRING,
   text: Sequelize.STRING,
-  tags: Sequelize.STRING,
+  tags: { 
+    type: Sequelize.STRING,
+    allowNull: true, 
+    defaultValue: null,
+  },
   isAnswerType: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
@@ -99,6 +103,7 @@ var Post = db.define('Post', {
 });
 
 var Votes = db.define('Votes', {
+ 
   isPositive: {
    type: Sequelize.BOOLEAN,
     allowNull: false,

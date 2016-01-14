@@ -33,7 +33,6 @@ module.exports = {
 	},
 
 	deleteQuestion: function(req, res) {
-		//console.log(req.user)
 		PostCtrl.deletePost(req, function(code) {
 			res.sendStatus(code);
 		});

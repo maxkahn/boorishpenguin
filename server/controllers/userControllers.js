@@ -14,9 +14,6 @@ module.exports = {
           name: user.name,
           pendingTeacher: user.pendingTeacher,
           isAdmin: user.isAdmin,
-          //TODO: reverse first name, last name convention
-          name_first: user.name_last,
-          name_last: user.name_first,
           email: user.email,
           reputation: user.reputation,
           image: user.image
@@ -40,9 +37,6 @@ module.exports = {
         name: user.name,
         pendingTeacher: user.pendingTeacher,
         isAdmin: user.isAdmin,
-        //TODO: last name/first name
-        name_first: user.name_last,
-        name_last: user.name_first,
         email: user.email,
         reputation: user.reputation,
         image: user.image
