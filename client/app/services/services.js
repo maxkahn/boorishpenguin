@@ -21,6 +21,7 @@ angular.module('boorish.services', [])
     },
 
     getAllQuestions: function() {
+
       return $http({
         method: 'GET',
         url: '/api/questions'
@@ -28,8 +29,6 @@ angular.module('boorish.services', [])
       .then(function(res) {
         return res.data.results;
       });
-
-
     },
 
     getQuestion: function(questionId) {
