@@ -33,6 +33,7 @@ module.exports = {
 
 	allPosts: function(queryObject, callback) {
 
+
 		db.Post.findAll({
 				where: {isQuestionType: true},
 				include: [db.User, db.Course, db.Tag]
@@ -50,7 +51,7 @@ module.exports = {
 						isAnswered: post.isAnswered,
 						isPreferred: post.isPreferred,
 						isClosed: post.isClosed,
-<<<<<<< HEAD
+
 						votes: post.votes,
 						createdAt: timeSince(post.createdAt),
 						course: post.CourseId,
