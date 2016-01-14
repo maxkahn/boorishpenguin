@@ -6,8 +6,8 @@ module.exports = {
 	allComments: function(req, res, callback) {
 
 	PostCtrl.allPosts({
-		isQuestionType: false,
-		isAnswerType: false,
+		isQuestionType: false, 
+		isAnswerType: false, 
 		ResponseId: req.body.responseId }, function(data) {
 			callback(data);
 		});

@@ -96,7 +96,6 @@ module.exports = {
 									isPreferred: true
 								}, {where : { id : postId }})
 								.then(function(result) {
-
 									callback(result);
 								});
 					// 	} else {

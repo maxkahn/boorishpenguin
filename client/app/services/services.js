@@ -38,7 +38,6 @@ angular.module('boorish.services', [])
       return $http({
         method: 'GET',
         url: '/api/questions/' + questionId
-
       })
       .then(function(res) {
         return res.data;
@@ -192,6 +191,7 @@ angular.module('boorish.services', [])
       return $http({
         method: 'GET',
         url: '/api/courses'
+
       })
       .then(function(res) {
         return res.data;

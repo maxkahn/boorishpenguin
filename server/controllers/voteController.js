@@ -7,7 +7,7 @@ module.exports = {
 
 		var queryObject = {
 			isPositive : req.body.isPositive,
-		  UserId : req.body.userId,
+		  UserId : req.body.userId, 
 			PostId : req.params.id
 		};
 		var up = queryObject.isPositive ? 1 : -1;
