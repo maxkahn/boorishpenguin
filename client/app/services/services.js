@@ -71,17 +71,14 @@ angular.module('boorish.services', [])
     },
 
     // adds an answer to a question. requires the answer object and question ID
-    addAnswer: function(answer, questionID) {
+    addAnswer: function(answer) {
 
       return $http({
         method: 'POST',
         url: 'api/answers',
-        data: JSON.stringify({
-          text: answer.text,
-          id_question: questionID,
-          id_user: answer.user
-        })
-      })
+        data: answer
+      });
+      
     },
 
     // updates an answer. requires the answerID and requested modification (mod). mod is a string.

@@ -30,7 +30,6 @@ angular.module('Main', ['ui.router', 'ngMaterial', 'main.controller', 'boorish.q
         .accentPalette('blue-grey');
 
   }).run(function () {
-    console.log('running');
   });
  
 

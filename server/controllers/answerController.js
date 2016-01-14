@@ -36,10 +36,14 @@ module.exports = {
 
 	newAnswer: function(req, res) {
 
-		PostCtrl.addPost(req.body, function(data) {
-			res.status(201).json(data);
+		PostCtrl.addPost(req.body, function(answer) {
+			db.Post.findById(req.body.QuestionId)
+				.then(function(question){
+					question.responses++;
+					question.save();
+					res.status(201).json(answer);
+				});
 		});
-
 	},
 
 	deleteAnswer: function(req, res) {
