@@ -267,6 +267,7 @@ angular.module('boorish.services', [])
         url: '/auth/google'
       })
       .then(function (res) {
+        console.log(res);
         user.google = res.data.email || res.data.profile.emails[0].value;
 
         return $http({
@@ -352,3 +353,4 @@ angular.module('boorish.services', [])
     $location.path('/signin');
   }
 };
+});
