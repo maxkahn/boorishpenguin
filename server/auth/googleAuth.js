@@ -2,6 +2,7 @@
 // var apikeys = require('../config/apikeys.js');
 // var controller = require('../controllers/userControllers.js');
 
+<<<<<<< HEAD
 
 exports.ensureAuth = function (req, res, next){
   // isAuthenticated is provided function that checks if the user is logged in to google
@@ -12,6 +13,7 @@ exports.ensureAuth = function (req, res, next){
   // redirect wasn't working here so we instead send nothing to the client
   // the client side checks if the res is empty and if it is redirects to signin
 };
+
 
 // // exports.signup = function (profileObj, callback){
 // //   // profileObj equals the userinfo that google sends upon signin

@@ -6,7 +6,6 @@ angular.module('boorish.services', [])
   return {
     // add a question from /ask
     addQuestion: function(question) {
-
       return $http({
         method: 'POST',
         url: '/api/questions',
@@ -17,7 +16,6 @@ angular.module('boorish.services', [])
           tag: question.tag,  // these are not setup yet
           title: question.title
         })
-
       });
     },
 
