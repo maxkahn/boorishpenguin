@@ -17,11 +17,11 @@ angular.module('boorish.services', [])
           tag: question.tag,  // these are not setup yet
           title: question.title
         })
+
       });
     },
 
     getAllQuestions: function() {
-
       return $http({
         method: 'GET',
         url: '/api/questions'
@@ -29,6 +29,8 @@ angular.module('boorish.services', [])
       .then(function(res) {
         return res.data.results;
       });
+
+
     },
 
     getQuestion: function(questionId) {
@@ -268,7 +270,6 @@ angular.module('boorish.services', [])
         url: '/auth/google'
       })
       .then(function (res) {
-
         user.google = res.data.email || res.data.profile.emails[0].value;
 
         return $http({
