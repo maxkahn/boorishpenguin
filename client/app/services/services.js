@@ -20,7 +20,7 @@ angular.module('boorish.services', [])
     },
 
     getAllQuestions: function() {
-
+      console.log('client-side getAllQuestions invoked');
       return $http({
         method: 'GET',
         url: '/api/questions'
@@ -353,5 +353,5 @@ angular.module('boorish.services', [])
     $rootScope.user = undefined;
     $location.path('/signin');
   }
+
 };
-});
