@@ -12,3 +12,5 @@ lib/
 client/lib
 
 */.DS_Store
+.DS_Store
+client/app/.DS_Store

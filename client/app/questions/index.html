@@ -31,7 +31,6 @@
           </div>
         </div>
 
-
         <md-card-title>
           <md-card-title-text>
             <md-button ng-click="goToQuestion(question.id)" class="tolowercase" style="text-align: left" >
@@ -56,8 +55,8 @@
           <div flex="40">
           </div>
           <div flex>
-            <md-button>{{ question.coursename }}</md-button>
-            <md-button>{{question.tagname }}</md-button>
+            <md-button ng-click="searchByText(question.coursename)">{{ question.coursename }}</md-button>
+            <md-button ng-click="searchByText(question.tagname)">{{ question.tagname }}</md-button>
           </div>
         </md-card-actions>
       </md-card>

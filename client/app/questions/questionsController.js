@@ -14,4 +14,8 @@ angular.module('boorish.questions', [])
     $state.go('answers', {id: questionId});
   };
 
+  $scope.searchByText = function(text){
+    $scope.searchText = text;
+  };
+
 });

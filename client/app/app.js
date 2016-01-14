@@ -1,6 +1,11 @@
-angular.module('Main', ['ui.router', 'ngMaterial', 'main.controller', 'boorish.questions' ,'boorish.services', 'boorish.ask', 'boorish.answers'])
-  .config(function ($stateProvider, $mdThemingProvider) {
+angular.module('Main', ['ui.router', 'ngMaterial', 'main.controller', 'boorish.questions' ,'boorish.services', 'boorish.ask', 'boorish.answers', 'boorish.login'])
+  .config(function ($stateProvider, $mdThemingProvider, $urlRouterProvider) {
     $stateProvider
+      .state('login', {
+        url: '/login',
+        templateUrl : 'app/login/index.html',
+        controller: 'loginController'
+      })
       .state('questions', {
         url: '/questions',
         templateUrl : 'app/questions/index.html',
@@ -16,6 +21,9 @@ angular.module('Main', ['ui.router', 'ngMaterial', 'main.controller', 'boorish.q
         templateUrl : 'app/ask/index.html',
         controller: 'askController'
       });
+
+      $urlRouterProvider
+        .otherwise('/login');
 
       $mdThemingProvider.theme('default')
         .primaryPalette('deep-purple')
