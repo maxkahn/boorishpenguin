@@ -20,7 +20,6 @@ angular.module('boorish.services', [])
     },
 
     getAllQuestions: function() {
-
       return $http({
         method: 'GET',
         url: '/api/questions'
