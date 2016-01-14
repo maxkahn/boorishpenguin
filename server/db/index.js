@@ -1,12 +1,13 @@
 var Sequelize = require('sequelize');
 
-var database = process.env.DATABASE || 'jmuspkeyvjzsvvwp';
-var dbUser = process.env.DBUSER || 'htmaaabw4pe3k9ja';
+var database = process.env.DATABASE || 'townhall';
+var dbUser = process.env.DBUSER || 'root';
 var dbPass = process.env.DBPASS;
-var dbHost = process.env.DBHOST || 'jw0ch9vofhcajqg7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
+//var dbHost = process.env.DBHOST || 'jw0ch9vofhcajqg7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com';
 
-var db = new Sequelize(database, dbUser, dbPass, {
-  host: dbHost
+var db = new Sequelize(database, dbUser, null, {
+  host: 'localhost',
+  username: 'root'
 });
 
 var User = db.define('User', {
@@ -19,7 +20,17 @@ var User = db.define('User', {
     allowNull: false,
     defaultValue: false
   },
-  points: {
+  pendingTeacher: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
+  reputation: {
     type: Sequelize.INTEGER,
     allowNull: false,
     defaultValue: 0
@@ -45,12 +56,18 @@ var Course = db.define('Course', {
 var Post = db.define('Post', {
   title: Sequelize.STRING,
   text: Sequelize.STRING,
-  isAnAnswer: {
+  //when teacher confirms answer is correct
+  isAnswerType: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
     defaultValue: false
   },
-  points: {
+  isQuestionType: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
+  votes: {
     type: Sequelize.INTEGER,
     allowNull: false,
     defaultValue: 0
@@ -65,7 +82,7 @@ var Post = db.define('Post', {
     allowNull: false,
     defaultValue: false
   },
-  isGood: {
+  isPreferred: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
     defaultValue: false
@@ -82,7 +99,12 @@ var Post = db.define('Post', {
   updatedAt: Sequelize.DATE
 });
 
-var Like = db.define('Like', {
+var Votes = db.define('Votes', {
+  isPositive: {
+   type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+    }
   }, {
     timestamps: false
 });
@@ -101,9 +123,9 @@ Post.belongsTo(Tag);
 Course.hasMany(Post);
 Post.belongsTo(Course);
 Post.hasMany(Post, {as: 'Responses', foreignKey: 'QuestionId'});
-
-Post.belongsToMany(User, {as: 'Vote', through: 'Like'});
-User.belongsToMany(Post, {through: 'Like'});
+Post.hasMany(Post, {as: 'Comments', foreignKey: 'ResponseId'});
+Post.belongsToMany(User, {as: 'Opinions', through: 'Votes'});
+User.belongsToMany(Post, {through: 'Votes'});
 
 User.sync()
 .then(function() {
@@ -116,10 +138,11 @@ User.sync()
   return Post.sync();
 })
 .then(function() {
-  return Like.sync();
+  return Votes.sync();
 });
 
 exports.User = User;
 exports.Course = Course;
 exports.Tag = Tag;
 exports.Post = Post;
+exports.Votes = Votes;

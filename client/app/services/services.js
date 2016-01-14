@@ -6,10 +6,11 @@ angular.module('boorish.services', [])
   return {
     // add a question from /ask
     addQuestion: function(question) {
+      console.log(question)
 
       return $http({
         method: 'POST',
-        url: '/townhall/questions',
+        url: '/api/questions',
         data: JSON.stringify({
           text: question.text,
           id_user: question.userId,
@@ -22,164 +23,34 @@ angular.module('boorish.services', [])
 
     getAllQuestions: function() {
 
-      // return $http({
-      //   method: 'GET',
-      //   url: '/townhall/questions/'
-      // })
-      // .then(function(res) {
-      //   return res.data; // returns all questions
-      // });
-
       return $http({
         method: 'GET',
-        url: '/townhall/test/'
+        url: '/api/questions/'
       })
       .then(function(res) {
-        return [{
-          id: 1,
-          user: "cpenarrieta",
-          coursename: "math",
-          tagname: "homework",
-          title: "How to make whatsapp type of animation for opening the menu from toolbar(actionbar)",
-          imgUrl: "http://images.apple.com/pr/bios/images/1501cue_thumb.jpg",
-          createdAt: '04/07/2016',
-          updatedAt: '04/07/2016'
-        },{
-          id: 2,
-          user: "ranjit",
-          coursename: "history",
-          tagname: "quiz",
-          title: "question title 2",
-          imgUrl: "http://images.apple.com/pr/bios/images/cook_thumb.jpg",
-          createdAt: '04/07/2016',
-          updatedAt: '04/07/2016'
-        },{
-          id: 3,
-          user: "ranjit",
-          coursename: "history",
-          tagname: "quiz",
-          title: "question title 2",
-          imgUrl: "http://images.apple.com/pr/bios/images/cook_thumb.jpg",
-          createdAt: '04/07/2016',
-          updatedAt: '04/07/2016'
-        },{
-          id: 4,
-          user: "ranjit",
-          coursename: "history",
-          tagname: "quiz",
-          title: "question title 2",
-          imgUrl: "http://images.apple.com/pr/bios/images/cook_thumb.jpg",
-          createdAt: '04/07/2016',
-          updatedAt: '04/07/2016'
-        },{
-          id: 5,
-          user: "ranjit",
-          coursename: "history",
-          tagname: "quiz",
-          title: "question title 2",
-          imgUrl: "http://images.apple.com/pr/bios/images/cook_thumb.jpg",
-          createdAt: '04/07/2016',
-          updatedAt: '04/07/2016'
-        }];
+        return res.data; // returns all questions
       });
+
+     
     },
 
     getQuestion: function(questionId) {
-      // return $http({
-      //   method: 'GET',
-      //   url: '/townhall/questions/' + questionId
-      // })
-      // .then(function(res) {
-      //   return res.data;
-      // });
-
       return $http({
         method: 'GET',
-        url: '/townhall/test/'
+        url: '/api/questions/' + questionId
       })
       .then(function(res) {
-        return [{
-          id: 1,
-          user: "cpenarrieta",
-          coursename: "math",
-          tagname: "homework",
-          title: "How to make whatsapp type of animation for opening the menu",
-          imgUrl: "http://images.apple.com/pr/bios/images/1501cue_thumb.jpg",
-          createdAt: '04/07/2016',
-          updatedAt: '04/07/2016'
-        },{
-          id: 2,
-          user: "ranjit",
-          coursename: "history",
-          tagname: "quiz",
-          title: "answer number 1, ",
-          imgUrl: "http://images.apple.com/pr/bios/images/cook_thumb.jpg",
-          createdAt: '04/07/2016',
-          updatedAt: '04/07/2016',
-          comments: [{
-            username: "jose",
-            text: "Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh."
-          },{
-            username: "mieul",
-            text: "Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh."
-          }]
-        },{
-          id: 3,
-          user: "sergio",
-          coursename: "history",
-          tagname: "quiz",
-          title: "answer number 2, ",
-          imgUrl: "http://images.apple.com/pr/bios/images/ahrendts_thumb.jpg",
-          createdAt: '04/07/2016',
-          updatedAt: '04/07/2016',
-          comments: [{
-            username: "cpenarrieta",
-            text: "Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh."
-          },{
-            username: "cpenarrieta",
-            text: "Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh."
-          }]
-        },{
-          id: 4,
-          user: "juan",
-          coursename: "history",
-          tagname: "quiz",
-          title: "answer number 3, ",
-          imgUrl: "http://images.apple.com/pr/bios/images/federighi_thumb20120727.jpg",
-          createdAt: '04/07/2016',
-          updatedAt: '04/07/2016',
-          comments: [{
-            username: "cpenarrieta",
-            text: "Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh."
-          },{
-            username: "pedro",
-            text: "Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh."
-          }]
-        },{
-          id: 5,
-          user: "pedro",
-          coursename: "history",
-          tagname: "quiz",
-          title: "answer number 4, ",
-          imgUrl: "http://images.apple.com/pr/bios/images/ive_thumb20110204.jpg",
-          createdAt: '04/07/2016',
-          updatedAt: '04/07/2016',
-          comments: [{
-            username: "ranjit",
-            text: "Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh."
-          },{
-            username: "sergio",
-            text: "Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh."
-          }]
-        }];
+        return res.data;
       });
+
+    
     },
 
     // updates a question. takes in the id of the question and the required modification
     updateQuestion: function(id, mod) {
       return $http({
         method: 'POST',
-        url: 'townhall/questions/' + id,
+        url: 'api/questions/' + id,
         data: { mod: mod } // possible mods = 'like' to increase like points, 'good' to mark as good (by teacher), 'answered', 'closed'
       })
     },
@@ -188,7 +59,7 @@ angular.module('boorish.services', [])
     removeQuestion: function(questionID) {
       return $http({
         method: 'DELETE',
-        url: 'townhall/questions/' + questionID
+        url: 'api/questions/' + questionID
       })
     }
   }
@@ -203,7 +74,7 @@ angular.module('boorish.services', [])
     getAnswers: function() {
       return $http({
         method: 'GET',
-        url: 'townhall/answers',
+        url: 'api/answers',
       })
       .then(function(res) {
         return res.data;
@@ -215,7 +86,7 @@ angular.module('boorish.services', [])
 
       return $http({
         method: 'POST',
-        url: 'townhall/answers',
+        url: 'api/answers',
         data: JSON.stringify({
           text: answer.text,
           id_question: questionID,
@@ -228,7 +99,7 @@ angular.module('boorish.services', [])
     updateAnswer: function(answerID, mod) {
       return $http({
         method: 'POST',
-        url: 'townhall/answers/' + answerID,
+        url: 'api/answers/' + answerID,
         data: JSON.stringify({
           id_answer: answerID,
           mod: mod // possible mods: 'like' to increase the number of points on a question, 'good' to mark as good
@@ -240,7 +111,7 @@ angular.module('boorish.services', [])
     removeAnswer: function(answerID) {
       return $http({
         method: 'DELETE',
-        url: 'townhall/answers/' + answerID
+        url: 'api/answers/' + answerID
       })
     }
 
@@ -256,7 +127,7 @@ angular.module('boorish.services', [])
     allUsers: function(){
       return $http({
         method: 'GET',
-        url: '/townhall/users'
+        url: '/api/users'
       })
       .then(function(res){
         return res.data;
@@ -268,7 +139,7 @@ angular.module('boorish.services', [])
       var userID = $window.localStorage.getItem('com.boorish');
       return $http({
         method: 'GET',
-        url: '/townhall/users/' + userID
+        url: '/api/users/' + userID
       }).then(function(res) {
         return res.data.results.id;
       })
@@ -277,7 +148,7 @@ angular.module('boorish.services', [])
     addUser: function(user) {
       return $http({
         method: 'POST',
-        url: '/townhall/users',
+        url: '/api/users',
         data: JSON.stringify({
           username: user.username,
           password: user.password,
@@ -302,7 +173,7 @@ angular.module('boorish.services', [])
     getTags: function() {
       return $http({
         method: 'GET',
-        url: '/townhall/tags'
+        url: '/api/tags'
       })
       .then(function(res) {
         return res.data;
@@ -319,26 +190,11 @@ angular.module('boorish.services', [])
     getCourses: function() {
       return $http({
         method: 'GET',
-        url: '/townhall/test' //courses
+        url: '/api/courses'
 
       })
       .then(function(res) {
-        return [{
-          name: "Calculus",
-          id: "01",
-        },{
-          name: "Physics",
-          id: "02",
-        },{
-          name: "History",
-          id: "03",
-        },{
-          name: "English",
-          id: "04",
-        },{
-          name: "Spanish",
-          id: "05",
-        }];
+        return res.data;
       });
     }
   };
@@ -359,7 +215,7 @@ angular.module('boorish.services', [])
 
         return $http({
           method: 'GET',
-          url: '/townhall/users'
+          url: '/api/users'
         })
         .then(function(res) {
           var users = res.data.results;
@@ -372,6 +228,7 @@ angular.module('boorish.services', [])
           }
           if (isUser) {
             $window.localStorage.setItem('com.boorish', user.id);
+            $location.path('/questions');
           } else {
             $location.path('/signin');
           }
@@ -390,3 +247,125 @@ angular.module('boorish.services', [])
 }
 
 });
+
+// [{
+//           id: 1,
+//           user: "cpenarrieta",
+//           coursename: "math",
+//           tagname: "homework",
+//           title: "How to make whatsapp type of animation for opening the menu",
+//           imgUrl: "http://images.apple.com/pr/bios/images/1501cue_thumb.jpg",
+//           createdAt: '04/07/2016',
+//           updatedAt: '04/07/2016'
+//         },{
+//           id: 2,
+//           user: "ranjit",
+//           coursename: "history",
+//           tagname: "quiz",
+//           title: "answer number 1, ",
+//           imgUrl: "http://images.apple.com/pr/bios/images/cook_thumb.jpg",
+//           createdAt: '04/07/2016',
+//           updatedAt: '04/07/2016',
+//           comments: [{
+//             username: "jose",
+//             text: "Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh."
+//           },{
+//             username: "mieul",
+//             text: "Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh."
+//           }]
+//         },{
+//           id: 3,
+//           user: "sergio",
+//           coursename: "history",
+//           tagname: "quiz",
+//           title: "answer number 2, ",
+//           imgUrl: "http://images.apple.com/pr/bios/images/ahrendts_thumb.jpg",
+//           createdAt: '04/07/2016',
+//           updatedAt: '04/07/2016',
+//           comments: [{
+//             username: "cpenarrieta",
+//             text: "Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh."
+//           },{
+//             username: "cpenarrieta",
+//             text: "Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh."
+//           }]
+//         },{
+//           id: 4,
+//           user: "juan",
+//           coursename: "history",
+//           tagname: "quiz",
+//           title: "answer number 3, ",
+//           imgUrl: "http://images.apple.com/pr/bios/images/federighi_thumb20120727.jpg",
+//           createdAt: '04/07/2016',
+//           updatedAt: '04/07/2016',
+//           comments: [{
+//             username: "cpenarrieta",
+//             text: "Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh."
+//           },{
+//             username: "pedro",
+//             text: "Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh."
+//           }]
+//         },{
+//           id: 5,
+//           user: "pedro",
+//           coursename: "history",
+//           tagname: "quiz",
+//           title: "answer number 4, ",
+//           imgUrl: "http://images.apple.com/pr/bios/images/ive_thumb20110204.jpg",
+//           createdAt: '04/07/2016',
+//           updatedAt: '04/07/2016',
+//           comments: [{
+//             username: "ranjit",
+//             text: "Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh."
+//           },{
+//             username: "sergio",
+//             text: "Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh."
+//           }]
+//         }];
+
+//         [{
+//           id: 1,
+//           user: "cpenarrieta",
+//           coursename: "math",
+//           tagname: "homework",
+//           title: "How to make whatsapp type of animation for opening the menu from toolbar(actionbar)",
+//           imgUrl: "http://images.apple.com/pr/bios/images/1501cue_thumb.jpg",
+//           createdAt: '04/07/2016',
+//           updatedAt: '04/07/2016'
+//         },{
+//           id: 2,
+//           user: "ranjit",
+//           coursename: "history",
+//           tagname: "quiz",
+//           title: "question title 2",
+//           imgUrl: "http://images.apple.com/pr/bios/images/cook_thumb.jpg",
+//           createdAt: '04/07/2016',
+//           updatedAt: '04/07/2016'
+//         },{
+//           id: 3,
+//           user: "ranjit",
+//           coursename: "history",
+//           tagname: "quiz",
+//           title: "question title 2",
+//           imgUrl: "http://images.apple.com/pr/bios/images/cook_thumb.jpg",
+//           createdAt: '04/07/2016',
+//           updatedAt: '04/07/2016'
+//         },{
+//           id: 4,
+//           user: "ranjit",
+//           coursename: "history",
+//           tagname: "quiz",
+//           title: "question title 2",
+//           imgUrl: "http://images.apple.com/pr/bios/images/cook_thumb.jpg",
+//           createdAt: '04/07/2016',
+//           updatedAt: '04/07/2016'
+//         },{
+//           id: 5,
+//           user: "ranjit",
+//           coursename: "history",
+//           tagname: "quiz",
+//           title: "question title 2",
+//           imgUrl: "http://images.apple.com/pr/bios/images/cook_thumb.jpg",
+//           createdAt: '04/07/2016',
+//           updatedAt: '04/07/2016'
+//         }];
