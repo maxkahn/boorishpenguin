@@ -6,19 +6,11 @@ angular.module('boorish.services', [])
   return {
     // add a question from /ask
     addQuestion: function(question) {
-      console.log(question)
-
       return $http({
         method: 'POST',
         url: '/api/questions',
-        data: JSON.stringify({
-          text: question.text,
-          id_user: question.userId,
-          course: question.course,  // these are not setup yet
-          tag: question.tag,  // these are not setup yet
-          title: question.title
-        })
-      })
+        data: question
+      });
     },
 
     getAllQuestions: function() {
@@ -191,7 +183,7 @@ angular.module('boorish.services', [])
 
       })
       .then(function(res) {
-        return res.data;
+        return res.data.results;
       });
     }
   };

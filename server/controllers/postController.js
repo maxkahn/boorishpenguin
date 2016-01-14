@@ -1,11 +1,40 @@
 var db = require('../db/index.js');
+
+function timeSince(date) {
+  var seconds = Math.floor((new Date() - date) / 1000);
+  var interval = Math.floor(seconds / 31536000);
+  if (interval >= 1) {
+      return interval + " years ago";
+  }
+  interval = Math.floor(seconds / 2592000);
+  if (interval >= 1) {
+      return interval + " months ago";
+  }
+  interval = Math.floor(seconds / 86400);
+  if (interval >= 1) {
+      return interval + " days ago";
+  }
+  interval = Math.floor(seconds / 3600);
+  if (interval >= 1) {
+      return interval + " hours ago";
+  }
+  interval = Math.floor(seconds / 60);
+  if (interval >= 1) {
+      return interval + " minutes ago";
+  }
+  if (seconds < 5){
+    return "just now";
+  }
+  return Math.floor(seconds) + " seconds ago";
+}
+
+
 module.exports = {
 
 	allPosts: function(queryObject, callback) {
+    console.log('queryObject',queryObject);
 		db.Post.findAll({
-				where: {
-					isQuestionType: false
-				},
+				where: queryObject,
 				include: [db.User, db.Course, db.Tag]
 			})
 			.then(function(posts) {
@@ -18,14 +47,15 @@ module.exports = {
 						points: post.points,
 						responses: post.responses,
 						isAnswered: post.isAnswered,
-						isGood: post.isGood,
 						isPreferred: post.isPreferred,
 						isClosed: post.isClosed,
-						createdAt: post.createdAt,
+						votes: post.votes,
+						createdAt: timeSince(post.createdAt),
 						course: post.CourseId,
+						coursename: post.Course ? post.Course.name : "",
 						tagname: post.TagId,
-						user: post.UserId,
-						// imgUrl: post.User.picture,
+						user: post.User ? post.User.name : "",
+						imgUrl: post.User ? post.User.picture : "",
 						updatedAt: post.updatedAt
 					};
 				});
@@ -40,10 +70,12 @@ module.exports = {
 				title: postData.title,
 				text: postData.text,
 				UserId: postData.userId,
-				QuestionId: postData.questionId,
+				QuestionId: postData.QuestionId,
 				ResponseId: postData.responseId,
 				CourseId: postData.CourseId,
-				TagId: postData.TagId
+				TagId: postData.TagId,
+        isQuestionType: postData.isQuestionType || false,
+        isAnswerType: postData.isAnswerType
 			})
 			.then(function(result) {
 				callback(result);

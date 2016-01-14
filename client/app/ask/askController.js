@@ -1,6 +1,6 @@
 angular.module('boorish.ask', [])
 
-.controller('askController', function($scope, $window, $location, Tags, Courses, Questions) {
+.controller('askController', function($scope, $window, $state, Courses, Questions) {
   $scope.question = {};
   $scope.topics = [];
 
@@ -12,12 +12,21 @@ angular.module('boorish.ask', [])
   });
 
   $scope.addQuestion = function() {
-    console.log($scope.topics);
-    $scope.question.userId = $window.localStorage.getItem('com.boorish');  // pulls userId from localStorage
-    $scope.question.course = $scope.courseOptions.selectedOption.name; // pulls selected course
-    $scope.question.tag = $scope.tagOptions.selectedOption.name;  // pulls selected tag
+    var questionToInsert = {
+      isQuestionType: true,
+      isAnswerType: false,
+      title: $scope.question.title,
+      text: $scope.question.text,
+      userId: 2, //TODO: get this from Auth
+      tagsArray: $scope.topics.join(),
+      CourseId: $scope.courseOptions.selectedOption
+    };
+
+    Questions.addQuestion(questionToInsert)
+      .then(function(){
+        //TODO show a message that the question was submitted
+        $state.go('questions');
+      });
   };
+
 });
-  
-
-

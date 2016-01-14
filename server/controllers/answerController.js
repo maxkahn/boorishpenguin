@@ -5,23 +5,32 @@ var CommentCtrl = require('./commentController.js');
 module.exports = {
 
 	allAnswers: function(req, res, callback) {
-
-	PostCtrl.allPosts({isAnswerType: true,
-		QuestionId: req.body.questionId}, function(data) {
+		console.log(req.body.id);
+		PostCtrl.allPosts({ isAnswerType: true, QuestionId: req.params.id }, function(data) {
 			//data an array of answers
-				//add the question at the head of the array
-				//for each answer, attach an array of comments
-			var answerArray = data.map(function(answer) {
-				answer.body = {};
-				answer.body.responseId = answer.id;
-				CommentCtrl.allComments(answer, res, function(data) {
-					answer.comments = data;
-				});
-				return answer;
-			})
-			.then(function(){
-				callback(answerArray);
-			});
+			//add the question at the head of the array
+			//for each answer, attach an array of comments
+
+			// var answerArray = data.results.map(function(answer) {
+			// 	answer.body = {};
+			// 	answer.body.responseId = answer.id;
+			// 	// CommentCtrl.allComments(answer, res, function(data) {
+			// 	// 	answer.comments = data;
+			// 	// });
+			// 	return answer;
+			// })
+			// .then(function(){
+			// 	callback(answerArray);
+			// });
+
+			// data.results.forEach(function(answer){
+			// 	req.body.responseId = answer.id;
+			// 	CommentCtrl.allComments(req, res, function(comments) {
+			// 		answer.comments = comments;
+			// 	});
+			// });
+
+			callback(data.results);
 		});
 	},
 
