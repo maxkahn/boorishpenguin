@@ -5,6 +5,7 @@ var AnswCtrl = require('./answerController.js');
 
 module.exports = {
 	allQuestions: function(req, res) {
+
 	PostCtrl.allPosts({isQuestionType: true}, function(data) {
 			res.json(data);
 		});
@@ -23,11 +24,7 @@ module.exports = {
 	},
 
 	newQuestion: function(req, res) {
-<<<<<<< HEAD
-		console.log(req.body);
-=======
-		console.log('server-side newQuestion invoked');
->>>>>>> preparing for rebase
+
 		PostCtrl.addPost(req.body, function(data) {
 			res.status(201).json(data);
 		});

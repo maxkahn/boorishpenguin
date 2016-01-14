@@ -24,6 +24,7 @@ module.exports = function(app, express, ensureAuth) {
 
   app.get('/api/users', userControllers.allUsers);
   app.get('/api/users/:id', userControllers.oneUser);
+
   app.post('/api/signup', userControllers.newUser);
 
   app.get('/api/courses', courseControllers.allCourses);
