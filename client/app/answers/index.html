@@ -56,7 +56,7 @@
       </div>
       <div flex>
         <md-button ng-show="question.coursename">{{ question.coursename }}</md-button>
-        <md-button ng-show="question.tagname">{{question.tagname }}</md-button>
+        <md-button ng-repeat="tag in question.tags">{{ tag }}</md-button>
       </div>
     </md-card-actions>
   </md-card>
