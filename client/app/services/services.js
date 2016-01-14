@@ -6,6 +6,8 @@ angular.module('boorish.services', [])
   return {
     // add a question from /ask
     addQuestion: function(question) {
+
+      console.log('client-side addQuestion invoked');
       return $http({
         method: 'POST',
         url: '/api/questions',
@@ -20,7 +22,7 @@ angular.module('boorish.services', [])
     },
 
     getAllQuestions: function() {
-
+      console.log('client-side getAllQuestions invoked');
       return $http({
         method: 'GET',
         url: '/api/questions'
@@ -274,6 +276,129 @@ angular.module('boorish.services', [])
     $rootScope.user = undefined;
     $location.path('/signin');
   }
-};
+
+}
 
 });
+
+// [{
+//           id: 1,
+//           user: "cpenarrieta",
+//           coursename: "math",
+//           tagname: "homework",
+//           title: "How to make whatsapp type of animation for opening the menu",
+//           imgUrl: "http://images.apple.com/pr/bios/images/1501cue_thumb.jpg",
+//           createdAt: '04/07/2016',
+//           updatedAt: '04/07/2016'
+//         },{
+//           id: 2,
+//           user: "ranjit",
+//           coursename: "history",
+//           tagname: "quiz",
+//           title: "answer number 1, ",
+//           imgUrl: "http://images.apple.com/pr/bios/images/cook_thumb.jpg",
+//           createdAt: '04/07/2016',
+//           updatedAt: '04/07/2016',
+//           comments: [{
+//             username: "jose",
+//             text: "Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh."
+//           },{
+//             username: "mieul",
+//             text: "Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh."
+//           }]
+//         },{
+//           id: 3,
+//           user: "sergio",
+//           coursename: "history",
+//           tagname: "quiz",
+//           title: "answer number 2, ",
+//           imgUrl: "http://images.apple.com/pr/bios/images/ahrendts_thumb.jpg",
+//           createdAt: '04/07/2016',
+//           updatedAt: '04/07/2016',
+//           comments: [{
+//             username: "cpenarrieta",
+//             text: "Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh."
+//           },{
+//             username: "cpenarrieta",
+//             text: "Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh."
+//           }]
+//         },{
+//           id: 4,
+//           user: "juan",
+//           coursename: "history",
+//           tagname: "quiz",
+//           title: "answer number 3, ",
+//           imgUrl: "http://images.apple.com/pr/bios/images/federighi_thumb20120727.jpg",
+//           createdAt: '04/07/2016',
+//           updatedAt: '04/07/2016',
+//           comments: [{
+//             username: "cpenarrieta",
+//             text: "Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh."
+//           },{
+//             username: "pedro",
+//             text: "Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh."
+//           }]
+//         },{
+//           id: 5,
+//           user: "pedro",
+//           coursename: "history",
+//           tagname: "quiz",
+//           title: "answer number 4, ",
+//           imgUrl: "http://images.apple.com/pr/bios/images/ive_thumb20110204.jpg",
+//           createdAt: '04/07/2016',
+//           updatedAt: '04/07/2016',
+//           comments: [{
+//             username: "ranjit",
+//             text: "Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh."
+//           },{
+//             username: "sergio",
+//             text: "Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh."
+//           }]
+//         }];
+
+//         [{
+//           id: 1,
+//           user: "cpenarrieta",
+//           coursename: "math",
+//           tagname: "homework",
+//           title: "How to make whatsapp type of animation for opening the menu from toolbar(actionbar)",
+//           imgUrl: "http://images.apple.com/pr/bios/images/1501cue_thumb.jpg",
+//           createdAt: '04/07/2016',
+//           updatedAt: '04/07/2016'
+//         },{
+//           id: 2,
+//           user: "ranjit",
+//           coursename: "history",
+//           tagname: "quiz",
+//           title: "question title 2",
+//           imgUrl: "http://images.apple.com/pr/bios/images/cook_thumb.jpg",
+//           createdAt: '04/07/2016',
+//           updatedAt: '04/07/2016'
+//         },{
+//           id: 3,
+//           user: "ranjit",
+//           coursename: "history",
+//           tagname: "quiz",
+//           title: "question title 2",
+//           imgUrl: "http://images.apple.com/pr/bios/images/cook_thumb.jpg",
+//           createdAt: '04/07/2016',
+//           updatedAt: '04/07/2016'
+//         },{
+//           id: 4,
+//           user: "ranjit",
+//           coursename: "history",
+//           tagname: "quiz",
+//           title: "question title 2",
+//           imgUrl: "http://images.apple.com/pr/bios/images/cook_thumb.jpg",
+//           createdAt: '04/07/2016',
+//           updatedAt: '04/07/2016'
+//         },{
+//           id: 5,
+//           user: "ranjit",
+//           coursename: "history",
+//           tagname: "quiz",
+//           title: "question title 2",
+//           imgUrl: "http://images.apple.com/pr/bios/images/cook_thumb.jpg",
+//           createdAt: '04/07/2016',
+//           updatedAt: '04/07/2016'
+//         }];
