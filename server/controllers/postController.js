@@ -116,23 +116,22 @@ module.exports = {
 
 	markAsPreferred: function(req, callback) {
 		var postId = req.params.id;
-		// reqUserId = req.body.userId;
-		// db.Post.findById(req.params.id)
-		// 	.then(function(post) {
-		// 		db.User.findById(reqUserId)
-		// 			.then(function(user) {
-		// 				if (user.isTeacher) {
+		db.Post.findById(req.params.id)
+			.then(function(post) {
+				db.User.findById(req.body.userId)
+					.then(function(user) {
+						if (user.isTeacher || user.isAdmin) {
 							db.Post.update({
-									isPreferred: true
+									isPreferred: !post.isPreferred
 								}, {where : { id : postId }})
 								.then(function(result) {
 									callback(result);
 								});
-					// 	} else {
-					// 		res.sendStatus(404);
-					// 	}
-					// });
-			// });
+						} else {
+							res.sendStatus(404);
+						}
+					});
+			});
 	}
 
 };
