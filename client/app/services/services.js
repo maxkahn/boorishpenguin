@@ -5,20 +5,26 @@ angular.module('boorish.services', [])
 .factory('Questions', function($http, $location) {
   return {
     // add a question from /ask
-    addQuestion: function(question, $rootScope) {
-      console.log($rootScope.user);
-
+    addQuestion: function(question) {
+      console.log('client-side addQuestion invoked');
       return $http({
         method: 'POST',
         url: '/api/questions',
-        data: question
+        data: JSON.stringify({
+          text: question.text,
+          id_user: question.userId,
+          course: question.course,  // these are not setup yet
+          tag: question.tag,  // these are not setup yet
+          title: question.title
+        })
       });
     },
 
     getAllQuestions: function() {
+
       return $http({
         method: 'GET',
-        url: '/api/questions/'
+        url: '/api/questions'
       })
       .then(function(res) {
         return res.data.results;
@@ -233,8 +239,6 @@ angular.module('boorish.services', [])
         url: '/auth/google'
       })
       .then(function (res) {
-        console.log('res', res);
-        console.log('json parsed data', JSON.parse(res.data));
         user.google = res.data.email || res.data.profile.emails[0].value;
 
         return $http({

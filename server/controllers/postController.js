@@ -32,11 +32,13 @@ function timeSince(date) {
 module.exports = {
 
 	allPosts: function(queryObject, callback) {
+
 		db.Post.findAll({
-				where: queryObject,
+				where: {isQuestionType: true},
 				include: [db.User, db.Course, db.Tag]
 			})
 			.then(function(posts) {
+				console.log('inside database query in allPosts server');
 				var formattedPosts = posts.map(function(post) {
 					return {
 						id: post.id,
@@ -55,6 +57,8 @@ module.exports = {
 						tags: post.tags ? post.tags.split(',') : [],
 						user: post.User ? post.User.name : "",
 						imgUrl: post.User ? post.User.picture : "",
+
+						// imgUrl: post.User.picture,
 						updatedAt: post.updatedAt
 					};
 				});
@@ -79,6 +83,7 @@ module.exports = {
 			.then(function(result) {
 				callback(result);
 			});
+
 	},
 
 	deletePost: function(req, callback) {

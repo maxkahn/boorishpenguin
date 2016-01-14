@@ -16,10 +16,10 @@ angular.module('boorish.questions', [])
 
 
   // if user is not authenticated, reroute to /signin
-  if (!Auth.isAuth()) {
-    $location.path('/signin') 
-  // else show questions
-  } else {
+  // if (!Auth.isAuth()) {
+  //   // $location.path('/signin') 
+  // // else show questions
+  // } else {
     $scope.init();
-  }
+  // }
 });
