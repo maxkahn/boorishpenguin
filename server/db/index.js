@@ -1,12 +1,13 @@
 var Sequelize = require('sequelize');
 
-var database = process.env.DATABASE || 'jmuspkeyvjzsvvwp';
-var dbUser = process.env.DBUSER || 'htmaaabw4pe3k9ja';
+var database = process.env.DATABASE || 'townhall';
+var dbUser = process.env.DBUSER || 'root';
 var dbPass = process.env.DBPASS;
-var dbHost = process.env.DBHOST || 'jw0ch9vofhcajqg7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com';
+//var dbHost = process.env.DBHOST || 'jw0ch9vofhcajqg7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com';
 
-var db = new Sequelize(database, dbUser, dbPass, {
-  host: dbHost
+var db = new Sequelize(database, dbUser, null, {
+  host: 'localhost',
+  username: 'root'
 });
 
 var User = db.define('User', {
@@ -98,8 +99,8 @@ var Post = db.define('Post', {
   updatedAt: Sequelize.DATE
 });
 
-var Like = db.define('Like', {
-  idPositive: {
+var Votes = db.define('Votes', {
+  isPositive: {
    type: Sequelize.BOOLEAN,
     allowNull: false,
     defaultValue: false,
@@ -123,8 +124,8 @@ Course.hasMany(Post);
 Post.belongsTo(Course);
 Post.hasMany(Post, {as: 'Responses', foreignKey: 'QuestionId'});
 Post.hasMany(Post, {as: 'Comments', foreignKey: 'ResponseId'});
-Post.belongsToMany(User, {as: 'Vote', through: 'Like'});
-User.belongsToMany(Post, {through: 'Like'});
+Post.belongsToMany(User, {as: 'Opinions', through: 'Votes'});
+User.belongsToMany(Post, {through: 'Votes'});
 
 User.sync()
 .then(function() {
@@ -137,11 +138,11 @@ User.sync()
   return Post.sync();
 })
 .then(function() {
-  return Like.sync();
+  return Votes.sync();
 });
 
 exports.User = User;
 exports.Course = Course;
 exports.Tag = Tag;
 exports.Post = Post;
-exprots.Like = Like;
+exports.Votes = Votes;

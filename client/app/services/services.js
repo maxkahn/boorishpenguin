@@ -6,6 +6,7 @@ angular.module('boorish.services', [])
   return {
     // add a question from /ask
     addQuestion: function(question) {
+      console.log(question)
 
       return $http({
         method: 'POST',
@@ -224,6 +225,7 @@ angular.module('boorish.services', [])
           }
           if (isUser) {
             $window.localStorage.setItem('com.boorish', user.id);
+            $location.path('/questions');
           } else {
             $location.path('/signin');
           }
