@@ -6,7 +6,6 @@ module.exports = {
 	votePost: function(req, res) {
 
 		var amount = req.body.isPositive === 'true' ? 1 : -1;
-		console.log(amount)
 		db.Votes.findOrCreate({
 				where: {
 					UserId: req.body.userId,
