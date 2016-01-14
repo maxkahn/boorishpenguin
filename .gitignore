@@ -5,6 +5,7 @@
 ### SERVER ###
 server/controllers/oldquestionController.js
 server/controllers/oldAnswerController.js
+server/config/apikeys.js
 
 ### NODE ###
 build/
