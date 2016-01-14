@@ -59,6 +59,7 @@ module.exports = {
 						user: post.User ? post.User.name : "",
 						userId: post.User.id,
 						imgUrl: post.User ? post.User.picture : "",
+
 						updatedAt: post.updatedAt,
 						questionId: post.QuestionId,
 						answerId: post.ResponseId
@@ -87,6 +88,7 @@ module.exports = {
 			.then(function(result) {
 				callback(result);
 			});
+
 	},
 
 	deletePost: function(req, callback) {

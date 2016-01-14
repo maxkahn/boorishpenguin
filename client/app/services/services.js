@@ -16,7 +16,6 @@ angular.module('boorish.services', [])
           tag: question.tag,  // these are not setup yet
           title: question.title
         })
-
       });
     },
 
