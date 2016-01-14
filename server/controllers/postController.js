@@ -32,7 +32,6 @@ function timeSince(date) {
 module.exports = {
 
 	allPosts: function(queryObject, callback) {
-		console.log('server fired allPosts');
 
 		db.Post.findAll({
 				where: {isQuestionType: true},
@@ -51,6 +50,7 @@ module.exports = {
 						isAnswered: post.isAnswered,
 						isPreferred: post.isPreferred,
 						isClosed: post.isClosed,
+
 						votes: post.votes,
 						createdAt: timeSince(post.createdAt),
 						course: post.CourseId,
@@ -62,6 +62,7 @@ module.exports = {
 						updatedAt: post.updatedAt,
 						questionId: post.QuestionId,
 						answerId: post.ResponseId
+
 					};
 				});
 
@@ -86,6 +87,7 @@ module.exports = {
 			.then(function(result) {
 				callback(result);
 			});
+
 	},
 
 	deletePost: function(req, callback) {
