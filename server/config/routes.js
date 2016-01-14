@@ -36,7 +36,10 @@ module.exports = function(app, express) {
 
   app.get('/api/users', userControllers.allUsers);
   app.get('/api/users/:id', userControllers.oneUser);
+<<<<<<< HEAD
   app.get('/api/users/getFullProfile/:id', userControllers.getFullProfile);
+=======
+>>>>>>> preparing for rebase
 
   app.post('/api/signup', userControllers.newUser);
 
