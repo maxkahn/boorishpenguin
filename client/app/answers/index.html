@@ -43,13 +43,7 @@
 
     <md-card-content>
       <p>
-        The titles of Washed Out's breakthrough song and the first single from Paracosm share song and the first single from Paracosm from Paracosm share song and the first single from from Paracosm share song and the first single from...
-        The titles of Washed Out's breakthrough song and the first single from Paracosm share song and the first single from Paracosm from Paracosm share song and the first single from from Paracosm share song and the first single from...
-        The titles of Washed Out's breakthrough song and the first single from Paracosm share song and the first single from Paracosm from Paracosm share song and the first single from from Paracosm share song and the first single from...
-        The titles of Washed Out's breakthrough song and the first single from Paracosm share song and the first single from Paracosm from Paracosm share song and the first single from from Paracosm share song and the first single from...
-        The titles of Washed Out's breakthrough song and the first single from Paracosm share song and the first single from Paracosm from Paracosm share song and the first single from from Paracosm share song and the first single from...
-        The titles of Washed Out's breakthrough song and the first single from Paracosm share song and the first single from Paracosm from Paracosm share song and the first single from from Paracosm share song and the first single from...
-        The titles of Washed Out's breakthrough song and the first single from Paracosm share song and the first single from Paracosm from Paracosm share song and the first single from from Paracosm share song and the first single from...
+        {{ question.text }}
       </p>
     </md-card-content>
 
@@ -73,7 +67,7 @@
   </md-list>
 
   <!-- answers -->
-  <md-card ng-repeat='answer in answers'>
+  <md-card ng-repeat='answer in answers' style="width: 100%">
     <div layout="row">
       <div flex="30">
         <md-card-header class="questionHeader">
@@ -100,25 +94,15 @@
       <div flex hide-xs>
         <md-card-header class="questionHeader">
           <md-card-header-text>
-            <span class="md-subhead">votes: {{question.votes}}</span>
+            <span class="md-subhead">votes: {{answer.votes}}</span>
           </md-card-header-text>
         </md-card-header>
       </div>
     </div>
 
-    <md-card-title>
-      <md-card-title-text>
-        <span class="md-headline">{{ answer.title }}</span>
-         <span class="md-subhead"></span>
-      </md-card-title-text>
-    </md-card-title>
-    <br>
-
     <md-card-content>
       <p>
-        The titles of Washed Out's breakthrough song and the first single from Paracosm share song and the first single from Paracosm from Paracosm share song and the first single from from Paracosm share song and the first single from...
-        The titles of Washed Out's breakthrough song and the first single from Paracosm share song and the first single from Paracosm from Paracosm share song and the first single from from Paracosm share song and the first single from...
-        The titles of Washed Out's breakthrough song and the first single from Paracosm share song and the first single from Paracosm from Paracosm share song and the first single from from Paracosm share song and the first single from...
+        {{ answer.text }}
       </p>
     </md-card-content>
 
