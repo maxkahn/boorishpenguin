@@ -3,28 +3,32 @@ var answerControllers = require ('../controllers/answerController.js');
 var userControllers = require ('../controllers/userControllers.js');
 var courseControllers = require ('../controllers/courseControllers.js');
 var tagControllers = require ('../controllers/tagControllers.js');
+var voteController = require ('../controllers/voteController.js');
 var passport = require('passport');
 
 
 module.exports = function(app, express, ensureAuth) {
-  app.get('/townhall/questions', ensureAuth, questionControllers.allQuestions);
-  app.post('/townhall/questions', ensureAuth, questionControllers.newQuestion);
-  app.delete('/townhall/questions/:id', ensureAuth, questionControllers.deleteQuestion);
+  app.get('/api/questions', questionControllers.allQuestions);
+  app.post('/api/questions', questionControllers.newQuestion);
+  app.delete('/api/questions/:id', questionControllers.deleteQuestion);
 
-  app.get('/townhall/questions/:id', ensureAuth, questionControllers.readQuestion);
-  app.post('/townhall/questions/:id', ensureAuth, questionControllers.modQuestion);
+  app.get('/api/questions/:id', questionControllers.renderQuestion);
+  app.put('/api/questions/changeStatus/:id', questionControllers.toggleCloseQuestion);
+  app.put('/api/questions/markAsGood/:id' , questionControllers.markAsGoodQuestion);
+  app.put('/api/questions/vote/:id' , voteController.votePost);
 
-  app.post('/townhall/answers', ensureAuth, answerControllers.newAnswer);
-  app.post('/townhall/answers/:id', ensureAuth, answerControllers.modAnswer);
-  app.delete('/townhall/answers/:id', ensureAuth, answerControllers.deleteAnswer);
+  app.post('/api/answers', answerControllers.newAnswer);
+  app.put('/api/answers/markAsCorrect/:id', answerControllers.markAsCorrectAnswer);
+  app.put('/api/answers/vote/:id' , voteController.votePost);
+  app.delete('/api/answers/:id', answerControllers.deleteAnswer);
 
-  app.get('/townhall/users', ensureAuth, userControllers.allUsers);
-  app.get('/townhall/users/:id', ensureAuth, userControllers.oneUser);
-  app.post('/townhall/signup', userControllers.newUser);
+  app.get('/api/users', userControllers.allUsers);
+  app.get('/api/users/:id', userControllers.oneUser);
+  app.post('/api/signup', userControllers.newUser);
 
-  app.get('/townhall/courses', ensureAuth, courseControllers.allCourses);
+  app.get('/api/courses', courseControllers.allCourses);
 
-  app.get('/townhall/tags', ensureAuth, tagControllers.allTags);
+  app.get('/api/tags', tagControllers.allTags);
 
   // Client does get request to /auth/google on signin
   app.get('/auth/google',
@@ -38,9 +42,9 @@ module.exports = function(app, express, ensureAuth) {
     res.redirect('/#/questions');
   });
 
-  app.get('/user', ensureAuth, function (req, res){
+  app.get('/user', function (req, res){
     // sends google user data to client so they can know whose currenty logged in
     res.json(req.user);
   });
 
-}
+};

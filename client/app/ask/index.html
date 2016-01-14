@@ -1,1 +1,36 @@
-<h1>ask view</h1>
+<md-content class="md-padding" layout="row" layout-wrap layout-align="center start" layout-xs="column">
+	<div flex="100" flex-sm="100" flex-xs="100" layout="column">
+    <span class="md-display-1">New Question</span>
+  <form>
+    <div class="dropdown-form form-group">
+      <md-input-container class="md-block" flex-gt-sm>
+        <label>Select Course</label>
+        <md-select ng-model="courseOptions.selectedOption">
+          <md-option ng-repeat="option in courseOptions.availableOptions track by option.id" value="{{option.name}}">
+            {{option.name}}
+          </md-option>
+        </md-select>
+      </md-input-container>
+    </div>
+    <div class="dropdown-form form-group">
+      <h2 class="md-title">Add Your Topic</h2>
+      <md-chips ng-model="topics" readonly="ctrl.readonly"></md-chips>
+    </div>
+    <br>
+    <md-input-container class="md-block">
+      <label>What's Your Question?</label>
+      <textarea ng-model="question.title" md-maxlength="150"></textarea>
+    </md-input-container>
+
+    <md-input-container class="md-block">
+      <label>Add More Details...</label>
+      <textarea ng-model="question.text" columns="1" md-maxlength="350" rows="10"></textarea>
+    </md-input-container>
+
+    <section layout="row" layout-sm="column" layout-align="end end" layout-wrap>
+      <span><md-button class="md-raised md-primary">Submit</md-button>
+
+      <md-button class="md-raised md-warn">Cancel</md-button></span>
+    </section>
+  </form>
+</div>

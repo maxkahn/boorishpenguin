@@ -6,7 +6,7 @@ angular.module('boorish.auth', [])
   $scope.signin = function () {
     $http({
       method: 'GET',
-      url: '/townhall/users'
+      url: '/api/users'
     }).then(function(res) {
       var users = res.results;
       $window.localStorage.setItem('com.boorish', users);

@@ -11,9 +11,9 @@ module.exports = {
         };
       });
 
-      courses = {};
-      courses.results = formattedCourses;
-      res.json(courses);
+      data = {};
+      data.results = formattedCourses;
+      res.json(data);
     });
   }
 };

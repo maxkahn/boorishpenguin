@@ -1,0 +1,167 @@
+<md-content class="md-padding" layout="row" layout-wrap layout-align="center start" layout-xs="column">
+  <!-- question -->
+  <md-card class="questionTop">
+    <div layout="row">
+      <div flex="30">
+        <md-card-header class="questionHeader">
+          <md-card-avatar>
+            <img class="md-user-avatar" src="{{ question.imgUrl }}"/>
+          </md-card-avatar>
+          <md-card-header-text>
+            <span class="md-title">{{ question.user }}</span>
+            <span class="md-subhead">{{ question.createdAt }}</span>
+          </md-card-header-text>
+        </md-card-header>
+      </div>
+      <div flex="40"></div>
+      <div flex="10">
+        <div layout="column">
+          <md-button ng-click='upVote(question)' aria-label="up vote" style="margin-bottom: 0px">
+            <md-icon md-svg-icon="styles/chevron-up.svg"></md-icon>
+          </md-button>
+          <md-button ng-click='downVote(question)' aria-label="down vote" style="margin-top: 0px">
+            <md-icon md-svg-icon="styles/chevron-down.svg"></md-icon>
+          </md-button>
+        </div>
+      </div>
+      <div flex hide-xs>
+        <md-card-header class="questionHeader">
+          <md-card-header-text>
+            <span class="md-subhead">answers: 4</span>
+            <span class="md-subhead">votes: 40</span>
+          </md-card-header-text>
+        </md-card-header>
+      </div>
+    </div>
+
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">{{ question.title }}</span>
+      </md-card-title-text>
+    </md-card-title>
+    <br>
+
+    <md-card-content>
+      <p>
+        The titles of Washed Out's breakthrough song and the first single from Paracosm share song and the first single from Paracosm from Paracosm share song and the first single from from Paracosm share song and the first single from...
+        The titles of Washed Out's breakthrough song and the first single from Paracosm share song and the first single from Paracosm from Paracosm share song and the first single from from Paracosm share song and the first single from...
+        The titles of Washed Out's breakthrough song and the first single from Paracosm share song and the first single from Paracosm from Paracosm share song and the first single from from Paracosm share song and the first single from...
+        The titles of Washed Out's breakthrough song and the first single from Paracosm share song and the first single from Paracosm from Paracosm share song and the first single from from Paracosm share song and the first single from...
+        The titles of Washed Out's breakthrough song and the first single from Paracosm share song and the first single from Paracosm from Paracosm share song and the first single from from Paracosm share song and the first single from...
+        The titles of Washed Out's breakthrough song and the first single from Paracosm share song and the first single from Paracosm from Paracosm share song and the first single from from Paracosm share song and the first single from...
+        The titles of Washed Out's breakthrough song and the first single from Paracosm share song and the first single from Paracosm from Paracosm share song and the first single from from Paracosm share song and the first single from...
+      </p>
+    </md-card-content>
+
+    <md-card-actions layout="row" layout-align="end">
+      <div flex="30">
+        <md-icon md-svg-icon="../../styles/checkbox-marked-circle.svg" >
+        </md-icon > <span> Teacher Approved Question </span>
+      </div>
+      <div flex="40">
+      </div>
+      <div flex>
+        <md-button>{{ question.coursename }}</md-button>
+        <md-button>{{question.tagname }}</md-button>
+      </div>
+    </md-card-actions>
+  </md-card>
+
+  <md-list flex="100">
+    <span class="md-title">4 answers</span>
+    <md-divider></md-divider>
+  </md-list>
+
+  <!-- answers -->
+  <md-card ng-repeat='answer in answers'>
+    <div layout="row">
+      <div flex="30">
+        <md-card-header class="questionHeader">
+          <md-card-avatar>
+            <img class="md-user-avatar" src="{{ answer.imgUrl }}"/>
+          </md-card-avatar>
+          <md-card-header-text>
+            <span class="md-title">{{ answer.user }}</span>
+            <span class="md-subhead">{{ answer.createdAt }}</span>
+          </md-card-header-text>
+        </md-card-header>
+      </div>
+      <div flex="40"></div>
+      <div flex="10">
+        <div layout="column">
+          <md-button ng-click='upVote(answer)' aria-label="up vote" style="margin-bottom: 0px">
+            <md-icon md-svg-icon="styles/chevron-up.svg"></md-icon>
+          </md-button>
+          <md-button ng-click='downVote(answer)' aria-label="down vote" style="margin-top: 0px">
+            <md-icon md-svg-icon="styles/chevron-down.svg"></md-icon>
+          </md-button>
+        </div>
+      </div>
+      <div flex hide-xs>
+        <md-card-header class="questionHeader">
+          <md-card-header-text>
+            <span class="md-subhead">votes: 40</span>
+          </md-card-header-text>
+        </md-card-header>
+      </div>
+    </div>
+
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">{{ answer.title }}</span>
+         <span class="md-subhead"></span>
+      </md-card-title-text>
+    </md-card-title>
+    <br>
+
+    <md-card-content>
+      <p>
+        The titles of Washed Out's breakthrough song and the first single from Paracosm share song and the first single from Paracosm from Paracosm share song and the first single from from Paracosm share song and the first single from...
+        The titles of Washed Out's breakthrough song and the first single from Paracosm share song and the first single from Paracosm from Paracosm share song and the first single from from Paracosm share song and the first single from...
+        The titles of Washed Out's breakthrough song and the first single from Paracosm share song and the first single from Paracosm from Paracosm share song and the first single from from Paracosm share song and the first single from...
+      </p>
+    </md-card-content>
+
+    <md-card-actions layout="row" layout-align="end">
+      <div flex="30">
+        <md-icon md-svg-icon="../../styles/checkbox-marked-circle.svg" >
+        </md-icon > <span> Correct Answer </span>
+      </div>
+      <div flex="40">
+      </div>
+      <div flex>
+      </div>
+    </md-card-actions>
+    
+    <!-- comments -->
+    <md-list>
+      <md-divider></md-divider>
+      <md-subheader class="md-no-sticky">2 comments</md-subheader>
+      <md-list-item class="md-3-line md-long-text" ng-repeat="comment in answer.comments">
+        <div class="md-list-item-text">
+          <h3>{{comment.username}}</h3>
+          <p>
+            {{comment.text}}
+          </p>
+        </div>
+      </md-list-item>
+      <form name="newAnswerForm" ng-submit="submitComment(answer.id)">
+        <md-input-container class="md-block" style="margin-left: 7px">
+          <label>New Comment</label>
+          <input ng-model="newComment.text" md-maxlength="250">
+        </md-input-container>
+      </form>
+    </md-list>
+  </md-card>
+  
+  <!-- submit answer -->
+  <div layout="column" class="answer-form">
+    <form name="newAnswerForm">
+      <md-input-container class="md-block answer-input">
+        <label>Answer</label>
+        <textarea ng-model="newAnswer.text" columns="1" md-maxlength="500" rows="5"></textarea>
+      </md-input-container>
+      <md-button class="md-raised md-primary" ng-click="submitAnswer()">Submit Answer</md-button>
+    </form>
+  </div>
+</md-content>
