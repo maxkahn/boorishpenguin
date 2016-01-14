@@ -33,10 +33,11 @@ module.exports = {
 
 	allPosts: function(queryObject, callback) {
 		db.Post.findAll({
-				where: queryObject,
+				where: {isQuestionType: true},
 				include: [db.User, db.Course, db.Tag]
 			})
 			.then(function(posts) {
+				console.log('inside database query in allPosts server');
 				var formattedPosts = posts.map(function(post) {
 					return {
 						id: post.id,
