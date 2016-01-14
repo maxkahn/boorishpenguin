@@ -7,7 +7,6 @@ angular.module('boorish.services', [])
     // add a question from /ask
     addQuestion: function(question) {
 
-      console.log('client-side addQuestion invoked');
       return $http({
         method: 'POST',
         url: '/api/questions',
@@ -22,7 +21,6 @@ angular.module('boorish.services', [])
     },
 
     getAllQuestions: function() {
-      console.log('client-side getAllQuestions invoked');
       return $http({
         method: 'GET',
         url: '/api/questions'
