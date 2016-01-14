@@ -53,7 +53,7 @@ module.exports = {
 						createdAt: timeSince(post.createdAt),
 						course: post.CourseId,
 						coursename: post.Course ? post.Course.name : "",
-						tagname: post.TagId,
+						tags: post.tags,
 						user: post.User ? post.User.name : "",
 						imgUrl: post.User ? post.User.picture : "",
 						updatedAt: post.updatedAt
@@ -73,7 +73,7 @@ module.exports = {
 				QuestionId: postData.QuestionId,
 				ResponseId: postData.responseId,
 				CourseId: postData.CourseId,
-				TagId: postData.TagId,
+				tags: postData.tagsArray,
         isQuestionType: postData.isQuestionType || false,
         isAnswerType: postData.isAnswerType
 			})

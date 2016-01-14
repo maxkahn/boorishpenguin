@@ -15,8 +15,13 @@ module.exports = {
 
 	newComment: function(req, res) {
 
-		PostCtrl.addPost(req.body, function(data) {
-			res.status(201).json(data);
+		PostCtrl.addPost(req.body, function(comment) {
+			db.Post.findById(req.body.AnswerId)
+				.then(function(answer){
+					answer.responses++;
+					answer.save();
+					res.status(201).json(comment);
+				});
 		});
 
 	},

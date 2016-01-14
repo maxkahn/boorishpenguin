@@ -55,7 +55,7 @@ var Course = db.define('Course', {
 var Post = db.define('Post', {
   title: Sequelize.STRING,
   text: Sequelize.STRING,
-  //when teacher confirms answer is correct
+  tags: Sequelize.STRING,
   isAnswerType: {
     type: Sequelize.BOOLEAN,
     allowNull: false,

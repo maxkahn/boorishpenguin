@@ -27,7 +27,7 @@
       <div flex hide-xs>
         <md-card-header class="questionHeader">
           <md-card-header-text>
-            <span class="md-subhead">answers: {{question.responses}}</span>
+            <span class="md-subhead">answers: {{answers.length}}</span>
             <span class="md-subhead">votes: {{question.votes}}</span>
           </md-card-header-text>
         </md-card-header>
@@ -49,20 +49,20 @@
 
     <md-card-actions layout="row" layout-align="end">
       <div flex="30">
-        <md-icon md-svg-icon="../../styles/checkbox-marked-circle.svg" >
-        </md-icon > <span> Teacher Approved Question </span>
+        <md-icon md-svg-icon="../../styles/checkbox-marked-circle.svg" ng-show="question.isPreferred" >
+        </md-icon> <span ng-show="question.isPreferred"> Teacher Approved Question </span>
       </div>
       <div flex="40">
       </div>
       <div flex>
-        <md-button>{{ question.coursename }}</md-button>
-        <md-button>{{question.tagname }}</md-button>
+        <md-button ng-show="question.coursename">{{ question.coursename }}</md-button>
+        <md-button ng-show="question.tagname">{{question.tagname }}</md-button>
       </div>
     </md-card-actions>
   </md-card>
 
   <md-list flex="100">
-    <span class="md-title">{{question.responses}} answers</span>
+    <span class="md-title">{{answers.length}} answers</span>
     <md-divider></md-divider>
   </md-list>
 
@@ -108,8 +108,8 @@
 
     <md-card-actions layout="row" layout-align="end">
       <div flex="30">
-        <md-icon md-svg-icon="../../styles/checkbox-marked-circle.svg" >
-        </md-icon > <span> Correct Answer </span>
+        <md-icon md-svg-icon="../../styles/checkbox-marked-circle.svg" ng-show="answer.isPreferred" >
+        </md-icon > <span ng-show="answer.isPreferred" > Correct Answer</span>
       </div>
       <div flex="40">
       </div>
@@ -120,7 +120,7 @@
     <!-- comments -->
     <md-list>
       <md-divider></md-divider>
-      <md-subheader class="md-no-sticky">2 comments</md-subheader>
+      <md-subheader class="md-no-sticky" ng-show="answer.comments.length > 0">{{answer.comments.length}} comments</md-subheader>
       <md-list-item class="md-3-line md-long-text" ng-repeat="comment in answer.comments">
         <div class="md-list-item-text">
           <h3>{{comment.username}}</h3>
