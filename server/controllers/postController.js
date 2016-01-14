@@ -2,13 +2,14 @@ var db = require('../db/index.js');
 module.exports = {
 
 	allPosts: function(queryObject, callback) {
+		console.log('server fired allPosts');
+
 		db.Post.findAll({
-				where: {
-					isQuestionType: false
-				},
+				where: {isQuestionType: true},
 				include: [db.User, db.Course, db.Tag]
 			})
 			.then(function(posts) {
+				console.log('inside database query in allPosts server');
 				var formattedPosts = posts.map(function(post) {
 					return {
 						id: post.id,

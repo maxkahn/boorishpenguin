@@ -40,6 +40,26 @@ module.exports = function(app, express, ensureAuth) {
 
   // app.get('/api/users', ensureAuth, userControllers.allUsers);
   // app.get('/api/users/:id', ensureAuth, userControllers.oneUser);
+// =======
+//   app.get('/api/questions', ensureAuth, questionControllers.allQuestions);
+//   // app.post('/api/questions', ensureAuth, questionControllers.newQuestion);
+//   app.post('/api/questions', questionControllers.newQuestion);
+//   app.delete('/api/questions/:id', ensureAuth, questionControllers.deleteQuestion);
+
+//   app.get('/api/questions/:id', ensureAuth, questionControllers.renderQuestion);
+//   app.put('/api/questions/changeStatus/:id', ensureAuth, questionControllers.toggleCloseQuestion);
+//   app.put('/api/questions/markAsGood/:id' , ensureAuth, questionControllers.markAsGoodQuestion);
+//   app.put('/api/questions/vote/:id' , ensureAuth, voteController.votePost);
+  
+//   app.post('/api/answers', ensureAuth, answerControllers.newAnswer);
+//   app.put('/api/answers/markAsCorrect/:id', ensureAuth, answerControllers.markAsCorrectAnswer);
+//   app.put('/api/answers/vote/:id' , ensureAuth, voteController.votePost);
+//   app.delete('/api/answers/:id', ensureAuth, answerControllers.deleteAnswer);
+
+
+//   app.get('/api/users', ensureAuth, userControllers.allUsers);
+//   app.get('/api/users/:id', ensureAuth, userControllers.oneUser);
+// >>>>>>> preparing for rebase
   app.post('/api/signup', userControllers.newUser);
 
   app.get('/api/courses', courseControllers.allCourses);
