@@ -1,6 +1,5 @@
 
-// var apikeys = require('../config/apikeys.js');
-// var controller = require('../controllers/userControllers.js');
+
 
 exports.ensureAuth = function (req, res, next){
   // isAuthenticated is provided function that checks if the user is logged in to google
@@ -25,6 +24,7 @@ exports.ensureAuth = function (req, res, next){
 // //   // Email set as username to make sure each username is unique.
 // //   // Usernames are used to find to find specific user(s) in the database
 // //   // Suggested Improvement: Make this a token or id saved in the database for each user.
+
   
 // //   user.picture = profileObj.profile._json.image.url;
 
