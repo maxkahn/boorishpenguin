@@ -32,8 +32,6 @@ function timeSince(date) {
 module.exports = {
 
 	allPosts: function(queryObject, callback) {
-		console.log('server fired allPosts');
-
 		db.Post.findAll({
 				where: {isQuestionType: true},
 				include: [db.User, db.Course, db.Tag]

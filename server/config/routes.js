@@ -35,7 +35,6 @@ module.exports = function(app, express) {
   app.get('/api/users/:id', userControllers.oneUser);
 
   app.get('/api/users/getFullProfile/:id', userControllers.getFullProfile);
-
   app.post('/api/signup', userControllers.newUser);
 
   app.get('/api/courses', courseControllers.allCourses);
