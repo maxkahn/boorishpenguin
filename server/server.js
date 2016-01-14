@@ -42,7 +42,6 @@ passport.use(new GoogleStrategy({
   clientSecret: apikeys.googleOauth.clientSecret,
   callbackURL: api_url + "/auth/google/callback"
 
-
 },
   function(accessToken, refreshToken, profile, done) {
     var queryObject = {};
