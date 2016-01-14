@@ -3,11 +3,14 @@ module.exports = {
 
 	allPosts: function(queryObject, callback) {
 
+		console.log('server fired allPosts');
+
 		db.Post.findAll({
-				where: queryObject,
+				where: {isQuestionType: true},
 				include: [db.User, db.Course, db.Tag]
 			})
 			.then(function(posts) {
+				console.log('inside database query in allPosts server');
 				var formattedPosts = posts.map(function(post) {
 					return {
 						id: post.id,
@@ -20,10 +23,10 @@ module.exports = {
 						isGood: post.isGood,
 						isClosed: post.isClosed,
 						createdAt: post.createdAt,
-						coursename: post.Course.name,
-						tagname: post.Tag.name,
-						user: post.User.name,
-						imgUrl: post.User.picture,
+						course: post.CourseId,
+						tagname: post.TagId,
+						user: post.UserId,
+						// imgUrl: post.User.picture,
 						updatedAt: post.updatedAt
 					};
 				});
@@ -38,13 +41,13 @@ module.exports = {
 		db.Post.create({
 				title: postData.title,
 				text: postData.message,
-				UserId: postData.userId,
-				QuestionId: postData.questionId,
-				ResponseId: postData.responseId,
-				CourseId: postData.CourseId,
-				TagId: postData.TagId
+				// UserId: postData.userId,
+				// QuestionId: postData.questionId,
+				// ResponseId: postData.responseId,
+				// CourseId: postData.CourseId,
+				// TagId: postData.TagId
 			})
-			.then(callback(result));
+			.then(callback);
 	},
 
 	deletePost: function(deleteData, callback) {

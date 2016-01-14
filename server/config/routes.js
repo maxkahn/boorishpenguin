@@ -9,7 +9,8 @@ var passport = require('passport');
 
 module.exports = function(app, express, ensureAuth) {
   app.get('/api/questions', ensureAuth, questionControllers.allQuestions);
-  app.post('/api/questions', ensureAuth, questionControllers.newQuestion);
+  // app.post('/api/questions', ensureAuth, questionControllers.newQuestion);
+  app.post('/api/questions', questionControllers.newQuestion);
   app.delete('/api/questions/:id', ensureAuth, questionControllers.deleteQuestion);
 
   app.get('/api/questions/:id', ensureAuth, questionControllers.renderQuestion);

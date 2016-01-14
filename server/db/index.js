@@ -148,4 +148,4 @@ exports.User = User;
 exports.Course = Course;
 exports.Tag = Tag;
 exports.Post = Post;
-exprots.Like = Like;
+exports.Like = Like;

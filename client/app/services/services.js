@@ -6,7 +6,7 @@ angular.module('boorish.services', [])
   return {
     // add a question from /ask
     addQuestion: function(question) {
-
+      console.log('client-side addQuestion invoked');
       return $http({
         method: 'POST',
         url: '/api/questions',
@@ -17,16 +17,17 @@ angular.module('boorish.services', [])
           tag: question.tag,  // these are not setup yet
           title: question.title
         })
-      })
+      });
     },
 
     getAllQuestions: function() {
-
+      console.log('client-side getAllQuestions invoked');
       return $http({
         method: 'GET',
-        url: '/api/questions/'
+        url: '/api/questions'
       })
       .then(function(res) {
+        console.log('getAllQs data: ', res.data);
         return res.data; // returns all questions
       })
     },
@@ -207,6 +208,7 @@ angular.module('boorish.services', [])
         url: '/user'
       })
       .then(function (res) {
+        console.log(res);
         user.google = res.data.email || res.data.profile.emails[0].value;
 
         return $http({
@@ -224,6 +226,7 @@ angular.module('boorish.services', [])
           }
           if (isUser) {
             $window.localStorage.setItem('com.boorish', user.id);
+            $location.path('/questions');
           } else {
             $location.path('/signin');
           }
