@@ -22,14 +22,13 @@ module.exports = function(app, express, ensureAuth) {
   app.put('/api/answers/vote/:id' , ensureAuth, voteController.votePost);
   app.delete('/api/answers/:id', ensureAuth, answerControllers.deleteAnswer);
 
-
-  app.get('/api/users', ensureAuth, userControllers.allUsers);
-  app.get('/api/users/:id', ensureAuth, userControllers.oneUser);
+  app.get('/api/users', userControllers.allUsers);
+  app.get('/api/users/:id', userControllers.oneUser);
   app.post('/api/signup', userControllers.newUser);
 
-  app.get('/api/courses', ensureAuth, courseControllers.allCourses);
+  app.get('/api/courses', courseControllers.allCourses);
 
-  app.get('/api/tags', ensureAuth, tagControllers.allTags);
+  app.get('/api/tags', tagControllers.allTags);
 
   // Client does get request to /auth/google on signin
   app.get('/auth/google',
@@ -43,7 +42,7 @@ module.exports = function(app, express, ensureAuth) {
     res.redirect('/#/questions');
   });
 
-  app.get('/user', ensureAuth, function (req, res){
+  app.get('/user', function (req, res){
     // sends google user data to client so they can know whose currenty logged in
     res.json(req.user);
   });

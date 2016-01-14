@@ -6,46 +6,47 @@ var AnswCtrl = require('./answerController.js');
 module.exports = {
 	allQuestions: function(req, res) {
 
-	PostCtrl.allPosts({isQuestionType: true}, function(data) {
+		PostCtrl.allPosts({
+			isQuestionType: true
+		}, function(data) {
 			res.json(data);
 		});
 	},
 
 	renderQuestion: function(req, res) {
 		db.Post.findById(req.params.id)
-			.then(function(question){
+			.then(function(question) {
 				var questionComponents = [question];
 				question.body = {};
 				question.body.questionId = req.params.id;
 				AnswCtrl.allAnswers(question, res, function(data) {
-					//data should ba an array of answer objects with a comments property
-					//which is an array of comment objects.
-					var questionData = questionComponents.concat(data);
-			})
-				.then(function(result){
-					res.json(questionData);
-				});
+						//data should ba an array of answer objects with a comments property
+						//which is an array of comment objects.
+						var questionData = questionComponents.concat(data);
+					})
+					.then(function(result) {
+						res.json(questionData);
+					});
 
-		});
+			});
 	},
 
 	newQuestion: function(req, res) {
-
-		PostCtrl.addPost(req.body, function(data) {
+		PostCtrl.addPost(req, function(data) {
 			res.status(201).json(data);
 		});
 
 	},
 
 	deleteQuestion: function(req, res) {
-
-		PostCtrl.deletePost(req.body, function(code) {
+		//console.log(req.user)
+		PostCtrl.deletePost(req, function(code) {
 			res.sendStatus(code);
 		});
 	},
 
 	markAsGoodQuestion: function(req, res) {
-		PostCtrl.markAsPreferred(req.body, function(post) {
+		PostCtrl.markAsPreferred(req, function(post) {
 			res.status(201).json(post);
 		});
 	},
@@ -55,17 +56,16 @@ module.exports = {
 		db.User.findById(req.body.userId)
 			.then(function(user) {
 				if (user.isTeacher || user.isAdmin) {
-					db.Post.findById(req.body.postId)
+					db.Post.findById(req.params.id)
 						.then(function(post) {
 							post.update({
-								isClosed: req.body.isClosed
-							})
-							.then(function() {
-								res.status(201).json(post);
-							});
+									isClosed: !post.isClosed
+								})
+								.then(function() {
+									res.status(201).json(post);
+								});
 						});
-				}
-				else {
+				} else {
 					res.sendStatus(404);
 				}
 			});

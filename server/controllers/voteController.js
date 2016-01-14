@@ -7,11 +7,11 @@ module.exports = {
 
 		var queryObject = {
 			isPositive : req.body.isPositive,
-			userId : req.body.userId,
-			postId : req.body.postId
+		  UserId : req.body.userId,
+			PostId : req.params.id
 		};
 		var up = queryObject.isPositive ? 1 : -1;
-		db.Vote.create({
+		db.Votes.create({
 				where: queryObject,
 				include: [db.User, db.Post]
 			})
@@ -22,10 +22,13 @@ module.exports = {
 								reputation: user.reputation + up
 							})
 							.then(function() {
-								db.Post.findById(queryObject.postId)
+								db.Post.findById(queryObject.PostId)
 									.then(function(post) {
 										post.update({
 											votes: post.votes + up
+										})
+										.then(function() {
+											res.sendStatus(200);
 										});
 									});
 							});
