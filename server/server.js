@@ -40,9 +40,7 @@ var api_url = process.env.API_URL || 'http://127.0.0.1:8001';
 passport.use(new GoogleStrategy({
   clientID: apikeys.googleOauth.clientID,
   clientSecret: apikeys.googleOauth.clientSecret,
-
   callbackURL: api_url + "/auth/google/callback"
-
 
 },
   function(accessToken, refreshToken, profile, done) {
