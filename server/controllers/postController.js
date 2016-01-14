@@ -32,7 +32,6 @@ function timeSince(date) {
 module.exports = {
 
 	allPosts: function(queryObject, callback) {
-    console.log('queryObject',queryObject);
 		db.Post.findAll({
 				where: queryObject,
 				include: [db.User, db.Course, db.Tag]
@@ -67,15 +66,15 @@ module.exports = {
 	},
 	addPost: function(postData, callback) {
 		db.Post.create({
-				title: postData.title,
+				title: postData.title || '',
 				text: postData.text,
-				UserId: postData.userId,
-				QuestionId: postData.QuestionId,
-				ResponseId: postData.responseId,
-				CourseId: postData.CourseId,
-				tags: postData.tagsArray,
+				UserId: postData.userId || null,
+				QuestionId: postData.QuestionId || null,
+				ResponseId: postData.responseId || null,
+				CourseId: postData.CourseId || null,
+				TagId: postData.TagId || null,
         isQuestionType: postData.isQuestionType || false,
-        isAnswerType: postData.isAnswerType
+        isAnswerType: postData.isAnswerType || false
 			})
 			.then(function(result) {
 				callback(result);

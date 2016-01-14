@@ -1,4 +1,5 @@
 var questionControllers = require ('../controllers/questionController.js');
+var commentControllers = require ('../controllers/commentController.js');
 var answerControllers = require ('../controllers/answerController.js');
 var userControllers = require ('../controllers/userControllers.js');
 var courseControllers = require ('../controllers/courseControllers.js');
@@ -17,10 +18,14 @@ module.exports = function(app, express, ensureAuth) {
   app.put('/api/questions/markAsGood/:id' , questionControllers.markAsGoodQuestion);
   app.put('/api/questions/vote/:id' , voteController.votePost);
 
-  app.post('/api/answers', answerControllers.newAnswer);
+  app.post('/api/answers/', answerControllers.newAnswer);
   app.put('/api/answers/markAsCorrect/:id', answerControllers.markAsCorrectAnswer);
   app.put('/api/answers/vote/:id' , voteController.votePost);
   app.delete('/api/answers/:id', answerControllers.deleteAnswer);
+
+  app.get('/api/comments/:id', commentControllers.allComments);
+  app.post('/api/comments', commentControllers.newComment);
+  app.delete('/api/comments/:id', commentControllers.deleteComment);
 
   app.get('/api/users', userControllers.allUsers);
   app.get('/api/users/:id', userControllers.oneUser);

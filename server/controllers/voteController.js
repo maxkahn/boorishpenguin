@@ -5,38 +5,58 @@ module.exports = {
 
 	votePost: function(req, res) {
 
-		var queryObject = {
-			isPositive : req.body.isPositive,
-		  UserId : req.body.userId, 
-			PostId : req.params.id
-		};
-		var up = queryObject.isPositive ? 1 : -1;
-		db.Votes.create({
-				where: queryObject,
-				include: [db.User, db.Post]
+		var amount = req.body.isPositive === 'true' ? 1 : -1;
+		console.log(amount)
+		db.Votes.findOrCreate({
+				where: {
+					UserId: req.body.userId,
+					PostId: req.params.id
+				}
 			})
-			.then(function() {
-				db.User.findById(queryObject.userId)
-					.then(function(user) {
-						user.update({
-								reputation: user.reputation + up
-							})
-							.then(function() {
-								db.Post.findById(queryObject.PostId)
-									.then(function(post) {
-										post.update({
-											votes: post.votes + up
-										})
-										.then(function() {
-											res.sendStatus(200);
-										});
-									});
-							});
+			.then(function(vote) {
+				if (vote[1]) {
+					updateReputation(req.body.userId, req.params.id, amount, function(status) {
+						res.sendStatus(status);
 					});
+				} else {
 
+					if (String(vote[0].dataValues.isPositive) !== req.body.isPositive) {
+						db.Votes.find({
+							where: {
+								UserId: req.body.userId,
+								PostId: req.params.id
+							}
+						}).then(function(oldVote) {
+							oldVote.updateAttributes({
+								isPositive: req.body.isPositive
+							}).then(function() {
+								updateReputation(req.params.id, amount * 2, function(status) {
+									res.sendStatus(status);
+								});
+							});
+						});
+					} else {
+						res.sendStatus(200);
+					}
+				}
 			});
-	}
+	},
+};
 
-
-
+var updateReputation = function(postId, amount, callback) {
+	db.Post.findById(postId).then(function(post) {
+		var userId = post.dataValues.UserId;
+		post.updateAttributes({
+			votes: post.votes + amount
+		}).then(function() {
+			db.User.findById(userId).then(function(user) {
+				var newRep = user.dataValues.reputation + amount;
+				user.updateAttributes({
+					reputation: newRep
+				}).then(function(result) {
+					callback(201);
+				});
+			});
+		});
+	});
 };
