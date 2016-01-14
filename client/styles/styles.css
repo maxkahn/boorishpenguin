@@ -5,3 +5,31 @@
 .questionHeader {
   height: 50px;
 }
+
+.questionTop {
+  /*background-color: #C5B3E5;*/
+  /*background-color: #B9B6E6;*/
+  /*background-color: #B2C4E3;*/
+  /*background-color: #FFF593;*/
+  /*background-color: #FFF9B8;*/
+  /*background-color: #E9D0E9;*/
+  background-color: #E2D2EA;
+  /*background-color: #F5DDFF;*/
+}
+
+.tolowercase {
+  text-transform: lowercase;
+}
+
+.tocapitalize {
+  text-transform: capitalize;
+}
+
+.answer-form{
+     width: 100%;
+     display:block;
+     float:left;
+  }
+.answer-input{
+   width: 100%;
+}

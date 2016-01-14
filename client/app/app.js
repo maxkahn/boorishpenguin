@@ -1,10 +1,15 @@
-angular.module('Main', ['ui.router', 'ngMaterial', 'main.controller', 'boorish.questions' ,'boorish.services', 'boorish.ask'])
+angular.module('Main', ['ui.router', 'ngMaterial', 'main.controller', 'boorish.questions' ,'boorish.services', 'boorish.ask', 'boorish.answers'])
   .config(function ($stateProvider, $mdThemingProvider) {
     $stateProvider
       .state('questions', {
         url: '/questions',
         templateUrl : 'app/questions/index.html',
         controller: 'questionsController'
+      })
+      .state('answers', {
+        url: '/questions/:id',
+        templateUrl : 'app/answers/index.html',
+        controller: 'answersController'
       })
       .state('ask', {
         url: '/ask',
@@ -14,12 +19,35 @@ angular.module('Main', ['ui.router', 'ngMaterial', 'main.controller', 'boorish.q
 
       $mdThemingProvider.theme('default')
         .primaryPalette('deep-purple')
-        .accentPalette('orange');
+        .accentPalette('blue-grey');
 
   }).run(function () {
     console.log('running');
   });
  
+
+ /*
+Possible Angular Material Themes:
+red
+pink
+purple
+deep-purple
+indigo
+blue
+light-blue
+cyan
+teal
+green
+light-green
+lime
+yellow
+amber
+orange
+deep-orange
+brown
+grey
+blue-grey
+ */
 
 
 
