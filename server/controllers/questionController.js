@@ -5,7 +5,6 @@ var AnswCtrl = require('./answerController.js');
 
 module.exports = {
 	allQuestions: function(req, res) {
-		console.log('server-side allQuestions invoked');
 
 	PostCtrl.allPosts({isQuestionType: true}, function(data) {
 			res.json(data);
