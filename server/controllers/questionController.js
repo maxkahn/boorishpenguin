@@ -5,7 +5,6 @@ var AnswCtrl = require('./answerController.js');
 
 module.exports = {
 	allQuestions: function(req, res) {
-
 		PostCtrl.allPosts({
 			isQuestionType: true
 		}, function(data) {
@@ -23,11 +22,11 @@ module.exports = {
 						//data should ba an array of answer objects with a comments property
 						//which is an array of comment objects.
 						var questionData = questionComponents.concat(data);
+						return questionData;
 					})
 					.then(function(result) {
 						res.json(questionData);
 					});
-
 			});
 	},
 

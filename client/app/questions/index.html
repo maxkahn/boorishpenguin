@@ -2,63 +2,63 @@
   <div flex="100" flex-sm="100" flex-xs="100" layout="column">
     <md-input-container class="md-block" style="margin-left: 7px">
       <label>Search for...</label>
-      <input ng-model="searchText" md-maxlength="250">
+      <input ng-model="searchText">
     </md-input-container>
 
-     <md-card ng-repeat='question in questions | filter:searchText | orderBy:"-updatedAt"'>
+    <md-card ng-repeat='question in questions | filter:searchText | orderBy:"-updatedAt"'>
         
-        <div layout="row">
-          <div flex="30">
-            <md-card-header class="questionHeader">
-              <md-card-avatar>
-                <img class="md-user-avatar" src="{{ question.imgUrl }}"/>
-              </md-card-avatar>
-              <md-card-header-text>
-                <span class="md-title">{{ question.user }}</span>
-                <span class="md-subhead">{{ question.createdAt }}</span>
-              </md-card-header-text>
-            </md-card-header>
-          </div>
-          <div flex="50">
-          </div>
-          <div flex hide-xs>
-            <md-card-header class="questionHeader">
-              <md-card-header-text>
-                <span class="md-subhead">answers: 5</span>
-                <span class="md-subhead">votes: 40</span>
-              </md-card-header-text>
-            </md-card-header>
-          </div>
+      <div layout="row">
+        <div flex="30">
+          <md-card-header class="questionHeader">
+            <md-card-avatar>
+              <img class="md-user-avatar" src="{{ question.imgUrl }}"/>
+            </md-card-avatar>
+            <md-card-header-text>
+              <span class="md-title">{{ question.user }}</span>
+              <span class="md-subhead">{{ question.createdAt }}</span>
+            </md-card-header-text>
+          </md-card-header>
         </div>
+        <div flex="50">
+        </div>
+        <div flex hide-xs>
+          <md-card-header class="questionHeader">
+            <md-card-header-text>
+              <span class="md-subhead">answers: {{question.responses}}</span>
+              <span class="md-subhead">votes: {{question.votes}}</span>
+            </md-card-header-text>
+          </md-card-header>
+        </div>
+      </div>
 
-        <md-card-title>
-          <md-card-title-text>
-            <md-button ng-click="goToQuestion(question.id)" class="tolowercase" style="text-align: left" >
-              <span class="md-headline tolowercase">{{ question.title }}</span>
-            </md-button>
-            <span class="md-subhead"></span>
-          </md-card-title-text>
-        </md-card-title>
-        <br>
+      <md-card-title>
+        <md-card-title-text>
+          <md-button ng-click="goToQuestion(question.id)" class="tolowercase" style="text-align: left" >
+            <span class="md-headline tolowercase">{{ question.title }}</span>
+          </md-button>
+          <span class="md-subhead"></span>
+        </md-card-title-text>
+      </md-card-title>
+      <br>
 
-        <md-card-content>
-          <p>
-            {{question.text}}
-          </p>
-        </md-card-content>
+      <md-card-content>
+        <p>
+          {{question.text}}
+        </p>
+      </md-card-content>
 
-        <md-card-actions layout="row" layout-align="end">
-          <div flex="30">
-            <md-icon md-svg-icon="../../styles/checkbox-marked-circle.svg" >
-            </md-icon > <span> Teacher Approved Question </span>
-          </div>
-          <div flex="40">
-          </div>
-          <div flex>
-            <md-button ng-click="searchByText(question.coursename)">{{ question.coursename }}</md-button>
-            <md-button ng-click="searchByText(question.tagname)">{{ question.tagname }}</md-button>
-          </div>
-        </md-card-actions>
-      </md-card>
+      <md-card-actions layout="row" layout-align="end">
+        <div flex="30">
+          <md-icon md-svg-icon="../../styles/checkbox-marked-circle.svg" ng-show="question.isPreferred" >
+          </md-icon > <span ng-show="question.isPreferred"> Teacher Approved Question </span>
+        </div>
+        <div flex="40">
+        </div>
+        <div flex>
+          <md-button ng-click="searchByText(question.tagname)" class="md-raised" ng-show="question.tagname" >{{ question.tagname }}</md-button>
+          <md-button ng-click="searchByText(question.coursename)" class="md-raised" ng-show="question.coursename">{{ question.coursename }}</md-button>
+        </div>
+      </md-card-actions>
+    </md-card>
   </div>
 </md>
