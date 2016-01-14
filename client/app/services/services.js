@@ -319,14 +319,28 @@ angular.module('boorish.services', [])
     getCourses: function() {
       return $http({
         method: 'GET',
-        url: '/townhall/courses'
+        url: '/townhall/test'
 
       })
       .then(function(res) {
-        return res.data;
+        return [{
+          name: "Calculus",
+          id: "01",
+        },{
+          name: "Physics",
+          id: "02",
+        },{
+          name: "History",
+          id: "03",
+        },{
+          name: "English",
+          id: "04",
+        },{
+          name: "Spanish",
+          id: "05",
+        }];
       });
     }
-
   };
 })
 
