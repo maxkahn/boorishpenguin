@@ -37,7 +37,6 @@ angular.module('boorish.services', [])
     getQuestion: function(questionId) {
       return $http({
         method: 'GET',
-
         url: '/api/questions/' + questionId
 
       })

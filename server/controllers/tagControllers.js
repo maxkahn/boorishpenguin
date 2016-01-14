@@ -11,9 +11,9 @@ module.exports = {
         };
       });
 
-      tags = {};
-      tags.results = formmatedTags;
-      res.json(tags);
+      data = {};
+      data.results = formmatedTags;
+      res.json(data);
     });
   }
 };
