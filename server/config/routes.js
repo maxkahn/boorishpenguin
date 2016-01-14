@@ -50,6 +50,17 @@ module.exports = function(app, express, ensureAuth) {
 //   app.put('/api/questions/changeStatus/:id', ensureAuth, questionControllers.toggleCloseQuestion);
 //   app.put('/api/questions/markAsGood/:id' , ensureAuth, questionControllers.markAsGoodQuestion);
 //   app.put('/api/questions/vote/:id' , ensureAuth, voteController.votePost);
+// =======
+//   app.get('/api/questions', ensureAuth, questionControllers.allQuestions);
+//   // app.post('/api/questions', ensureAuth, questionControllers.newQuestion);
+//   app.post('/api/questions', questionControllers.newQuestion);
+//   app.delete('/api/questions/:id', ensureAuth, questionControllers.deleteQuestion);
+
+//   app.get('/api/questions/:id', ensureAuth, questionControllers.renderQuestion);
+//   app.put('/api/questions/changeStatus/:id', ensureAuth, questionControllers.toggleCloseQuestion);
+//   app.put('/api/questions/markAsGood/:id' , ensureAuth, questionControllers.markAsGoodQuestion);
+//   app.put('/api/questions/vote/:id' , ensureAuth, voteController.votePost);
+// >>>>>>> b1629047aa8064e41283e79759cbf5d7f1402aa7
   
 //   app.post('/api/answers', ensureAuth, answerControllers.newAnswer);
 //   app.put('/api/answers/markAsCorrect/:id', ensureAuth, answerControllers.markAsCorrectAnswer);
