@@ -32,7 +32,6 @@ function timeSince(date) {
 module.exports = {
 
 	allPosts: function(queryObject, callback) {
-		console.log('server fired allPosts');
 
 		db.Post.findAll({
 				where: {isQuestionType: true},
@@ -64,7 +63,6 @@ module.exports = {
 						updatedAt: post.updatedAt,
 						questionId: post.QuestionId,
 						answerId: post.ResponseId
-
 					};
 				});
 
