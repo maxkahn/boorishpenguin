@@ -27,6 +27,7 @@ angular.module('boorish.services', [])
       .then(function(res) {
         return res.data.results;
       });
+
     },
 
     getQuestion: function(questionId) {
