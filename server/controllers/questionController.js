@@ -23,6 +23,7 @@ module.exports = {
 	},
 
 	newQuestion: function(req, res) {
+
 		PostCtrl.addPost(req.body, function(data) {
 			res.status(201).json(data);
 		});

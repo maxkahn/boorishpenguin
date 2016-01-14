@@ -32,7 +32,6 @@ function timeSince(date) {
 module.exports = {
 
 	allPosts: function(queryObject, callback) {
-
 		db.Post.findAll({
 				where: {isQuestionType: true},
 				include: [db.User, db.Course, db.Tag]
@@ -72,6 +71,7 @@ module.exports = {
 	addPost: function(postData, callback) {
 		db.Post.create({
 				title: postData.title || '',
+
 				text: postData.text,
 				UserId: postData.userId || null,
 				QuestionId: postData.QuestionId || null,
@@ -84,7 +84,6 @@ module.exports = {
 			.then(function(result) {
 				callback(result);
 			});
-
 	},
 
 	deletePost: function(req, callback) {
