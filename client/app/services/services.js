@@ -6,7 +6,6 @@ angular.module('boorish.services', [])
   return {
     // add a question from /ask
     addQuestion: function(question) {
-      console.log('client-side addQuestion invoked');
       return $http({
         method: 'POST',
         url: '/api/questions',
@@ -239,6 +238,7 @@ angular.module('boorish.services', [])
         url: '/auth/google'
       })
       .then(function (res) {
+        console.log(res);
         user.google = res.data.email || res.data.profile.emails[0].value;
 
         return $http({

@@ -39,7 +39,6 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new GoogleStrategy({
   clientID: apikeys.googleOauth.clientID,
   clientSecret: apikeys.googleOauth.clientSecret,
-
   //callbackURL: "https://fathomless-sands-7752.herokuapp.com/auth/google/callback"
    callbackURL: "http://127.0.0.1:8001/auth/google/callback"
 
@@ -58,16 +57,3 @@ passport.use(new GoogleStrategy({
   		return done(null, user);
   	});
   }));
-    // controllers.isUserInDb(profile.emails[0].value, function (inDb){
-    //   // if the username/email is in the database run login
-    //   if(inDb){
-    //     googleAuth.login({profile: profile}, function (err, profile){
-    //       return done(err, profile);
-    //     });
-    //   } else {
-    //     googleAuth.signup({profile: profile}, function (err, profile){
-    //       return done(err, profile);
-    //     })
-    //   }
-    //   })
-// }));
