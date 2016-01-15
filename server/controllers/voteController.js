@@ -46,13 +46,13 @@ var updateReputation = function(req, amount, callback) {
 				var creatorId = post.dataValues.UserId;
 				post.updateAttributes({
 					votes: post.votes + amount
-				}).then(function() {
+				}).then(function(changedPost) {
 					db.User.findById(creatorId).then(function(user) {
 						var newRep = user.dataValues.reputation + amount;
 						user.updateAttributes({
 							reputation: newRep
 						}).then(function(result) {
-							callback(newRep);
+							callback(changedPost.dataValues.votes);
 						});
 					});
 				});
