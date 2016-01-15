@@ -107,6 +107,46 @@ angular.module('boorish.answers', [])
       });
   };
 
+  $scope.upVoteQuestion = function(question){
+    voteQuestion('true', question);
+  };
+
+  $scope.downVoteQuestion = function(question){
+    voteQuestion('false', question);
+  };
+
+  var voteQuestion = function(isPositive, question){
+    var vote = {
+      isPositive: isPositive,
+      userId: 2 //TODO
+    };
+
+    Questions.voteQuestion(questionId, vote)
+      .then(function(votes){
+        question.votes = votes;
+      });
+  };
+
+  $scope.upVoteAnswer = function(answer){
+    voteAnswer('true', answer);
+  };
+
+  $scope.downVoteAnswer = function(answer){
+    voteAnswer('false', answer);
+  };
+
+  var voteAnswer = function(isPositive, answer){
+    var vote = {
+      isPositive: isPositive,
+      userId: 2 //TODO
+    };
+
+    Answers.voteAnswer(answer.id, vote)
+      .then(function(votes){
+        answer.votes = votes;
+      });
+  };
+
   if (questionId){
     getQuestion(questionId);
   }
