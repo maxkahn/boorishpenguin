@@ -11,7 +11,7 @@
         <div flex="30">
           <md-card-header class="questionHeader">
             <md-card-avatar>
-              <img class="md-user-avatar" ng-click="goToUserProfile(question.userId)" src="{{ question.imgUrl }}"/>
+              <img class="md-user-avatar" ng-click="goToUserProfile(question.userId)" ng-src="{{ question.imgUrl }}"/>
             </md-card-avatar>
             <md-card-header-text>
               <span class="md-title">{{ question.user }}</span>
@@ -54,9 +54,9 @@
         </div>
         <div flex="30">
         </div>
-        <div flex>
-          <md-button ng-click="searchByText(question.coursename)" ng-show="question.coursename">{{ question.coursename }}</md-button>
-          <md-button ng-repeat="tag in question.tags" ng-click="searchByText(tag)" >{{ tag }}</md-button>
+        <div style="text-align: right" flex>
+          <md-button md-no-ink class="md-primary" ng-click="searchByText(question.coursename)" ng-show="question.coursename">{{ question.coursename }}</md-button>
+          <md-button md-no-ink class="md-primary" ng-repeat="tag in question.tags" ng-click="searchByText(tag)" >{{ tag }}</md-button>
         </div>
       </md-card-actions>
     </md-card>
