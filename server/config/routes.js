@@ -5,10 +5,14 @@ var userControllers = require ('../controllers/userControllers.js');
 var courseControllers = require ('../controllers/courseControllers.js');
 var tagControllers = require ('../controllers/tagControllers.js');
 var voteController = require ('../controllers/voteController.js');
+var adminControllers = require ('../controllers/adminControllers.js');
 var passport = require('passport');
 
 
 module.exports = function(app, express, ensureAuth) {
+
+  app.get('/api/admin/', adminControllers.getPendingTeachers);
+  app.put('/api/admin/:id', adminControllers.toggleTeacherAccess);
   app.get('/api/questions', questionControllers.allQuestions);
   app.post('/api/questions', questionControllers.newQuestion);
   app.delete('/api/questions/:id', questionControllers.deleteQuestion);

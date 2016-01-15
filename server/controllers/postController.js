@@ -1,31 +1,31 @@
 var db = require('../db/index.js');
 
 function timeSince(date) {
-  var seconds = Math.floor((new Date() - date) / 1000);
-  var interval = Math.floor(seconds / 31536000);
-  if (interval >= 1) {
-      return interval + " years ago";
-  }
-  interval = Math.floor(seconds / 2592000);
-  if (interval >= 1) {
-      return interval + " months ago";
-  }
-  interval = Math.floor(seconds / 86400);
-  if (interval >= 1) {
-      return interval + " days ago";
-  }
-  interval = Math.floor(seconds / 3600);
-  if (interval >= 1) {
-      return interval + " hours ago";
-  }
-  interval = Math.floor(seconds / 60);
-  if (interval >= 1) {
-      return interval + " minutes ago";
-  }
-  if (seconds < 5){
-    return "just now";
-  }
-  return Math.floor(seconds) + " seconds ago";
+	var seconds = Math.floor((new Date() - date) / 1000);
+	var interval = Math.floor(seconds / 31536000);
+	if (interval >= 1) {
+		return interval + " years ago";
+	}
+	interval = Math.floor(seconds / 2592000);
+	if (interval >= 1) {
+		return interval + " months ago";
+	}
+	interval = Math.floor(seconds / 86400);
+	if (interval >= 1) {
+		return interval + " days ago";
+	}
+	interval = Math.floor(seconds / 3600);
+	if (interval >= 1) {
+		return interval + " hours ago";
+	}
+	interval = Math.floor(seconds / 60);
+	if (interval >= 1) {
+		return interval + " minutes ago";
+	}
+	if (seconds < 5) {
+		return "just now";
+	}
+	return Math.floor(seconds) + " seconds ago";
 }
 
 
@@ -73,8 +73,8 @@ module.exports = {
 				ResponseId: postData.responseId || null,
 				CourseId: postData.CourseId || null,
 				TagId: postData.TagId || null,
-        isQuestionType: postData.isQuestionType || false,
-        isAnswerType: postData.isAnswerType || false
+				isQuestionType: postData.isQuestionType || false,
+				isAnswerType: postData.isAnswerType || false
 			})
 			.then(function(result) {
 				callback(result);
@@ -83,12 +83,9 @@ module.exports = {
 
 	deletePost: function(req, callback) {
 		var postNumber = req.params.id;
-		//TODO extract the user id out of the req somehow
-		//or do the authentication in the front end
-		var reqUserId = req.body.userId;
 		db.Post.findById(postNumber)
 			.then(function(post) {
-				db.User.findById(reqUserId)
+				db.User.findById(req.body.userId)
 					.then(function(user) {
 						if (user.isAdmin || user.isTeacher || user.id === post.userId) {
 							db.Post.destroy({
@@ -118,18 +115,32 @@ module.exports = {
 		var postId = req.params.id;
 		db.Post.findById(req.params.id)
 			.then(function(post) {
-				db.User.findById(req.body.userId)
-					.then(function(user) {
-						if (user.isTeacher || user.isAdmin) {
-							db.Post.update({
-									isPreferred: !post.isPreferred
-								}, {where : { id : postId }})
-								.then(function(result) {
-									callback(result);
-								});
-						} else {
-							res.sendStatus(404);
-						}
+				db.User.findById(post.dataValues.UserId)
+					.then(function(postCreator) {
+						var incriment = post.dataValues.isPreferred ? -5 : 5;
+						var newRep = postCreator.reputation + incriment;
+						postCreator.updateAttributes({
+								reputation: newRep
+							})
+							.then(function(change) {
+								db.User.findById(req.body.userId)
+									.then(function(user) {
+										if (user.isTeacher || user.isAdmin) {
+											db.Post.update({
+													isPreferred: !post.isPreferred
+												}, {
+													where: {
+														id: postId
+													}
+												})
+												.then(function(result) {
+													callback(result);
+												});
+										} else {
+											res.sendStatus(404);
+										}
+									});
+							});
 					});
 			});
 	}
