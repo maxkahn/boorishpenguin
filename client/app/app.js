@@ -1,5 +1,24 @@
 angular.module('Main', ['ui.router', 'ngMaterial', 'main.controller', 'boorish.questions' ,'boorish.services', 'boorish.ask', 'boorish.answers', 'boorish.login'])
   .config(function ($stateProvider, $mdThemingProvider, $urlRouterProvider) {
+
+    var checkLoggedin = function($q, $http, $location, $rootScope) {
+     var deferred = $q.defer();
+
+     $http.get('/api/loggedin').success(function(user) {
+        console.log('are we in?');
+       if (user !== '0') {
+         $rootScope.user = user;
+         console.log('$rootScope.user', $rootScope.user);
+         deferred.resolve();
+       } else {
+         deferred.reject();
+         $location.url('/');
+       }
+     });
+
+       return deferred.promise;
+     };
+
     $stateProvider
       .state('login', {
         url: '/login',
@@ -9,17 +28,20 @@ angular.module('Main', ['ui.router', 'ngMaterial', 'main.controller', 'boorish.q
       .state('questions', {
         url: '/questions',
         templateUrl : 'app/questions/index.html',
-        controller: 'questionsController'
+        controller: 'questionsController',
+        resolve: { loggedin: checkLoggedin }
       })
       .state('answers', {
         url: '/questions/:id',
         templateUrl : 'app/answers/index.html',
-        controller: 'answersController'
+        controller: 'answersController',
+        resolve: { loggedin: checkLoggedin }
       })
       .state('ask', {
         url: '/ask',
         templateUrl : 'app/ask/index.html',
-        controller: 'askController'
+        controller: 'askController',
+        resolve: { loggedin: checkLoggedin }
       });
 
       $urlRouterProvider

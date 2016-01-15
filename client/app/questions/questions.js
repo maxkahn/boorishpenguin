@@ -1,3 +1,5 @@
+// new controller file 
+
 angular.module('boorish.questions', [])
 
 .controller('questionsController', function($scope, $location, Questions, Auth) {

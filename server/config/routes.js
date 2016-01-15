@@ -40,6 +40,10 @@ module.exports = function(app, express, ensureAuth) {
 
   app.get('/api/tags', ensureAuth, tagControllers.allTags);
 
+  app.get('/api/loggedin', function(req, res) {
+   res.send(req.isAuthenticated() ? req.user : '0');
+ });
+
   // Client does get request to /auth/google on signin
   app.get('/auth/google',
     passport.authenticate('google', { scope:  ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/plus.me', "https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"] }));
