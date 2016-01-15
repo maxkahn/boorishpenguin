@@ -25,7 +25,6 @@ module.exports = {
 	},
 
 	newQuestion: function(req, res) {
-		console.log(req.body);
 		PostCtrl.addPost(req.body, function(data) {
 			res.status(201).json(data);
 		});
