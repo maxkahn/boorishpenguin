@@ -17,7 +17,7 @@ module.exports = {
 	newComment: function(req, res) {
 
 		PostCtrl.addPost(req.body, function(comment) {
-			db.Post.findById(req.body.AnswerId)
+			db.Post.findById(req.body.responseId)
 				.then(function(answer) {
 					answer.responses++;
 					answer.save();

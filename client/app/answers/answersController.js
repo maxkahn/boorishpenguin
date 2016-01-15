@@ -11,6 +11,10 @@ angular.module('boorish.answers', [])
     Questions.getQuestion(questionId).then(function(res) {
       $scope.question = res[0];
       $scope.answers = res.slice(1);
+      for (var i=0; i<$scope.answers.length; i++){
+        $scope.answers[i].newComment = {};
+        $scope.answers[i].newComment.text = "";
+      }
     });
   };
 
@@ -51,27 +55,55 @@ angular.module('boorish.answers', [])
     );
   };
 
-  $scope.submitComment = function(answerId){
-    console.log(answerId);
-    console.log($scope.newComment.text);
-    $scope.newComment.text = '';
-    console.log('submit comment');
-  };
-
   $scope.markGoodQuestion = function(){
     Questions.markGoodQuestion(questionId)
       .then(function(){
         $scope.question.isPreferred = $scope.question.isPreferred ? false : true;
-        //TODO show messahe, Question updated
       });
   };
 
   $scope.markCorrectAnswer = function(answer){
-    answer.isPreferred = answer.isPreferred ? false : true;
     Answers.markCorrectAnswer(answer.id)
       .then(function(){
-        // $scope.question.isPreferred = $scope.question.isPreferred ? false : true;
-        //TODO show messahe, Question updated
+        answer.isPreferred = answer.isPreferred ? false : true;
+      });
+  };
+
+  $scope.showComments = function(answer){
+    if (answer.comments && answer.comments.length > 0){
+      answer.comments = [];
+    } else {
+      answer.comments = [];
+      Answers.getCommentsOfAnAnswer(answer.id)
+        .then(function(comments){
+          answer.comments = comments;
+        });
+    }
+  };
+
+  $scope.submitComment = function(answer){
+    if (answer.newComment.text.trim() === ''){
+      return;
+    }
+
+    if (!answer.comments){
+      answer.comments = [];
+    }
+
+    var commentToInsert = {
+      text: answer.newComment.text,
+      userId: 2, //TODO: get this from Auth
+      responseId: answer.id
+    };
+
+    Answers.addCommentToAnswer(commentToInsert)
+      .then(function(){
+        Answers.getCommentsOfAnAnswer(answer.id)
+          .then(function(comments){
+            answer.comments = comments;
+            answer.newComment.text = '';
+            answer.responses++;
+          });
       });
   };
 
