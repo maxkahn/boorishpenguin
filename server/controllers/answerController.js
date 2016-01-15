@@ -29,14 +29,14 @@ module.exports = {
 	},
 
 	deleteAnswer: function(req, res) {
-
-		PostCtrl.deletePost(req.body, function(code) {
+		PostCtrl.deletePost(req, function(code) {
 			res.sendStatus(code);
 		});
 	},
 
 	markAsCorrectAnswer: function(req, res) {
-		PostCtrl.markAsPreferred(req.body, function(post) {
+		PostCtrl.markAsPreferred(req, function(post) {
+			console.log(post)
 			res.status(201).json(post);
 		});
 	},
