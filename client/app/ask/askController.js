@@ -1,6 +1,6 @@
 angular.module('boorish.ask', [])
 
-.controller('askController', function($scope, $window, $state, $mdToast, Courses, Questions) {
+.controller('askController', function($scope, $window, $state, $mdToast, Courses, Questions, $rootScope) {
   $scope.question = {};
   $scope.topics = [];
 
@@ -17,7 +17,7 @@ angular.module('boorish.ask', [])
       isAnswerType: false,
       title: $scope.question.title,
       text: $scope.question.text,
-      userId: 2, //TODO: get this from Auth
+      userId: $rootScope.user.id,
       tagsArray: $scope.topics.join(),
       CourseId: $scope.courseOptions.selectedOption
     };
