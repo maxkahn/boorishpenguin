@@ -19,6 +19,10 @@ angular.module('boorish.answers', [])
   };
 
   $scope.submitAnswer = function(){
+    if ($scope.newAnswer.text.trim() === ''){
+      return;
+    }
+
     var answerToInsert = {
       QuestionId: questionId,
       isQuestionType: false,
@@ -102,6 +106,9 @@ angular.module('boorish.answers', [])
           .then(function(comments){
             answer.comments = comments;
             answer.newComment.text = '';
+            if (!answer.responses){
+              answer.responses = 0;
+            }
             answer.responses++;
           });
       });
