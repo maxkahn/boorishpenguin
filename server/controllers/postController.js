@@ -83,7 +83,6 @@ module.exports = {
 
 	deletePost: function(req, callback) {
 		var postNumber = req.params.id;
-		var reqUserId = req.body.userId;
 		db.Post.findById(postNumber)
 			.then(function(post) {
 				db.User.findById(req.body.userId)
@@ -118,14 +117,12 @@ module.exports = {
 			.then(function(post) {
 				db.User.findById(post.dataValues.UserId)
 					.then(function(postCreator) {
-						console.log(postCreator);
 						var incriment = post.dataValues.isPreferred ? -5 : 5;
 						var newRep = postCreator.reputation + incriment;
 						postCreator.updateAttributes({
 								reputation: newRep
 							})
 							.then(function(change) {
-								console.log(change)
 								db.User.findById(req.body.userId)
 									.then(function(user) {
 										if (user.isTeacher || user.isAdmin) {
