@@ -17,7 +17,7 @@ module.exports = {
 			id: req.params.id
 		}, function(question){
 			question = question.results;
-			AnswCtrl.allAnswers(req, res, question, function(answers) {
+			AnswCtrl.allAnswers(req, res, function(answers) {
 				question = question.concat(answers);
 				res.status(200).json(question);
 			});
