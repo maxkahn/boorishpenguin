@@ -8,8 +8,7 @@ module.exports = {
 		PostCtrl.allPosts({
 			isAnswerType: true,
 			QuestionId: req.params.id
-		})
-		.then(function(answers) {
+		}, function(answers) {
 			callback(answers.results);
 		});
 	},
