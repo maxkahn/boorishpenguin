@@ -55,7 +55,7 @@
       </div>
       <div flex="40">
       </div>
-      <div flex>
+      <div layout-align="end center" flex>
         <md-button ng-show="question.coursename">{{ question.coursename }}</md-button>
         <md-button ng-repeat="tag in question.tags">{{ tag }}</md-button>
       </div>
@@ -121,19 +121,21 @@
     <!-- comments -->
     <md-list>
       <md-divider></md-divider>
-      <md-subheader class="md-no-sticky" ng-show="answer.comments.length > 0">{{answer.responses}} comments</md-subheader>
-      <md-list-item class="md-3-line md-long-text" ng-repeat="comment in answer.comments">
+      <md-subheader class="md-no-sticky" ng-click="showComments(answer)">
+        {{answer.responses}} comments
+      </md-subheader>
+      <md-list-item class="md-3-line md-short-text" ng-repeat="comment in answer.comments">
         <div class="md-list-item-text">
-          <h3>{{comment.username}}</h3>
+          <h3>{{comment.user}}</h3>
           <p>
             {{comment.text}}
           </p>
         </div>
       </md-list-item>
-      <form name="newAnswerForm" ng-submit="submitComment(answer.id)">
+      <form name="newAnswerForm" ng-submit="submitComment(answer)">
         <md-input-container class="md-block" style="margin-left: 7px">
           <label>New Comment</label>
-          <input ng-model="newComment.text" md-maxlength="250">
+          <input ng-model="answer.newComment.text" md-maxlength="250">
         </md-input-container>
       </form>
     </md-list>

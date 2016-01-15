@@ -36,7 +36,6 @@ module.exports = {
 
 	markAsCorrectAnswer: function(req, res) {
 		PostCtrl.markAsPreferred(req, function(post) {
-			console.log(post)
 			res.status(201).json(post);
 		});
 	},
