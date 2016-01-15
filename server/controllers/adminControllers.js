@@ -8,7 +8,8 @@ module.exports = {
 				db.User.findById(req.params.id)
 					.then(function(user) {
 						user.updateAttributes({
-							isTeacher: !user.isTeacher
+							isTeacher: !user.isTeacher,
+							pendingTeacher : false
 						}).then(function(result) {
 							res.status(200).json(result);
 						});
