@@ -54,6 +54,7 @@ module.exports = {
 						coursename: post.Course ? post.Course.name : "",
 						tags: post.tags ? post.tags.split(',') : [],
 						user: post.User ? post.User.name : "",
+						userId: post.User.id,
 						imgUrl: post.User ? post.User.picture : "",
 						updatedAt: post.updatedAt
 					};
