@@ -13,7 +13,8 @@
           </md-card-header-text>
         </md-card-header>
       </div>
-      <div flex="40"></div>
+      <div flex="40">
+      </div>
       <div flex="10">
         <div layout="column">
           <md-button ng-click='upVote(question)' aria-label="up vote" style="margin-bottom: 0px">
@@ -49,14 +50,14 @@
 
     <md-card-actions layout="row" layout-align="end">
       <div flex="30">
-        <md-icon md-svg-icon="../../styles/checkbox-marked-circle.svg" ng-show="question.isPreferred" >
+        <md-icon md-svg-icon="../../styles/checkbox-marked-circle.svg" ng-show="question.isPreferred || true" ng-click="markGoodQuestion()" >
         </md-icon> <span ng-show="question.isPreferred"> Teacher Approved Question </span>
       </div>
       <div flex="40">
       </div>
       <div flex>
         <md-button ng-show="question.coursename">{{ question.coursename }}</md-button>
-        <md-button ng-show="question.tagname">{{question.tagname }}</md-button>
+        <md-button ng-repeat="tag in question.tags">{{ tag }}</md-button>
       </div>
     </md-card-actions>
   </md-card>
@@ -108,7 +109,7 @@
 
     <md-card-actions layout="row" layout-align="end">
       <div flex="30">
-        <md-icon md-svg-icon="../../styles/checkbox-marked-circle.svg" ng-show="answer.isPreferred" >
+        <md-icon md-svg-icon="../../styles/checkbox-marked-circle.svg" ng-show="answer.isPreferred || true" ng-click="markCorrectAnswer(answer)" >
         </md-icon > <span ng-show="answer.isPreferred" > Correct Answer</span>
       </div>
       <div flex="40">
@@ -141,7 +142,7 @@
   <!-- submit answer -->
   <div layout="column" class="answer-form">
     <form name="newAnswerForm">
-      <md-input-container class="md-block answer-input">
+      <md-input-container class="md-block answer-input" id="answer_container_id">
         <label>Answer</label>
         <textarea ng-model="newAnswer.text" columns="1" md-maxlength="500" rows="5"></textarea>
       </md-input-container>

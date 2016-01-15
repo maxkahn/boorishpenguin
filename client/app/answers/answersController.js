@@ -1,5 +1,5 @@
 angular.module('boorish.answers', [])
-.controller('answersController', function($scope, $state, $window, $stateParams, Answers, Questions, Users, Auth) {
+.controller('answersController', function($scope, $state, $window, $stateParams, $mdToast, $document, Answers, Questions, Users, Auth) {
   var questionId = $stateParams.id;
 
   $scope.question = {};
@@ -26,7 +26,7 @@ angular.module('boorish.answers', [])
 
     Answers.addAnswer(answerToInsert)
       .then(function(newAnswer){
-        //TODO show a message that the answer was submitted
+        showAnswerSubmittedToast();
         $scope.answers.push({
           id: newAnswer.data.id,
           text: newAnswer.data.text,
@@ -41,11 +41,38 @@ angular.module('boorish.answers', [])
     $scope.newAnswer.text = '';
   };
 
+  var showAnswerSubmittedToast = function() {
+    $mdToast.show(
+      $mdToast.simple()
+        .textContent('Answer Submitted')
+        .position('top left')
+        .parent($document[0].querySelector('#answer_container_id'))
+        .hideDelay(2000)
+    );
+  };
+
   $scope.submitComment = function(answerId){
     console.log(answerId);
     console.log($scope.newComment.text);
     $scope.newComment.text = '';
     console.log('submit comment');
+  };
+
+  $scope.markGoodQuestion = function(){
+    Questions.markGoodQuestion(questionId)
+      .then(function(){
+        $scope.question.isPreferred = $scope.question.isPreferred ? false : true;
+        //TODO show messahe, Question updated
+      });
+  };
+
+  $scope.markCorrectAnswer = function(answer){
+    answer.isPreferred = answer.isPreferred ? false : true;
+    Answers.markCorrectAnswer(answer.id)
+      .then(function(){
+        // $scope.question.isPreferred = $scope.question.isPreferred ? false : true;
+        //TODO show messahe, Question updated
+      });
   };
 
   if (questionId){

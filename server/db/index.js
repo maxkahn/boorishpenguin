@@ -55,9 +55,9 @@ var Course = db.define('Course', {
 var Post = db.define('Post', {
   title: Sequelize.STRING,
   text: Sequelize.STRING,
-  tags: { 
+  tags: {
     type: Sequelize.STRING,
-    allowNull: true, 
+    allowNull: true,
     defaultValue: null,
   },
   isAnswerType: {

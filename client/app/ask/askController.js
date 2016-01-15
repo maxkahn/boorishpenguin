@@ -1,6 +1,6 @@
 angular.module('boorish.ask', [])
 
-.controller('askController', function($scope, $window, $state, Courses, Questions) {
+.controller('askController', function($scope, $window, $state, $mdToast, Courses, Questions) {
   $scope.question = {};
   $scope.topics = [];
 
@@ -24,9 +24,18 @@ angular.module('boorish.ask', [])
 
     Questions.addQuestion(questionToInsert)
       .then(function(){
-        //TODO show a message that the question was submitted
+        showQuestionSubmittedToast();
         $state.go('questions');
       });
+  };
+
+  var showQuestionSubmittedToast = function() {
+    $mdToast.show(
+      $mdToast.simple()
+        .textContent('Question Submitted')
+        .position('top right')
+        .hideDelay(2000)
+    );
   };
 
 });
