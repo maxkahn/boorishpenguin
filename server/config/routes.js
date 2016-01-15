@@ -9,8 +9,7 @@ var adminControllers = require ('../controllers/adminControllers.js');
 var passport = require('passport');
 
 
-module.exports = function(app, express, ensureAuth) {
-
+module.exports = function(app, express) {
   app.get('/api/admin/', adminControllers.getPendingTeachers);
   app.put('/api/admin/:id', adminControllers.toggleTeacherAccess);
   app.get('/api/questions', questionControllers.allQuestions);
@@ -22,7 +21,8 @@ module.exports = function(app, express, ensureAuth) {
   app.put('/api/questions/markAsGood/:id' , questionControllers.markAsGoodQuestion);
   app.put('/api/questions/vote/:id' , voteController.votePost);
 
-  app.post('/api/answers/', answerControllers.newAnswer);
+
+  app.post('/api/answers', answerControllers.newAnswer);
   app.put('/api/answers/markAsCorrect/:id', answerControllers.markAsCorrectAnswer);
   app.put('/api/answers/vote/:id' , voteController.votePost);
   app.delete('/api/answers/:id', answerControllers.deleteAnswer);
@@ -36,9 +36,9 @@ module.exports = function(app, express, ensureAuth) {
 
   app.post('/api/signup', userControllers.newUser);
 
-  app.get('/api/courses', ensureAuth, courseControllers.allCourses);
+  app.get('/api/courses', courseControllers.allCourses);
 
-  app.get('/api/tags', ensureAuth, tagControllers.allTags);
+  app.get('/api/tags', tagControllers.allTags);
 
   app.get('/api/loggedin', function(req, res) {
    res.send(req.isAuthenticated() ? req.user : '0');

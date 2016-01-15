@@ -1,4 +1,4 @@
-// new controller file 
+// old controller file 
 
 angular.module('boorish.questions', [])
 
