@@ -17,7 +17,7 @@ module.exports = {
 			id: req.params.id
 		}, function(question){
 			question = question.results;
-			AnswCtrl.allAnswers(req, res, function(answers) {
+			AnswCtrl.allAnswers(req, res, question, function(answers) {
 				question = question.concat(answers);
 				res.status(200).json(question);
 			});
@@ -25,7 +25,6 @@ module.exports = {
 	},
 
 	newQuestion: function(req, res) {
-		console.log(req.body);
 		PostCtrl.addPost(req.body, function(data) {
 			res.status(201).json(data);
 		});
