@@ -43,29 +43,15 @@ passport.use(new GoogleStrategy({
    callbackURL: "http://127.0.0.1:8001/auth/google/callback"
 },
   function(accessToken, refreshToken, profile, done) {
-  	console.log('profile', profile); 
-  	var queryObject = {};
-  	queryObject.username = profile.emails[0].value;
-  	queryObject.name_last = profile.name.familyName;
-  	queryObject.name_first = profile.name.givenName;
-  	queryObject.name = queryObject.name_first + " " + queryObject.name_last;
-  	queryObject.email = profile.emails[0].value;
-  	queryObject.username = queryObject.email;
-  	//TODO: not have username === email
-  	User.findOrCreate({where: queryObject}).spread(function(user, created) {
-  		return done(null, user);
-  	});
+    var queryObject = {};
+    queryObject.username = profile.emails[0].value;
+    queryObject.name_last = profile.name.familyName;
+    queryObject.name_first = profile.name.givenName;
+    queryObject.name = queryObject.name_first + " " + queryObject.name_last;
+    queryObject.email = profile.emails[0].value;
+    queryObject.username = queryObject.email;
+    //TODO: not have username === email
+    User.findOrCreate({where: queryObject}).spread(function(user, created) {
+      return done(null, user);
+    });
   }));
-    // controllers.isUserInDb(profile.emails[0].value, function (inDb){
-    //   // if the username/email is in the database run login
-    //   if(inDb){
-    //     googleAuth.login({profile: profile}, function (err, profile){
-    //       return done(err, profile);
-    //     });
-    //   } else {
-    //     googleAuth.signup({profile: profile}, function (err, profile){
-    //       return done(err, profile);
-    //     })
-    //   }
-    //   })
-// }));
