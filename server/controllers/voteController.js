@@ -14,46 +14,47 @@ module.exports = {
 			})
 			.then(function(vote) {
 				if (vote[1]) {
-					updateReputation(req.body.userId, req.params.id, amount, function(status) {
-						res.sendStatus(status);
+					updateReputation(req, amount, function(reputation) {
+						res.status(201).json(reputation);
 					});
 				} else {
-
 					if (String(vote[0].dataValues.isPositive) !== req.body.isPositive) {
-						db.Votes.find({
-							where: {
-								UserId: req.body.userId,
-								PostId: req.params.id
-							}
-						}).then(function(oldVote) {
-							oldVote.updateAttributes({
-								isPositive: req.body.isPositive
-							}).then(function() {
-								updateReputation(req.params.id, amount * 2, function(status) {
-									res.sendStatus(status);
-								});
-							});
+						updateReputation(req, amount * 2, function(reputation) {
+							res.status(201).json(reputation);
 						});
 					} else {
-						res.sendStatus(200);
+						updateReputation(req, 0, function(reputation) {
+							res.status(201).json(reputation);
+						});
 					}
 				}
 			});
 	},
 };
 
-var updateReputation = function(postId, amount, callback) {
-	db.Post.findById(postId).then(function(post) {
-		var userId = post.dataValues.UserId;
-		post.updateAttributes({
-			votes: post.votes + amount
+var updateReputation = function(req, amount, callback) {
+	db.Votes.find({
+		where: {
+			UserId: req.body.userId,
+			PostId: req.params.id
+		}
+	}).then(function(oldVote) {
+		oldVote.updateAttributes({
+			isPositive: req.body.isPositive
 		}).then(function() {
-			db.User.findById(userId).then(function(user) {
-				var newRep = user.dataValues.reputation + amount;
-				user.updateAttributes({
-					reputation: newRep
-				}).then(function(result) {
-					callback(201);
+			db.Post.findById(req.params.id).then(function(post) {
+				var creatorId = post.dataValues.UserId;
+				post.updateAttributes({
+					votes: post.votes + amount
+				}).then(function() {
+					db.User.findById(creatorId).then(function(user) {
+						var newRep = user.dataValues.reputation + amount;
+						user.updateAttributes({
+							reputation: newRep
+						}).then(function(result) {
+							callback(newRep);
+						});
+					});
 				});
 			});
 		});
