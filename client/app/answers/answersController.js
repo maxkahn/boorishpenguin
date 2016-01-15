@@ -1,5 +1,5 @@
 angular.module('boorish.answers', [])
-.controller('answersController', function($scope, $state, $window, $stateParams, $mdToast, $document, Answers, Questions, Users, Auth) {
+.controller('answersController', function($scope, $state, $window, $stateParams, $mdToast, $document, Answers, Questions, Users, Auth, $rootScope) {
   var questionId = $stateParams.id;
 
   $scope.question = {};
@@ -19,13 +19,17 @@ angular.module('boorish.answers', [])
   };
 
   $scope.submitAnswer = function(){
+    if ($scope.newAnswer.text === undefined || $scope.newAnswer.text.trim() === ''){
+      return;
+    }
+
     var answerToInsert = {
       QuestionId: questionId,
       isQuestionType: false,
       isAnswerType: true,
       title: '',
       text: $scope.newAnswer.text,
-      userId: 2 //TODO: get this from Auth
+      userId: $rootScope.user.id
     };
 
     Answers.addAnswer(answerToInsert)
@@ -37,8 +41,8 @@ angular.module('boorish.answers', [])
           isCorrectAnswer: false,
           votes: 0,
           createdAt: 'just now',
-          user: "cpenarrieta", //TODO get this from the Auth
-          imgUrl: "http://images.apple.com/pr/bios/images/williams_thumb20110204.jpg", //TODO get this from the Auth
+          user: $rootScope.user.name,
+          imgUrl: $rootScope.user.picture,
         });
       });
 
@@ -56,6 +60,10 @@ angular.module('boorish.answers', [])
   };
 
   $scope.markGoodQuestion = function(){
+    if (!$rootScope.user.isTeacher){
+      return;
+    }
+
     Questions.markGoodQuestion(questionId)
       .then(function(){
         $scope.question.isPreferred = $scope.question.isPreferred ? false : true;
@@ -63,6 +71,10 @@ angular.module('boorish.answers', [])
   };
 
   $scope.markCorrectAnswer = function(answer){
+    if (!$rootScope.user.isTeacher){
+      return;
+    }
+
     Answers.markCorrectAnswer(answer.id)
       .then(function(){
         answer.isPreferred = answer.isPreferred ? false : true;
@@ -92,7 +104,7 @@ angular.module('boorish.answers', [])
 
     var commentToInsert = {
       text: answer.newComment.text,
-      userId: 2, //TODO: get this from Auth
+      userId: $rootScope.user.id,
       responseId: answer.id
     };
 
@@ -102,6 +114,9 @@ angular.module('boorish.answers', [])
           .then(function(comments){
             answer.comments = comments;
             answer.newComment.text = '';
+            if (!answer.responses){
+              answer.responses = 0;
+            }
             answer.responses++;
           });
       });
@@ -118,7 +133,7 @@ angular.module('boorish.answers', [])
   var voteQuestion = function(isPositive, question){
     var vote = {
       isPositive: isPositive,
-      userId: 2 //TODO
+      userId: $rootScope.user.id
     };
 
     Questions.voteQuestion(questionId, vote)
@@ -138,7 +153,7 @@ angular.module('boorish.answers', [])
   var voteAnswer = function(isPositive, answer){
     var vote = {
       isPositive: isPositive,
-      userId: 2 //TODO
+      userId: $rootScope.user.id
     };
 
     Answers.voteAnswer(answer.id, vote)

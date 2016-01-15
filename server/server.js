@@ -39,7 +39,6 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new GoogleStrategy({
   clientID: apikeys.googleOauth.clientID,
   clientSecret: apikeys.googleOauth.clientSecret,
-  //callbackURL: "https://fathomless-sands-7752.herokuapp.com/auth/google/callback"
    callbackURL: "http://127.0.0.1:8001/auth/google/callback"
 },
   function(accessToken, refreshToken, profile, done) {
@@ -50,7 +49,8 @@ passport.use(new GoogleStrategy({
     queryObject.name = queryObject.name_first + " " + queryObject.name_last;
     queryObject.email = profile.emails[0].value;
     queryObject.username = queryObject.email;
-    //TODO: not have username === email
+    queryObject.picture = profile.photos ? profile.photos[0].value : "";
+
     User.findOrCreate({where: queryObject}).spread(function(user, created) {
       return done(null, user);
     });

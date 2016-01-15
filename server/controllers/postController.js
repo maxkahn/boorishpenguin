@@ -72,7 +72,7 @@ module.exports = {
 				QuestionId: postData.QuestionId || null,
 				ResponseId: postData.responseId || null,
 				CourseId: postData.CourseId || null,
-				TagId: postData.TagId || null,
+				tags: postData.tagsArray || "",
 				isQuestionType: postData.isQuestionType || false,
 				isAnswerType: postData.isAnswerType || false
 			})

@@ -50,7 +50,7 @@
 
     <md-card-actions layout="row" layout-align="end">
       <div flex="30">
-        <md-icon md-svg-icon="../../styles/checkbox-marked-circle.svg" ng-show="question.isPreferred || true" ng-click="markGoodQuestion()" >
+        <md-icon md-svg-icon="../../styles/checkbox-marked-circle.svg" ng-show="question.isPreferred || user.isTeacher" ng-click="markGoodQuestion()" >
         </md-icon> <span ng-show="question.isPreferred"> Teacher Approved Question </span>
       </div>
       <div flex="40">
@@ -109,7 +109,7 @@
 
     <md-card-actions layout="row" layout-align="end">
       <div flex="30">
-        <md-icon md-svg-icon="../../styles/checkbox-marked-circle.svg" ng-show="answer.isPreferred || true" ng-click="markCorrectAnswer(answer)" >
+        <md-icon md-svg-icon="../../styles/checkbox-marked-circle.svg" ng-show="answer.isPreferred || user.isTeacher" ng-click="markCorrectAnswer(answer)" >
         </md-icon > <span ng-show="answer.isPreferred" > Correct Answer</span>
       </div>
       <div flex="40">

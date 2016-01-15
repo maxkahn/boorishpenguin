@@ -2,12 +2,10 @@ angular.module('boorish.services', [])
 
 // Questions factory handles all requests to add, retrieve, or modify questions in the database
 
-.factory('Questions', function($http, $location) {
+.factory('Questions', function($http, $location, $rootScope) {
   return {
     // add a question from /ask
     addQuestion: function(question, $rootScope) {
-      console.log($rootScope.user);
-
       return $http({
         method: 'POST',
         url: '/api/questions',
@@ -56,7 +54,7 @@ angular.module('boorish.services', [])
       return $http({
         method: 'PUT',
         url: '/api/questions/markAsGood/' + questionId,
-        data: { userId: 2 } //TODO get this from auth user
+        data: { userId: $rootScope.user.id }
       });
     },
 
@@ -75,7 +73,7 @@ angular.module('boorish.services', [])
 
 // Answers factory handles all requests to add, retrieve, or modify answers in the database
 
-.factory('Answers', function($http) {
+.factory('Answers', function($http, $rootScope) {
 
   return {
     // get all answers
@@ -124,7 +122,7 @@ angular.module('boorish.services', [])
       return $http({
         method: 'PUT',
         url: '/api/answers/markAsCorrect/' + answerId,
-        data: { userId: 2 } //TODO get this from auth user
+        data: { userId: $rootScope.user.id }
       });
     },
 
@@ -269,7 +267,6 @@ angular.module('boorish.services', [])
             if (users[i].email === user.google) {
               isUser = true;
               $rootScope.user = users[i];
-              console.log($rootScope.user);
               continue;
             }
           }
