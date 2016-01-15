@@ -123,6 +123,7 @@ angular.module('boorish.answers', [])
 
     Questions.voteQuestion(questionId, vote)
       .then(function(votes){
+        console.log(votes);
         question.votes = votes;
       });
   };
@@ -143,6 +144,7 @@ angular.module('boorish.answers', [])
 
     Answers.voteAnswer(answer.id, vote)
       .then(function(votes){
+        console.log(votes);
         answer.votes = votes;
       });
   };
