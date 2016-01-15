@@ -14,15 +14,18 @@ module.exports = {
 	},
 
 	newAnswer: function(req, res) {
-
-		PostCtrl.addPost(req.body, function(answer) {
-			db.Post.findById(req.body.QuestionId)
-				.then(function(question){
+		db.Post.findById(req.body.QuestionId)
+			.then(function(question) {
+				if (question.isClosed) {
+					res.sendStatus(404);
+				}
+				PostCtrl.addPost(req.body, function(answer) {
 					question.responses++;
 					question.save();
 					res.status(201).json(answer);
 				});
-		});
+
+			});
 	},
 
 	deleteAnswer: function(req, res) {
