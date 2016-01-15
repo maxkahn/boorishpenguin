@@ -70,7 +70,6 @@ module.exports = {
 	addPost: function(postData, callback) {
 		db.Post.create({
 				title: postData.title,
-<<<<<<< HEAD
 				text: postData.text,
 				UserId: postData.userId,
 				QuestionId: postData.QuestionId,
@@ -83,16 +82,7 @@ module.exports = {
 			.then(function(result) {
 				callback(result);
 			});
-=======
-				text: postData.message,
-				// UserId: postData.userId,
-				// QuestionId: postData.questionId,
-				// ResponseId: postData.responseId,
-				// CourseId: postData.CourseId,
-				// TagId: postData.TagId
-			})
-			.then(callback);
->>>>>>> preparing for rebase
+
 	},
 
 	deletePost: function(req, callback) {
