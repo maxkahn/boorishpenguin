@@ -1,5 +1,6 @@
 var db = require('../db/index.js');
 var User = db.User;
+var PostCtrl = require('./postController.js');
 
 module.exports = {
   allUsers: function(req, res) {
@@ -66,5 +67,22 @@ module.exports = {
       callback(!!number);
       return;
     });
+  },
+
+  getFullProfile: function(req, res, next){
+    var userId = req.params.id;
+    var result = {profile: null, questions: null, answers: null};
+
+    User.findById(userId)
+      .then(function(user) {
+        result.profile = user;
+        PostCtrl.allPosts({isQuestionType: true, userId: userId}, function(userQuestions){
+          result.questions = userQuestions.results;
+          PostCtrl.allPosts({isAnswerType: true, userId: userId}, function(userAnswers){
+            result.answers = userAnswers.results;
+            res.status(200).json(result);
+          });
+        });
+      });
   }
 };

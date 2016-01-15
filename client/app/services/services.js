@@ -182,7 +182,7 @@ angular.module('boorish.services', [])
         url: '/api/users/' + userID
       }).then(function(res) {
         return res.data.results.id;
-      })
+      });
     },
 
     addUser: function(user) {
@@ -198,6 +198,15 @@ angular.module('boorish.services', [])
           email: user.email,
           picture: user.picture
         })
+      });
+    },
+
+    getFullProfile: function(userId){
+      return $http({
+        method: 'GET',
+        url: '/api/users/getFullProfile/' + userId
+      }).then(function(userInfo) {
+        return userInfo.data;
       });
     }
 

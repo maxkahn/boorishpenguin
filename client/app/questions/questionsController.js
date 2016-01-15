@@ -1,5 +1,3 @@
-// new controller file 
-
 angular.module('boorish.questions', [])
 .controller('questionsController', function($scope, $window, $state, $location, Questions) {
   $scope.questions = [];
@@ -18,6 +16,10 @@ angular.module('boorish.questions', [])
 
   $scope.searchByText = function(text){
     $scope.searchText = text;
+  };
+
+  $scope.goToUserProfile = function(userId){
+    $state.go('user', {id: userId});
   };
 
 });
