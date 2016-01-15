@@ -52,7 +52,20 @@ var updateReputation = function(req, amount, callback) {
 						user.updateAttributes({
 							reputation: newRep
 						}).then(function(result) {
-							callback(newRep);
+							db.Votes.findAll({
+								where: {
+									PostId: req.params.id
+								}
+							}).then(function(votes){
+								callback(votes.reduce(function(memo, vote){
+									if(vote.dataValues.isPositive){
+										memo = memo + 1;
+									} else {
+										memo = memo - 1;
+									}
+									return memo;
+								}, 0));
+							});
 						});
 					});
 				});
