@@ -33,8 +33,6 @@ angular.module('boorish.services', [])
       .then(function(res) {
         return res.data;
       });
-
-    
     },
 
     // updates a question. takes in the id of the question and the required modification
@@ -59,6 +57,17 @@ angular.module('boorish.services', [])
         method: 'PUT',
         url: '/api/questions/markAsGood/' + questionId,
         data: { userId: 2 } //TODO get this from auth user
+      });
+    },
+
+    voteQuestion: function(questionId, vote){
+      return $http({
+        method: 'PUT',
+        url: '/api/questions/vote/' + questionId,
+        data: vote
+      })
+      .then(function(votes) {
+        return votes.data;
       });
     }
   };
@@ -134,6 +143,17 @@ angular.module('boorish.services', [])
         method: 'POST',
         url: '/api/comments',
         data: comment
+      });
+    },
+
+    voteAnswer: function(answerId, vote){
+      return $http({
+        method: 'PUT',
+        url: '/api/answers/vote/' + answerId,
+        data: vote
+      })
+      .then(function(votes) {
+        return votes.data;
       });
     }
 

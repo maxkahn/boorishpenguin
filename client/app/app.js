@@ -5,10 +5,8 @@ angular.module('Main', ['ui.router', 'ngMaterial', 'main.controller', 'boorish.q
      var deferred = $q.defer();
 
      $http.get('/api/loggedin').success(function(user) {
-        console.log('are we in?');
        if (user !== '0') {
          $rootScope.user = user;
-         console.log('$rootScope.user', $rootScope.user);
          deferred.resolve();
        } else {
          deferred.reject();
@@ -54,7 +52,6 @@ angular.module('Main', ['ui.router', 'ngMaterial', 'main.controller', 'boorish.q
   })
 
   .run(function () {
-    console.log('running');
   });
  
 
