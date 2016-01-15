@@ -121,7 +121,7 @@
     <!-- comments -->
     <md-list>
       <md-divider></md-divider>
-      <md-subheader class="md-no-sticky" ng-show="answer.comments.length > 0">{{answer.comments.length}} comments</md-subheader>
+      <md-subheader class="md-no-sticky" ng-show="answer.comments.length > 0">{{answer.responses}} comments</md-subheader>
       <md-list-item class="md-3-line md-long-text" ng-repeat="comment in answer.comments">
         <div class="md-list-item-text">
           <h3>{{comment.username}}</h3>
