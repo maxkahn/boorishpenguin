@@ -46,26 +46,13 @@ var updateReputation = function(req, amount, callback) {
 				var creatorId = post.dataValues.UserId;
 				post.updateAttributes({
 					votes: post.votes + amount
-				}).then(function() {
+				}).then(function(changedPost) {
 					db.User.findById(creatorId).then(function(user) {
 						var newRep = user.dataValues.reputation + amount;
 						user.updateAttributes({
 							reputation: newRep
 						}).then(function(result) {
-							db.Votes.findAll({
-								where: {
-									PostId: req.params.id
-								}
-							}).then(function(votes){
-								callback(votes.reduce(function(memo, vote){
-									if(vote.dataValues.isPositive){
-										memo = memo + 1;
-									} else {
-										memo = memo - 1;
-									}
-									return memo;
-								}, 0));
-							});
+							callback(changedPost.dataValues.votes);
 						});
 					});
 				});
