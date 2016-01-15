@@ -33,20 +33,21 @@ module.exports = function(app, express, ensureAuth) {
 
   app.get('/api/users', userControllers.allUsers);
   app.get('/api/users/:id', userControllers.oneUser);
+
   app.post('/api/signup', userControllers.newUser);
 
-  app.get('/api/courses', courseControllers.allCourses);
+  app.get('/api/courses', ensureAuth, courseControllers.allCourses);
 
-  app.get('/api/tags', tagControllers.allTags);
+  app.get('/api/tags', ensureAuth, tagControllers.allTags);
 
   // Client does get request to /auth/google on signin
   app.get('/auth/google',
-  passport.authenticate('google', { scope:  ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/plus.me', "https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"] }));
+    passport.authenticate('google', { scope:  ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/plus.me', "https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"] }));
 
   // Server.js:38 sends get req to /auth/google/callback after user has successfully logged into google
   app.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/' }),
-  function(req, res) {
+    passport.authenticate('google', { failureRedirect: '/' }),
+      function(req, res) {
     // sends user to questions page after they successfully login
     res.redirect('/#/questions');
   });

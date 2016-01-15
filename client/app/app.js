@@ -29,7 +29,10 @@ angular.module('Main', ['ui.router', 'ngMaterial', 'main.controller', 'boorish.q
         .primaryPalette('deep-purple')
         .accentPalette('blue-grey');
 
-  }).run(function () {
+  })
+
+  .run(function () {
+    console.log('running');
   });
  
 
