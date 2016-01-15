@@ -19,7 +19,7 @@ angular.module('boorish.answers', [])
   };
 
   $scope.submitAnswer = function(){
-    if ($scope.newAnswer.text.trim() === ''){
+    if ($scope.newAnswer.text === undefined || $scope.newAnswer.text.trim() === ''){
       return;
     }
 
@@ -60,6 +60,10 @@ angular.module('boorish.answers', [])
   };
 
   $scope.markGoodQuestion = function(){
+    if (!$rootScope.user.isTeacher){
+      return;
+    }
+
     Questions.markGoodQuestion(questionId)
       .then(function(){
         $scope.question.isPreferred = $scope.question.isPreferred ? false : true;
@@ -67,6 +71,10 @@ angular.module('boorish.answers', [])
   };
 
   $scope.markCorrectAnswer = function(answer){
+    if (!$rootScope.user.isTeacher){
+      return;
+    }
+
     Answers.markCorrectAnswer(answer.id)
       .then(function(){
         answer.isPreferred = answer.isPreferred ? false : true;
