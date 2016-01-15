@@ -85,6 +85,7 @@ module.exports = {
 			.then(function(result) {
 				callback(result);
 			});
+
 	},
 
 	deletePost: function(req, callback) {

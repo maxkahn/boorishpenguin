@@ -39,6 +39,7 @@ Requests from client (services.js):
   /user GET (setUser) (exists on server)
 
     expects .data.email field or .data.profile.emails array
+
   /api/users  GET (anonymous)
   /api/users  GET (signin, in auth.js)
 
@@ -78,4 +79,3 @@ Routes on server:
     adding logout functionality
     (we could add some other oauth system, maybe facebook)
     tons of css / user experience
-    how are we  going to tie things together? we have to change: routes (easy, one man job); methods (harder, also one-man-job); controllers and Angular front-end (harder, probably also one-man-job)
