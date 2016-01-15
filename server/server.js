@@ -7,6 +7,9 @@ var session = require('express-session');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var apikeys = require('./config/apikeys.js');
 var controllers = require('./controllers/userControllers.js');
+var sequelize = require('sequelize');
+var db = require('./db/index.js');
+var User = db.User;
 var app = express();
 var port = process.env.PORT || 8001;
 
@@ -40,16 +43,29 @@ passport.use(new GoogleStrategy({
    callbackURL: "http://127.0.0.1:8001/auth/google/callback"
 },
   function(accessToken, refreshToken, profile, done) {
-    controllers.isUserInDb(profile.emails[0].value, function (inDb){
-      // if the username/email is in the database run login
-      if(inDb){
-        googleAuth.login({profile: profile}, function (err, profile){
-          return done(err, profile);
-        });
-      } else {
-        googleAuth.signup({profile: profile}, function (err, profile){
-          return done(err, profile);
-        })
-      }
-      })
-}));
+  	console.log('profile', profile); 
+  	var queryObject = {};
+  	queryObject.username = profile.emails[0].value;
+  	queryObject.name_last = profile.name.familyName;
+  	queryObject.name_first = profile.name.givenName;
+  	queryObject.name = queryObject.name_first + " " + queryObject.name_last;
+  	queryObject.email = profile.emails[0].value;
+  	queryObject.username = queryObject.email;
+  	//TODO: not have username === email
+  	User.findOrCreate({where: queryObject}).spread(function(user, created) {
+  		return done(null, user);
+  	});
+  }));
+    // controllers.isUserInDb(profile.emails[0].value, function (inDb){
+    //   // if the username/email is in the database run login
+    //   if(inDb){
+    //     googleAuth.login({profile: profile}, function (err, profile){
+    //       return done(err, profile);
+    //     });
+    //   } else {
+    //     googleAuth.signup({profile: profile}, function (err, profile){
+    //       return done(err, profile);
+    //     })
+    //   }
+    //   })
+// }));

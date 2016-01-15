@@ -9,8 +9,7 @@ var adminControllers = require ('../controllers/adminControllers.js');
 var passport = require('passport');
 
 
-module.exports = function(app, express, ensureAuth) {
-
+module.exports = function(app, express) {
   app.get('/api/admin/', adminControllers.getPendingTeachers);
   app.put('/api/admin/:id', adminControllers.toggleTeacherAccess);
   app.get('/api/questions', questionControllers.allQuestions);
@@ -22,7 +21,8 @@ module.exports = function(app, express, ensureAuth) {
   app.put('/api/questions/markAsGood/:id' , questionControllers.markAsGoodQuestion);
   app.put('/api/questions/vote/:id' , voteController.votePost);
 
-  app.post('/api/answers/', answerControllers.newAnswer);
+
+  app.post('/api/answers', answerControllers.newAnswer);
   app.put('/api/answers/markAsCorrect/:id', answerControllers.markAsCorrectAnswer);
   app.put('/api/answers/vote/:id' , voteController.votePost);
   app.delete('/api/answers/:id', answerControllers.deleteAnswer);
@@ -33,20 +33,25 @@ module.exports = function(app, express, ensureAuth) {
 
   app.get('/api/users', userControllers.allUsers);
   app.get('/api/users/:id', userControllers.oneUser);
+
   app.post('/api/signup', userControllers.newUser);
 
   app.get('/api/courses', courseControllers.allCourses);
 
   app.get('/api/tags', tagControllers.allTags);
 
+  app.get('/api/loggedin', function(req, res) {
+   res.send(req.isAuthenticated() ? req.user : '0');
+ });
+
   // Client does get request to /auth/google on signin
   app.get('/auth/google',
-  passport.authenticate('google', { scope:  ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/plus.me', "https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"] }));
+    passport.authenticate('google', { scope:  ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/plus.me', "https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"] }));
 
   // Server.js:38 sends get req to /auth/google/callback after user has successfully logged into google
   app.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/' }),
-  function(req, res) {
+    passport.authenticate('google', { failureRedirect: '/' }),
+      function(req, res) {
     // sends user to questions page after they successfully login
     res.redirect('/#/questions');
   });

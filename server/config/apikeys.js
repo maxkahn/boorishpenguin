@@ -1,6 +1,6 @@
 module.exports = {
   googleOauth: {
-    clientID: "456598125555-0nbiekk5rdp1lup82j6hmirp47inhkq1.apps.googleusercontent.com",
-    clientSecret: "IFl-oxG-LGoazw9tmJiavmjl"
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET
   }
 }
