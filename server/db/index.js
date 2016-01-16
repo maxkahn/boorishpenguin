@@ -5,8 +5,9 @@ var dbUser = process.env.DBUSER || 'root';
 var dbPass = process.env.DBPASS;
 
 var db = new Sequelize(database, dbUser, dbPass, {
-  host: 'localhost',
+  host: '127.0.0.1',
   username: 'root'
+
 });
 
 var User = db.define('User', {

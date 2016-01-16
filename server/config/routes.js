@@ -10,7 +10,7 @@ var passport = require('passport');
 
 
 module.exports = function(app, express) {
-  app.get('/api/admin/', adminControllers.getPendingTeachers);
+  app.get('/api/admin', adminControllers.getStaff);
   app.put('/api/admin/:id', adminControllers.toggleTeacherAccess);
   app.get('/api/questions', questionControllers.allQuestions);
   app.post('/api/questions', questionControllers.newQuestion);
