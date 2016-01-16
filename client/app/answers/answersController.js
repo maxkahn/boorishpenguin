@@ -188,7 +188,9 @@ angular.module('boorish.answers', [])
     $mdDialog.show(confirm).then(function() {
       Questions.removePost(post.id)
         .then(function(){
-
+          if (post.isAnswerType){
+            $scope.answers.splice(post.id, 1);
+          }
         });
     }, function() {
       
