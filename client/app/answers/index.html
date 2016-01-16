@@ -136,7 +136,7 @@
           </p>
         </div>
       </md-list-item>
-      <form name="newAnswerForm" ng-submit="submitComment(answer)">
+      <form name="newAnswerForm" ng-submit="submitComment(answer)" ng-show="question.isClosed === false">
         <md-input-container class="md-block" style="margin-left: 7px">
           <label>New Comment</label>
           <input ng-model="answer.newComment.text" md-maxlength="250">
@@ -146,7 +146,7 @@
   </md-card>
   
   <!-- submit answer -->
-  <div layout="column" class="answer-form">
+  <div layout="column" class="answer-form" ng-show="question.isClosed === false">
     <form name="newAnswerForm">
       <md-input-container class="md-block answer-input" id="answer_container_id">
         <label>Answer</label>
