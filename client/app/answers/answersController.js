@@ -204,7 +204,7 @@ angular.module('boorish.answers', [])
           .ok('Yes, Close question')
           .cancel('Cancel');
     $mdDialog.show(confirm).then(function() {
-      Questions.closePost(post.id)
+      Questions.closePost(question.id)
         .then(function(){
           
         });

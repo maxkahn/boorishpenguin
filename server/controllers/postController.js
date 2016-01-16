@@ -33,9 +33,9 @@ module.exports = {
 
 	allPosts: function(queryObject, callback) {
 		console.log('server fired allPosts');
-
+		queryObject.isDeleted = false;
 		db.Post.findAll({
-				where: {isQuestionType: true},
+				where: queryObject,
 				include: [db.User, db.Course, db.Tag]
 			})
 			.then(function(posts) {
@@ -51,7 +51,6 @@ module.exports = {
 						isAnswered: post.isAnswered,
 						isPreferred: post.isPreferred,
 						isClosed: post.isClosed,
-
 						votes: post.votes,
 						createdAt: timeSince(post.createdAt),
 						course: post.CourseId,
@@ -60,7 +59,6 @@ module.exports = {
 						user: post.User ? post.User.name : "",
 						userId: post.User.id,
 						imgUrl: post.User ? post.User.picture : "",
-
 						updatedAt: post.updatedAt,
 						questionId: post.QuestionId,
 						answerId: post.ResponseId
@@ -75,7 +73,6 @@ module.exports = {
 	addPost: function(postData, callback) {
 		db.Post.create({
 				title: postData.title || '',
-
 				text: postData.text,
 				UserId: postData.userId || null,
 				QuestionId: postData.QuestionId || null,
