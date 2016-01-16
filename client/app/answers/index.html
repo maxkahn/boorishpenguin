@@ -112,7 +112,7 @@
 
     <md-card-actions layout="row" layout-align="end">
       <div flex="30">
-        <md-icon md-svg-icon="styles/delete.svg" ng-click='removePost($event,answer)' ng-show="user.isTeacher"></md-icon>
+        <md-icon md-svg-icon="styles/delete.svg" ng-click='removePost($event,answer,$index)' ng-show="user.isTeacher"></md-icon>
         <md-icon md-svg-icon="../../styles/checkbox-marked-circle.svg" ng-show="answer.isPreferred || user.isTeacher" ng-click="markCorrectAnswer(answer)" >
         </md-icon > <span ng-show="answer.isPreferred" > Correct Answer</span>
       </div>
@@ -130,13 +130,13 @@
       </md-subheader>
       <md-list-item class="md-3-line md-short-text" ng-repeat="comment in answer.comments">
         <div class="md-list-item-text">
-          <h3>{{comment.user}}</h3>
+          <h3 ng-click="goToUserProfile(comment.userId)">{{comment.user}}</h3>
           <p>
             {{comment.text}}
           </p>
         </div>
       </md-list-item>
-      <form name="newAnswerForm" ng-submit="submitComment(answer)">
+      <form name="newAnswerForm" ng-submit="submitComment(answer)" ng-show="question.isClosed === false">
         <md-input-container class="md-block" style="margin-left: 7px">
           <label>New Comment</label>
           <input ng-model="answer.newComment.text" md-maxlength="250">
@@ -146,7 +146,7 @@
   </md-card>
   
   <!-- submit answer -->
-  <div layout="column" class="answer-form">
+  <div layout="column" class="answer-form" ng-show="question.isClosed === false">
     <form name="newAnswerForm">
       <md-input-container class="md-block answer-input" id="answer_container_id">
         <label>Answer</label>
