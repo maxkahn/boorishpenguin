@@ -335,29 +335,34 @@ angular.module('boorish.services', [])
     },
 
     confirmTeacher : function(userId, user) {
+    var member = user.student || user.pendingTeacher;
+    console.log(member)
        return $http({
         method: 'PUT',
-        url: '/api/admin/' + user.pendingTeacher.id,
+        url: '/api/admin/' + member.id,
         data: JSON.stringify({
           userId: 6,
           isTeacher: true
         })
       });
     },
-    fireTeacher : function(userId, user) {
-        var teacherId = user.pendingTeacher.id || user.teacher.id;
+    moveToStudent : function(userId, user) {
+        var member = user.pendingTeacher || user.teacher;
        return $http({
         method: 'PUT',
-        url: '/api/admin/' + user.pendingTeacher.id,
+        url: '/api/admin/' + member.id,
         data: JSON.stringify({
           userId: 6,
+          pendingTeacher: false,
+          isTeacher: false,
         })
       });
     },
-    moveTeacherToPending : function(userId, user) {
+    moveToPending : function(userId, user) {
+      var member = user.student || user.teacher;
        return $http({
         method: 'PUT',
-        url: '/api/admin/' + user.teacher.id,
+        url: '/api/admin/' + member.id,
         data: JSON.stringify({
           userId: 6,
           pendingTeacher: true
