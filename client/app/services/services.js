@@ -208,8 +208,15 @@ angular.module('boorish.services', [])
       }).then(function(userInfo) {
         return userInfo.data;
       });
-    }
+    },
 
+    becomeTeacherRequest: function(userId){
+      return $http({
+        method: 'POST',
+        url: '/api/users/becomeTeacherRequest',
+        data: { userId: userId }
+      });
+    }
   };
 })
 

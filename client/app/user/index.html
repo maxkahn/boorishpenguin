@@ -13,7 +13,7 @@
             </md-card-title-media>
           </md-card-title>
           <md-card-actions layout="row" layout-align="end center" style="margin-top: 10px;">
-            <md-button class="md-raised md-primary">Add as a Friend</md-button>
+            <md-button class="md-raised md-primary" ng-click="becomeTeacherRequest(user.profile.id)" ng-show="showBecomeTeacherButtom()" >Become a Teacher</md-button>
           </md-card-actions>
         </md-card>
       </md-content>
@@ -77,8 +77,8 @@
               <div flex="30">
               </div>
               <div flex style="text-align: right">
-                <md-button ng-click="searchByText(question.coursename)" ng-show="question.coursename">{{ question.coursename }}</md-button>
-                <md-button ng-repeat="tag in question.tags" ng-click="searchByText(tag)" >{{ tag }}</md-button>
+                <md-button md-no-ink class="md-primary" ng-click="searchByText(question.coursename)" ng-show="question.coursename">{{ question.coursename }}</md-button>
+                <md-button md-no-ink class="md-primary" ng-repeat="tag in question.tags" ng-click="searchByText(tag)" >{{ tag }}</md-button>
               </div>
             </md-card-actions>
           </md-card>

@@ -84,5 +84,15 @@ module.exports = {
           });
         });
       });
+  },
+
+  becomeTeacherRequest: function(req, res, next){
+    var userId = req.body.userId;
+    User.findById(userId)
+      .then(function(user) {
+        user.pendingTeacher = true;
+        user.save();
+        res.sendStatus(200);
+      });
   }
 };
