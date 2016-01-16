@@ -178,7 +178,7 @@ angular.module('boorish.answers', [])
       });
   };
 
-  $scope.removePost = function(ev, post, index) {
+  $scope.removePost = function(ev, post, index, comments) {
     var confirm = $mdDialog.confirm()
           .title('Would you like to delete this?')
           .ariaLabel('delete confirmation')
@@ -190,6 +190,8 @@ angular.module('boorish.answers', [])
         .then(function(){
           if (post.isAnswerType){
             $scope.answers.splice(index, 1);
+          } else if (post.isAnswerType === false && post.isQuestionType === false){
+            comments.splice(index, 1);
           }
         });
     }, function() {

@@ -134,6 +134,7 @@
           <p>
             {{comment.text}}
           </p>
+          <md-icon md-svg-icon="styles/delete.svg" ng-click='removePost($event,comment,$index, answer.comments)' ng-show="user.isTeacher"></md-icon>
         </div>
       </md-list-item>
       <form name="newAnswerForm" ng-submit="submitComment(answer)" ng-show="question.isClosed === false">
