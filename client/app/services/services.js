@@ -324,6 +324,19 @@ angular.module('boorish.services', [])
 
 .factory('Admin', function ($http){
   return {
+
+    adCourse : function(courseName) {
+      return $http({
+        method: 'POST',
+        url: '/api/courses',
+        data: JSON.stringify({
+          name: courseName,
+        })
+      })
+      .then(function(res) {
+        return res.data;
+      });
+    },
     getPendingTeachers : function () {
       return $http({
         method: 'GET',
@@ -340,7 +353,7 @@ angular.module('boorish.services', [])
         method: 'PUT',
         url: '/api/admin/' + member.id,
         data: JSON.stringify({
-          userId: 6,
+          userId: userId,
           isTeacher: true
         })
       });
@@ -351,7 +364,7 @@ angular.module('boorish.services', [])
         method: 'PUT',
         url: '/api/admin/' + member.id,
         data: JSON.stringify({
-          userId: 6,
+          userId: userId,
           pendingTeacher: false,
           isTeacher: false,
         })
@@ -363,7 +376,7 @@ angular.module('boorish.services', [])
         method: 'PUT',
         url: '/api/admin/' + member.id,
         data: JSON.stringify({
-          userId: 6,
+          userId: userId,
           pendingTeacher: true
         })
       });

@@ -3,8 +3,10 @@ angular.module('boorish.ask', [])
 .controller('askController', function($scope, $state, $mdToast, Courses, Questions, $rootScope) {
   $scope.question = {};
   $scope.topics = [];
+  $scope.courses = [];
 
   Courses.getCourses().then(function(data) {
+    console.log(data)
     $scope.courseOptions = {
       availableOptions: data,
       selectedOption: data[data.length - 1],
@@ -19,7 +21,7 @@ angular.module('boorish.ask', [])
       text: $scope.question.text,
       userId: $rootScope.user.id,
       tagsArray: $scope.topics.join(),
-      CourseId: $scope.courseOptions.selectedOption
+      CourseId: $scope.courses.join()
     };
 
     Questions.addQuestion(questionToInsert)
