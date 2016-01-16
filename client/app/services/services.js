@@ -309,6 +309,7 @@ angular.module('boorish.services', [])
         return res.data;
       });
     },
+
     confirmTeacher : function(userId, user) {
        return $http({
         method: 'PUT',

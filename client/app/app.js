@@ -1,8 +1,4 @@
-<<<<<<< d63c637559ccf7aaa4afd392f2e5b5cb3a8939bc
-angular.module('Main', ['ui.router', 'ngMaterial', 'main.controller', 'boorish.questions' ,'boorish.services', 'boorish.ask', 'boorish.answers', 'boorish.login','boorish.user'])
-=======
-angular.module('Main', ['ui.router', 'ngMaterial', 'main.controller', 'boorish.questions' ,'boorish.services', 'boorish.ask', 'boorish.answers', 'boorish.login', 'boorish.admin'])
->>>>>>> Working on the admin page
+angular.module('Main', ['ui.router', 'ngMaterial', 'main.controller', 'boorish.questions' ,'boorish.services', 'boorish.ask', 'boorish.answers', 'boorish.login', 'boorish.admin', 'boorish.user'])
   .config(function ($stateProvider, $mdThemingProvider, $urlRouterProvider) {
 
     var checkLoggedin = function($q, $http, $location, $rootScope) {
