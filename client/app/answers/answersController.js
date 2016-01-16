@@ -59,6 +59,15 @@ angular.module('boorish.answers', [])
     );
   };
 
+  var showCantVoteTwiceToast = function() {
+    $mdToast.show(
+      $mdToast.simple()
+        .textContent('Cant vote twice on same question/answer')
+        .position('top right')
+        .hideDelay(2000)
+    );
+  };
+
   $scope.markGoodQuestion = function(){
     if (!$rootScope.user.isTeacher){
       return;
@@ -138,6 +147,9 @@ angular.module('boorish.answers', [])
 
     Questions.voteQuestion(questionId, vote)
       .then(function(votes){
+        if (question.votes === votes){
+          showCantVoteTwiceToast();
+        }
         question.votes = votes;
       });
   };
@@ -158,6 +170,9 @@ angular.module('boorish.answers', [])
 
     Answers.voteAnswer(answer.id, vote)
       .then(function(votes){
+        if (answer.votes === votes){
+          showCantVoteTwiceToast();
+        }
         answer.votes = votes;
       });
   };
