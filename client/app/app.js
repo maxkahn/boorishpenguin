@@ -1,7 +1,7 @@
 angular.module('Main', ['ui.router', 'ngMaterial', 'main.controller', 'boorish.questions' ,'boorish.services', 'boorish.ask', 'boorish.answers', 'boorish.login', 'boorish.admin', 'boorish.user'])
   .config(function ($stateProvider, $mdThemingProvider, $urlRouterProvider) {
 
-    var checkLoggedin = function($q, $http, $location, $rootScope) {
+    var checkLoggedin = function($q, $http, $location, $rootScope, $state) {
      var deferred = $q.defer();
 
      $http.get('/api/loggedin').success(function(user) {
@@ -10,7 +10,7 @@ angular.module('Main', ['ui.router', 'ngMaterial', 'main.controller', 'boorish.q
          deferred.resolve();
        } else {
          deferred.reject();
-         $location.url('/');
+         $state.go('login');
        }
      });
 
