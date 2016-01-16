@@ -9,6 +9,7 @@ var adminControllers = require ('../controllers/adminControllers.js');
 var passport = require('passport');
 
 
+
 module.exports = function(app, express) {
   app.get('/api/admin', adminControllers.getStaff);
   app.put('/api/admin/:id', adminControllers.toggleTeacherAccess);
@@ -16,10 +17,12 @@ module.exports = function(app, express) {
   app.post('/api/questions', questionControllers.newQuestion);
   app.delete('/api/questions/:id', questionControllers.deleteQuestion);
 
+
   app.get('/api/questions/:id', questionControllers.renderQuestion);
   app.put('/api/questions/changeStatus/:id', questionControllers.toggleCloseQuestion);
   app.put('/api/questions/markAsGood/:id' , questionControllers.markAsGoodQuestion);
   app.put('/api/questions/vote/:id' , voteController.votePost);
+
 
 
   app.post('/api/answers', answerControllers.newAnswer);

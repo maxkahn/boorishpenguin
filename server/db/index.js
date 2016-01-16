@@ -36,7 +36,8 @@ var User = db.define('User', {
     defaultValue: 0
   },
   email: Sequelize.STRING,
-  picture: Sequelize.STRING
+  picture: Sequelize.STRING,
+  google_id: Sequelize.STRING
 }, {
   timestamps: false
 });
@@ -96,12 +97,17 @@ var Post = db.define('Post', {
     allowNull: false,
     defaultValue: false
   },
-  createdAt: {
-    type: Sequelize.DATE,
-    defaultValue: Sequelize.fn('NOW')
-  },
-  updatedAt: Sequelize.DATE
-});
+  isDeleted: {
+   type: Sequelize.BOOLEAN,
+   defaultValue: false
+ },
+//   createdAt: {
+//     type: Sequelize.DATE,
+//     defaultValue: db.fn('NOW')
+//   },
+//   updatedAt: Sequelize.DATE
+}
+);
 
 var Votes = db.define('Votes', {
  

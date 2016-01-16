@@ -5,9 +5,8 @@ var AnswCtrl = require('./answerController.js');
 
 module.exports = {
 	allQuestions: function(req, res) {
-		PostCtrl.allPosts({
-			isQuestionType: true
-		}, function(data) {
+
+	PostCtrl.allPosts({isQuestionType: true}, function(data) {
 			res.json(data);
 		});
 	},
@@ -25,6 +24,7 @@ module.exports = {
 	},
 
 	newQuestion: function(req, res) {
+
 		PostCtrl.addPost(req.body, function(data) {
 			res.status(201).json(data);
 		});

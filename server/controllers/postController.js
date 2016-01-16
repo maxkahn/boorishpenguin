@@ -32,11 +32,14 @@ function timeSince(date) {
 module.exports = {
 
 	allPosts: function(queryObject, callback) {
+		console.log('server fired allPosts');
+
 		db.Post.findAll({
-				where: queryObject,
+				where: {isQuestionType: true},
 				include: [db.User, db.Course, db.Tag]
 			})
 			.then(function(posts) {
+				console.log('inside database query in allPosts server');
 				var formattedPosts = posts.map(function(post) {
 					return {
 						id: post.id,
@@ -48,6 +51,7 @@ module.exports = {
 						isAnswered: post.isAnswered,
 						isPreferred: post.isPreferred,
 						isClosed: post.isClosed,
+
 						votes: post.votes,
 						createdAt: timeSince(post.createdAt),
 						course: post.CourseId,
@@ -56,6 +60,7 @@ module.exports = {
 						user: post.User ? post.User.name : "",
 						userId: post.User.id,
 						imgUrl: post.User ? post.User.picture : "",
+
 						updatedAt: post.updatedAt,
 						questionId: post.QuestionId,
 						answerId: post.ResponseId
@@ -70,6 +75,7 @@ module.exports = {
 	addPost: function(postData, callback) {
 		db.Post.create({
 				title: postData.title || '',
+
 				text: postData.text,
 				UserId: postData.userId || null,
 				QuestionId: postData.QuestionId || null,
