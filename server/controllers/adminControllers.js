@@ -8,8 +8,8 @@ module.exports = {
 				db.User.findById(req.params.id)
 					.then(function(user) {
 						user.updateAttributes({
-							isTeacher: req.body.isTeacher,
-							pendingTeacher : false
+							isTeacher: req.body.isTeacher || false,
+							pendingTeacher : req.body.pendingTeacher || false
 						}).then(function(result) {
 							res.status(200).json(result);
 						});
@@ -20,10 +20,17 @@ module.exports = {
 			});
 	},
 
-	getPendingTeachers : function(req, res){
+	getStaff : function(req, res){
 		db.User.findAll({where: { pendingTeacher : true } })
 			.then(function(pendingTeachers){
-				res.status(200).json(pendingTeachers);
+				db.User.findAll({where: { isTeacher : true } })
+				.then(function(currentTeacher){
+					var data = {
+						confirmed : currentTeacher,
+						pending : pendingTeachers
+					};
+				res.status(200).json(data);
+				});
 			});
 	}
 };
