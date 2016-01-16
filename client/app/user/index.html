@@ -2,11 +2,12 @@
   <md-tabs md-dynamic-height md-border-bottom>
     <md-tab label="Profile">
       <md-content class="md-padding">
-        <md-card flex="60">
+        <md-card flex="60" style="height: 200px;">
           <md-card-title style="margin-bottom: 20px;">
             <md-card-title-text>
               <span class="md-headline">{{ user.profile.name }}</span>
               <span class="md-subhead">{{ user.profile.email }}</span>
+              <span class="md-subhead">reputation: {{ user.profile.reputation }}</span>
             </md-card-title-text>
             <md-card-title-media>
               <img class="md-user-avatar" ng-src="{{ user.profile.picture }}"/>

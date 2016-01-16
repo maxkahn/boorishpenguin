@@ -211,6 +211,10 @@ angular.module('boorish.answers', [])
     });
   };
 
+  $scope.goToUserProfile = function(userId){
+    $state.go('user', {id: userId});
+  };
+
   if (questionId){
     getQuestion(questionId);
   }
