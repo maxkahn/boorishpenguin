@@ -1,7 +1,5 @@
 angular.module('boorish.admin', [])
 	.controller('adminController', function($scope, Admin, $rootScope) {
-		console.log('Im here');
-		//console.log($rootScope.user.id)
 		$scope.confirmTeacher = function(){
 			Admin.confirmTeacher("$rootScope.user.id", this);
 		};
@@ -17,6 +15,6 @@ angular.module('boorish.admin', [])
 			.then(function(results){
 				$scope.pending = results.pending;
 				$scope.confirmed = results.confirmed;
-				console.log(results.pending)
 			})
 	});
+
