@@ -20,7 +20,7 @@ angular.module('boorish.ask', [])
       text: $scope.question.text,
       userId: $rootScope.user.id,
       tagsArray: $scope.topics.join(),
-      CourseId: $scope.courses.join()
+      CourseId: $scope.courseOptions.selectedOption
     };
 
     Questions.addQuestion(questionToInsert)
