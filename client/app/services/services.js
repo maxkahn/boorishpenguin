@@ -272,7 +272,6 @@ angular.module('boorish.services', [])
           var users = res.data.results;
           var isUser = false;
           for (var i = 0; i < users.length; i++) {
-            console.log()
             if (users[i].email === user.google) {
               isUser = true;
               $rootScope.user = users[i];
@@ -286,16 +285,59 @@ angular.module('boorish.services', [])
           }
         });
       });
-  },
+    },
 
-  isAuth: function () {
-    return !!$rootScope.user;
-  },
+    isAuth: function () {
+      return !!$rootScope.user;
+    },
 
-  signout: function () {
-    $rootScope.user = undefined;
-    $location.path('/signin');
-  }
-};
+    signout: function () {
+      $rootScope.user = undefined;
+      $location.path('/signin');
+    }
+  };
+})
 
+.factory('Admin', function ($http){
+  return {
+    getPendingTeachers : function () {
+      return $http({
+        method: 'GET',
+        url: '/api/admin'
+      })
+      .then(function(res) {
+        return res.data;
+      });
+    },
+    confirmTeacher : function(userId, user) {
+       return $http({
+        method: 'PUT',
+        url: '/api/admin/' + user.pendingTeacher.id,
+        data: JSON.stringify({
+          userId: 6,
+          isTeacher: true
+        })
+      });
+    },
+    fireTeacher : function(userId, user) {
+        var teacherId = user.pendingTeacher.id || user.teacher.id;
+       return $http({
+        method: 'PUT',
+        url: '/api/admin/' + user.pendingTeacher.id,
+        data: JSON.stringify({
+          userId: 6,
+        })
+      });
+    },
+    moveTeacherToPending : function(userId, user) {
+       return $http({
+        method: 'PUT',
+        url: '/api/admin/' + user.teacher.id,
+        data: JSON.stringify({
+          userId: 6,
+          pendingTeacher: true
+        })
+      });
+    }
+  };
 });
