@@ -1,27 +1,82 @@
 <md-content class="md-padding" layout = "row" layout-align="center start">
-    <div flex = "33">
-        Welcome Admin
-    </div>
+
+    <md-list flex = "33">
+
+        <md-subheader class="md-no-sticky">All Students</md-subheader>
+          <md-input-container class="md-block" style="margin-left: 7px">
+          <label>Search for...</label>
+          <input ng-model="searchText">
+          </md-input-container>
+         <md-card flex = "90" ng-repeat = "student in students | filter:searchText" style = "margin-bottom : 10px">
+        <md-card-title style = "margin-bottom : 60px">
+          <md-card-title-text>
+            <span class="md-headline">{{ student.name }}</span>
+            <span>reputation {{student.reputation}}</span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-sm card-media">
+              <img class="md-user-avatar" src="{{ student.imgUrl }}"/>
+            </div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end">
+         <md-button ng-click = "moveToPending()" flex = "30" class="md-raised">Pending</md-button>
+        <md-button ng-click = "confirmTeacher()" flex = "30" class="md-raised md-primary">Teacher</md-button>
+        <md-button ng-click = "deleteUser()" flex = "30" class="md-raised md-warn">Delete</md-button>
+        </md-card-actions>
+      </md-card>
+      </md-list>
+
 
      <md-list flex = "33">
-     <md-subheader class="md-no-sticky">Current Teachers</md-subheader>
-      <md-list-item layout = "column" class="md-3-line" ng-repeat = "teacher in confirmed">
-        <img class="md-user-avatar" src="{{ teacher.imgUrl }}" alt="{{teacher.name}}"/>
-        <div class="md-list-item-text" layout="column">
-          <h3 flex = "80">{{ teacher.name }}</h3>
-           <md-button flex = "5" class="md-raised md-warn" ng-click = "moveTeacherToPending()" >Warn</md-button>
-        </div>
-      </md-list-item>
+     <md-subheader class="md-no-sticky">Teachers</md-subheader>
+          <md-input-container class="md-block" style="margin-left: 7px">
+          <label>Search for...</label>
+          <input ng-model="teachers">
+          </md-input-container>
+         <md-card flex = "90" ng-repeat = "teacher in confirmed | filter: teachers" style = "margin-bottom : 10px">
+        <md-card-title style = "margin-bottom : 60px">
+          <md-card-title-text>
+            <span class="md-headline">{{ teacher.name }}</span>
+            <span>reputation {{teacher.reputation}}</span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-sm card-media">
+              <img class="md-user-avatar" src="{{ teacher.imgUrl }}"/>
+            </div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+           <md-button ng-click = "moveToStudent()" flex = "30" class="md-raised">User</md-button>
+        <md-button ng-click = "moveToPending()" flex = "30" class="md-raised md-primary">Pending</md-button>
+        <md-button ng-click = "deleteUser()" flex = "30" class="md-raised md-warn">Delete</md-button>
+        </md-card-actions>
+      </md-card>
       </md-list>
 
     <md-list flex = "33">
      <md-subheader class="md-no-sticky">Pending Teachers</md-subheader>
-      <md-list-item layout = "column" class="md-3-line" ng-repeat = "pendingTeacher in pending">
-        <img class="md-user-avatar" src="{{ pendingTeacher.imgUrl }}"/>
-        <div class="md-list-item-text" layout="column">
-          <h3>{{ pendingTeacher.name }}</h3>
-         <md-button flex = "5"class="md-raised md-primary" ng-click = "confirmTeacher()">Confirm</md-button>
-        </div>
-      </md-list-item>
+          <md-input-container class="md-block" style="margin-left: 7px">
+          <label>Search for...</label>
+          <input ng-model="pendingTeachers">
+          </md-input-container>
+         <md-card flex = "90" ng-repeat = "pendingTeacher in pending | filter: pendingTeachers" style = "margin-bottom : 10px">
+        <md-card-title style = "margin-bottom : 60px">
+          <md-card-title-text>
+            <span class="md-headline">{{ pendingTeacher.name }}</span>
+            <span>reputation {{pendingTeacher.reputation}}</span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-sm card-media">
+              <img class="md-user-avatar" src="{{ pendingTeacher.imgUrl }}"/>
+            </div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button ng-click = "moveToStudent()" flex = "30" class="md-raised">User</md-button>
+          <md-button ng-click = "confirmTeacher()" flex = "30" class="md-raised md-primary">Teacher</md-button>
+          <md-button ng-click = "deleteUser()" flex = "30" class="md-raised md-warn">Delete</md-button>
+        </md-card-actions>
+      </md-card>
       </md-list>
 </md-content>
