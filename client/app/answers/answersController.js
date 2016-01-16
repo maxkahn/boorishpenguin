@@ -43,6 +43,7 @@ angular.module('boorish.answers', [])
           createdAt: 'just now',
           user: $rootScope.user.name,
           imgUrl: $rootScope.user.picture,
+          userId: $rootScope.user.id
         });
       });
 
