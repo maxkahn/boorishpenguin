@@ -61,7 +61,9 @@ module.exports = {
 						imgUrl: post.User ? post.User.picture : "",
 						updatedAt: post.updatedAt,
 						questionId: post.QuestionId,
-						answerId: post.ResponseId
+						answerId: post.ResponseId,
+						isAnswerType: post.isAnswerType,
+						isQuestionType: post.isQuestionType
 					};
 				});
 
