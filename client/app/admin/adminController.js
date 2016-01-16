@@ -1,5 +1,9 @@
 angular.module('boorish.admin', [])
-	.controller('adminController', function($scope, Admin, $rootScope) {
+	.controller('adminController', function($scope, Admin, $rootScope, $location) {
+
+		if(!$rootScope.user.isAdmin){
+			$location.path('/questions');
+		}
 
 		$scope.confirmTeacher = function() {
 

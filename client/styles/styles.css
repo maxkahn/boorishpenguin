@@ -6,6 +6,10 @@
   height: 50px;
 }
 
+.mainDiv {
+  background: url('school.jpg');
+}
+
 .questionTop {
   background-color: #E2D2EA;
   width: 100%;
