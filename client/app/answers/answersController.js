@@ -1,5 +1,5 @@
 angular.module('boorish.answers', [])
-.controller('answersController', function($scope, $state, $stateParams, $mdToast, $document, Answers, Questions, Users, $rootScope) {
+.controller('answersController', function($scope, $state, $stateParams, $mdToast, $document, Answers, Questions, Users, $rootScope, $mdDialog) {
   var questionId = $stateParams.id;
 
   $scope.question = {};
@@ -43,6 +43,7 @@ angular.module('boorish.answers', [])
           createdAt: 'just now',
           user: $rootScope.user.name,
           imgUrl: $rootScope.user.picture,
+          userId: $rootScope.user.id
         });
       });
 
@@ -62,7 +63,7 @@ angular.module('boorish.answers', [])
   var showCantVoteTwiceToast = function() {
     $mdToast.show(
       $mdToast.simple()
-        .textContent('Cant vote twice on same question/answer')
+        .textContent("Can't vote twice on same question/answer")
         .position('top right')
         .hideDelay(2000)
     );
@@ -175,6 +176,44 @@ angular.module('boorish.answers', [])
         }
         answer.votes = votes;
       });
+  };
+
+  $scope.removePost = function(ev, post) {
+    var confirm = $mdDialog.confirm()
+          .title('Would you like to delete this?')
+          .ariaLabel('delete confirmation')
+          .targetEvent(ev)
+          .ok('Yes, Remove this')
+          .cancel('Cancel');
+    $mdDialog.show(confirm).then(function() {
+      Questions.removePost(post.id)
+        .then(function(){
+
+        });
+    }, function() {
+      
+    });
+  };
+
+  $scope.closeQuestion = function(ev, question) {
+    var confirm = $mdDialog.confirm()
+          .title('Would you like to close this question?')
+          .textContent('Question content and answers will be visible but readonly.')
+          .ariaLabel('close confirmation')
+          .targetEvent(ev)
+          .ok('Yes, Close question')
+          .cancel('Cancel');
+    $mdDialog.show(confirm).then(function() {
+      Questions.closePost(post.id)
+        .then(function(){
+          
+        });
+    }, function() {
+    });
+  };
+
+  $scope.goToUserProfile = function(userId){
+    $state.go('user', {id: userId});
   };
 
   if (questionId){

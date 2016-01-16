@@ -74,6 +74,22 @@ angular.module('boorish.services', [])
       .then(function(votes) {
         return votes.data;
       });
+    },
+
+    removePost: function(postId){
+      return $http({
+        method: 'POST',
+        url: 'api/questions/removePost',
+        data: { postId: postId }
+      });
+    },
+
+    closePost: function(postId){
+      return $http({
+        method: 'POST',
+        url: 'api/questions/closePost',
+        data: { postId: postId }
+      });
     }
   };
 })
@@ -215,8 +231,15 @@ angular.module('boorish.services', [])
       }).then(function(userInfo) {
         return userInfo.data;
       });
-    }
+    },
 
+    becomeTeacherRequest: function(userId){
+      return $http({
+        method: 'POST',
+        url: '/api/users/becomeTeacherRequest',
+        data: { userId: userId }
+      });
+    }
   };
 })
 
