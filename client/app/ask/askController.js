@@ -1,6 +1,6 @@
 angular.module('boorish.ask', [])
 
-.controller('askController', function($scope, $window, $state, $mdToast, Courses, Questions, $rootScope) {
+.controller('askController', function($scope, $state, $mdToast, Courses, Questions, $rootScope) {
   $scope.question = {};
   $scope.topics = [];
 

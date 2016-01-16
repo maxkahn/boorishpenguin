@@ -1,5 +1,5 @@
 angular.module('boorish.questions', [])
-.controller('questionsController', function($scope, $window, $state, $location, Questions) {
+.controller('questionsController', function($scope, $state, Questions) {
   $scope.questions = [];
 
   $scope.init = function() {

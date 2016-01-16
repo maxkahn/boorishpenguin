@@ -35,11 +35,12 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
+var api_url = process.env.API_URL || 'http://127.0.0.1:8001';
 // When user logged in does a get req to auth/google/callback
 passport.use(new GoogleStrategy({
   clientID: apikeys.googleOauth.clientID,
   clientSecret: apikeys.googleOauth.clientSecret,
-   callbackURL: "http://127.0.0.1:8001/auth/google/callback"
+   callbackURL: api_url + "/auth/google/callback"
 },
   function(accessToken, refreshToken, profile, done) {
     var queryObject = {};

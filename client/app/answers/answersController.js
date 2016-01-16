@@ -1,5 +1,5 @@
 angular.module('boorish.answers', [])
-.controller('answersController', function($scope, $state, $window, $stateParams, $mdToast, $document, Answers, Questions, Users, Auth, $rootScope) {
+.controller('answersController', function($scope, $state, $stateParams, $mdToast, $document, Answers, Questions, Users, $rootScope) {
   var questionId = $stateParams.id;
 
   $scope.question = {};
@@ -55,6 +55,15 @@ angular.module('boorish.answers', [])
         .textContent('Answer Submitted')
         .position('top left')
         .parent($document[0].querySelector('#answer_container_id'))
+        .hideDelay(2000)
+    );
+  };
+
+  var showCantVoteTwiceToast = function() {
+    $mdToast.show(
+      $mdToast.simple()
+        .textContent('Cant vote twice on same question/answer')
+        .position('top right')
         .hideDelay(2000)
     );
   };
@@ -138,6 +147,9 @@ angular.module('boorish.answers', [])
 
     Questions.voteQuestion(questionId, vote)
       .then(function(votes){
+        if (question.votes === votes){
+          showCantVoteTwiceToast();
+        }
         question.votes = votes;
       });
   };
@@ -158,6 +170,9 @@ angular.module('boorish.answers', [])
 
     Answers.voteAnswer(answer.id, vote)
       .then(function(votes){
+        if (answer.votes === votes){
+          showCantVoteTwiceToast();
+        }
         answer.votes = votes;
       });
   };
