@@ -45,6 +45,7 @@ passport.use(new GoogleStrategy({
 },
   function(accessToken, refreshToken, profile, done) {
     var queryObject = {};
+    queryObject.google_id = profile.id;
     queryObject.username = profile.emails[0].value;
     queryObject.name_last = profile.name.familyName;
     queryObject.name_first = profile.name.givenName;
@@ -54,6 +55,7 @@ passport.use(new GoogleStrategy({
     queryObject.picture = profile.photos ? profile.photos[0].value : "";
 
     User.findOrCreate({where: queryObject}).spread(function(user, created) {
+      User.update(queryObject, {where: {google_id: profile.id}});
       return done(null, user);
     });
   }));
