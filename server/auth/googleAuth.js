@@ -1,4 +1,5 @@
 
+
 exports.ensureAuth = function (req, res, next){
   // isAuthenticated is provided function that checks if the user is logged in to google
   if (req.isAuthenticated()) {return next(); }

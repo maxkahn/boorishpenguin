@@ -20,6 +20,7 @@ angular.module('boorish.services', [])
     },
 
     getAllQuestions: function() {
+
       return $http({
         method: 'GET',
         url: '/api/questions'
@@ -267,7 +268,6 @@ angular.module('boorish.services', [])
         url: '/auth/google'
       })
       .then(function (res) {
-
         user.google = res.data.email || res.data.profile.emails[0].value;
 
         return $http({
@@ -353,4 +353,4 @@ angular.module('boorish.services', [])
     $location.path('/signin');
   }
 
-};
+});
