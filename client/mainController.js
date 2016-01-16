@@ -10,4 +10,8 @@ angular.module('main.controller', [])
         $state.go('user', { id: $rootScope.user.id });
       }
     };
+
+    $scope.goToAdmin = function(){
+      $state.go('admin');
+    };
   });
