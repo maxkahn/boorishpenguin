@@ -1,5 +1,5 @@
 angular.module('boorish.answers', [])
-.controller('answersController', function($scope, $state, $stateParams, $mdToast, $document, Answers, Questions, Users, $rootScope) {
+.controller('answersController', function($scope, $state, $stateParams, $mdToast, $document, Answers, Questions, Users, $rootScope, $mdDialog) {
   var questionId = $stateParams.id;
 
   $scope.question = {};
@@ -175,6 +175,40 @@ angular.module('boorish.answers', [])
         }
         answer.votes = votes;
       });
+  };
+
+  $scope.removePost = function(ev, post) {
+    var confirm = $mdDialog.confirm()
+          .title('Would you like to delete this?')
+          .ariaLabel('delete confirmation')
+          .targetEvent(ev)
+          .ok('Yes, Remove this')
+          .cancel('Cancel');
+    $mdDialog.show(confirm).then(function() {
+      Questions.removePost(post.id)
+        .then(function(){
+
+        });
+    }, function() {
+      
+    });
+  };
+
+  $scope.closeQuestion = function(ev, question) {
+    var confirm = $mdDialog.confirm()
+          .title('Would you like to close this question?')
+          .textContent('Question content and answers will be visible but readonly.')
+          .ariaLabel('close confirmation')
+          .targetEvent(ev)
+          .ok('Yes, Close question')
+          .cancel('Cancel');
+    $mdDialog.show(confirm).then(function() {
+      Questions.closePost(post.id)
+        .then(function(){
+          
+        });
+    }, function() {
+    });
   };
 
   if (questionId){

@@ -14,6 +14,7 @@
         </md-card-header>
       </div>
       <div flex="40">
+
       </div>
       <div flex="10">
         <div layout="column">
@@ -50,6 +51,8 @@
 
     <md-card-actions layout="row" layout-align="end">
       <div flex="30">
+        <md-icon md-svg-icon="styles/delete.svg" ng-click='removePost($event,question)' ng-show="user.isTeacher"></md-icon>
+        <md-icon md-svg-icon="styles/marker-check.svg" ng-click='closeQuestion($event,question)' ng-show="user.isTeacher"></md-icon>
         <md-icon md-svg-icon="../../styles/checkbox-marked-circle.svg" ng-show="question.isPreferred || user.isTeacher" ng-click="markGoodQuestion()" >
         </md-icon> <span ng-show="question.isPreferred"> Teacher Approved Question </span>
       </div>
@@ -109,6 +112,7 @@
 
     <md-card-actions layout="row" layout-align="end">
       <div flex="30">
+        <md-icon md-svg-icon="styles/delete.svg" ng-click='removePost($event,answer)' ng-show="user.isTeacher"></md-icon>
         <md-icon md-svg-icon="../../styles/checkbox-marked-circle.svg" ng-show="answer.isPreferred || user.isTeacher" ng-click="markCorrectAnswer(answer)" >
         </md-icon > <span ng-show="answer.isPreferred" > Correct Answer</span>
       </div>
