@@ -30,6 +30,10 @@
             <md-icon md-svg-icon="styles/plus.svg"></md-icon>
           </a>
         </md-button>
+
+        <md-button ng-click='goToCourses()' aria-label="Courses" ng-show="user.isAdmin">
+          <md-icon md-svg-icon="styles/book-open.svg"></md-icon>
+        </md-button>
     
         <md-button ng-click='goToAdmin()' aria-label="Admin" ng-show="user.isAdmin">
           <md-icon md-svg-icon="styles/account-multiple-plus.svg"></md-icon>

@@ -14,4 +14,8 @@ angular.module('main.controller', [])
     $scope.goToAdmin = function(){
       $state.go('admin');
     };
+
+    $scope.goToCourses = function(){
+      $state.go('courses');
+    };
   });
