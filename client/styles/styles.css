@@ -7,8 +7,19 @@
 }
 
 .mainDiv {
-  background: url('school.jpg');
+
+background: url('school.jpg') no-repeat center center fixed;
+
+-webkit-background-size: cover;
+
+-moz-background-size: cover;
+
+-o-background-size: cover;
+
+background-size: cover;
+
 }
+
 
 .questionTop {
   background-color: #E2D2EA;
