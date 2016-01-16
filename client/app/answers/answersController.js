@@ -62,7 +62,7 @@ angular.module('boorish.answers', [])
   var showCantVoteTwiceToast = function() {
     $mdToast.show(
       $mdToast.simple()
-        .textContent('Cant vote twice on same question/answer')
+        .textContent("Can't vote twice on same question/answer")
         .position('top right')
         .hideDelay(2000)
     );
