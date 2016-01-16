@@ -1,5 +1,5 @@
 angular.module('main.controller', [])
-  .controller('MainController', function ($scope, $state, $rootScope) {
+  .controller('MainController', function ($scope, $state, $rootScope, $location) {
     $scope.logout = function() {
       $rootScope.user = undefined;
       $location.path('/');
