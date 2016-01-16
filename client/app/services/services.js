@@ -369,11 +369,14 @@ angular.module('boorish.services', [])
           pendingTeacher: true
         })
       });
+    },
+
+    signout: function() {
+      $rootScope.user = undefined;
+      $location.path('/signin');
     }
   };
-  signout: function () {
-    $rootScope.user = undefined;
-    $location.path('/signin');
-  }
 
-};
+
+
+});
