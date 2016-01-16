@@ -2,11 +2,11 @@
 
     <md-list flex = "33">
 
-        <md-subheader class="md-no-sticky">All Students</md-subheader>
-          <md-input-container class="md-block" style="margin-left: 7px">
-          <label>Search for...</label>
-          <input ng-model="searchText">
-          </md-input-container>
+      <md-subheader class="md-no-sticky">All Students</md-subheader>
+        <md-input-container class="md-block" style="margin-left: 7px">
+        <label>Search for...</label>
+        <input ng-model="searchText">
+        </md-input-container>
          <md-card flex = "90" ng-repeat = "student in students | filter:searchText" style = "margin-bottom : 10px">
         <md-card-title style = "margin-bottom : 60px">
           <md-card-title-text>

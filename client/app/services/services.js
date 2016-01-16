@@ -257,7 +257,6 @@ angular.module('boorish.services', [])
 })
 
 .factory('Courses', function($http) {
-  
   return {
 
     getCourses: function() {
@@ -267,7 +266,32 @@ angular.module('boorish.services', [])
 
       })
       .then(function(res) {
+        return res.data;
+      });
+    },
+    updateCourse: function(name, status) {
+      return $http({
+        method: 'PUT',
+        url: '/api/courses',
+        data : {
+          name : name,
+          isActive : !status
+        }
+
+      })
+      .then(function(res) {
         return res.data.results;
+      });
+    },
+    addCourse: function(course) {
+      return $http({
+        method: 'POST',
+        url: '/api/courses',
+        data : course
+
+      })
+      .then(function(res) {
+        return course;
       });
     }
   };
@@ -324,6 +348,19 @@ angular.module('boorish.services', [])
 
 .factory('Admin', function ($http){
   return {
+
+    addCourse : function(courseName) {
+      return $http({
+        method: 'POST',
+        url: '/api/courses',
+        data: JSON.stringify({
+          name: courseName,
+        })
+      })
+      .then(function(res) {
+        return res.data;
+      });
+    },
     getPendingTeachers : function () {
       return $http({
         method: 'GET',
@@ -340,7 +377,7 @@ angular.module('boorish.services', [])
         method: 'PUT',
         url: '/api/admin/' + member.id,
         data: JSON.stringify({
-          userId: 6,
+          userId: userId,
           isTeacher: true
         })
       });
@@ -351,7 +388,7 @@ angular.module('boorish.services', [])
         method: 'PUT',
         url: '/api/admin/' + member.id,
         data: JSON.stringify({
-          userId: 6,
+          userId: userId,
           pendingTeacher: false,
           isTeacher: false,
         })
@@ -363,7 +400,7 @@ angular.module('boorish.services', [])
         method: 'PUT',
         url: '/api/admin/' + member.id,
         data: JSON.stringify({
-          userId: 6,
+          userId: userId,
           pendingTeacher: true
         })
       });

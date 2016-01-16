@@ -1,0 +1,38 @@
+<md-content class="md-padding" layout = "row" layout-align="center start">
+	<div flex = "30" style = "margin-right : 10px">
+
+	<md-subheader class="md-no-sticky">Add A Class</md-subheader>
+	<div layout = "row" layout-align="center start">
+
+	<div flex = "80" class="dropdown-form form-group">
+	    <md-input-container class="md-block">
+      <label>Add Course Here</label>
+      <textarea ng-model="newCourse" md-maxlength="30"></textarea>
+    </md-input-container>
+	  </div>
+	  <md-button flex = "25"class="md-raised md-primary" ng-click= "addCourse()">Add Class</md-button>
+	</div>
+	</div>
+	<div flex = "30" style = "margin-right : 10px">
+
+	<md-subheader class="md-no-sticky">Current Classes</md-subheader>
+	<div layout = "row" layout-align="center start" ng-repeat = "course in activeCourses">
+
+	<div flex = "80" class="dropdown-form form-group">
+	   <h2>{{course.name}}</h2>
+	 </div>
+	  <md-button flex = "20"class="md-raised md-warn" ng-click = "changeCourse(true)">Suspend</md-button>
+	</div>
+	</div>
+	<div flex = "30">
+
+	<md-subheader class="md-no-sticky">Inactive Classes</md-subheader>
+	<div layout = "row" layout-align="center start" ng-repeat = "course in inactiveCourses">
+
+	<div flex = "80" class="dropdown-form form-group">
+	    <h2>{{course.name}}</h2>
+	  </div>
+	  <md-button flex = "20" ng-click = "changeCourse(false)"class="md-raised md-primary">Activate</md-button>
+	</div>
+	</div>
+</md-content>
