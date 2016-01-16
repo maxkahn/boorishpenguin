@@ -18,13 +18,13 @@ module.exports = {
 			.then(function(question) {
 				if (question.isClosed) {
 					res.sendStatus(404);
+				} else {
+					PostCtrl.addPost(req.body, function(answer) {
+						question.responses++;
+						question.save();
+						res.status(201).json(answer);
+					});
 				}
-				PostCtrl.addPost(req.body, function(answer) {
-					question.responses++;
-					question.save();
-					res.status(201).json(answer);
-				});
-
 			});
 	},
 
