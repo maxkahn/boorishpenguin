@@ -1,5 +1,5 @@
 angular.module('boorish.user', [])
-.controller('userController', function($scope, $window, $state, $stateParams, Users) {
+.controller('userController', function($scope, $state, $stateParams, Users) {
   var userId = $stateParams.id;
   $scope.user = {};
 

@@ -1,5 +1,5 @@
 angular.module('boorish.answers', [])
-.controller('answersController', function($scope, $state, $window, $stateParams, $mdToast, $document, Answers, Questions, Users, Auth, $rootScope) {
+.controller('answersController', function($scope, $state, $stateParams, $mdToast, $document, Answers, Questions, Users, $rootScope) {
   var questionId = $stateParams.id;
 
   $scope.question = {};
