@@ -257,7 +257,6 @@ angular.module('boorish.services', [])
 })
 
 .factory('Courses', function($http) {
-  
   return {
 
     getCourses: function() {
@@ -267,7 +266,32 @@ angular.module('boorish.services', [])
 
       })
       .then(function(res) {
+        return res.data;
+      });
+    },
+    updateCourse: function(name, status) {
+      return $http({
+        method: 'PUT',
+        url: '/api/courses',
+        data : {
+          name : name,
+          isActive : !status
+        }
+
+      })
+      .then(function(res) {
         return res.data.results;
+      });
+    },
+    addCourse: function(course) {
+      return $http({
+        method: 'POST',
+        url: '/api/courses',
+        data : course
+
+      })
+      .then(function(res) {
+        return course;
       });
     }
   };
@@ -325,7 +349,7 @@ angular.module('boorish.services', [])
 .factory('Admin', function ($http){
   return {
 
-    adCourse : function(courseName) {
+    addCourse : function(courseName) {
       return $http({
         method: 'POST',
         url: '/api/courses',

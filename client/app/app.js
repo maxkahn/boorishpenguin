@@ -1,4 +1,4 @@
-angular.module('Main', ['ui.router', 'ngMaterial', 'main.controller', 'boorish.questions' ,'boorish.services', 'boorish.ask', 'boorish.answers', 'boorish.login', 'boorish.admin', 'boorish.user'])
+angular.module('Main', ['ui.router', 'ngMaterial', 'main.controller', 'boorish.questions' ,'boorish.services', 'boorish.ask', 'boorish.answers', 'boorish.login', 'boorish.admin', 'boorish.user', 'boorish.courses'])
   .config(function ($stateProvider, $mdThemingProvider, $urlRouterProvider) {
 
     var checkLoggedin = function($q, $http, $location, $rootScope, $state) {
@@ -51,6 +51,12 @@ angular.module('Main', ['ui.router', 'ngMaterial', 'main.controller', 'boorish.q
         url: '/admin',
         templateUrl : 'app/admin/index.html',
         controller : 'adminController',
+        resolve: { loggedin : checkLoggedin }
+      })
+      .state('courses', {
+        url: '/admin/courses',
+        templateUrl : 'app/courses/index.html',
+        controller : 'coursesController',
         resolve: { loggedin : checkLoggedin }
       });
 

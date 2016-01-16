@@ -6,10 +6,9 @@ angular.module('boorish.ask', [])
   $scope.courses = [];
 
   Courses.getCourses().then(function(data) {
-    console.log(data)
     $scope.courseOptions = {
-      availableOptions: data,
-      selectedOption: data[data.length - 1],
+      availableOptions: data.active,
+      selectedOption: data.active[data.length - 1],
     };
   });
 

@@ -43,6 +43,7 @@ module.exports = function(app, express) {
 
   app.get('/api/courses', courseControllers.allCourses);
   app.post('/api/courses', courseControllers.addCourse);
+  app.put('/api/courses', courseControllers.updateCourse);
 
 
   app.get('/api/tags', tagControllers.allTags);

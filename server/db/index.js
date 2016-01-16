@@ -49,7 +49,12 @@ var Tag = db.define('Tag', {
 });
 
 var Course = db.define('Course', {
-  name: Sequelize.STRING
+  name: Sequelize.STRING,
+  isActive : {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: true
+  }
 }, {
   timestamps: false
 });
