@@ -8,7 +8,7 @@ angular.module('boorish.admin', [])
 			} else {
 				moveUser($scope.students, $scope.confirmed, this.student);
 			}
-			Admin.confirmTeacher("$rootScope.user.id", this);
+			Admin.confirmTeacher($rootScope.user.id, this);
 		};
 
 
@@ -19,7 +19,7 @@ angular.module('boorish.admin', [])
 			} else {
 				moveUser($scope.confirmed, $scope.students, this.teacher);
 			}
-			Admin.moveToStudent("$rootScope.user.id", this);
+			Admin.moveToStudent($rootScope.user.id, this);
 		};
 
 		$scope.moveToPending = function() {
@@ -29,7 +29,7 @@ angular.module('boorish.admin', [])
 			} else {
 				moveUser($scope.students, $scope.pending, this.student);
 			}
-			Admin.moveToPending("$rootScope.user.id", this);
+			Admin.moveToPending($rootScope.user.id, this);
 		};
 
 		$scope.deleteUser = function() {

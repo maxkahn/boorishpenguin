@@ -336,7 +336,6 @@ angular.module('boorish.services', [])
 
     confirmTeacher : function(userId, user) {
     var member = user.student || user.pendingTeacher;
-    console.log(member)
        return $http({
         method: 'PUT',
         url: '/api/admin/' + member.id,
