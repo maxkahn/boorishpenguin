@@ -9,13 +9,7 @@ angular.module('boorish.services', [])
       return $http({
         method: 'POST',
         url: '/api/questions',
-        data: JSON.stringify({
-          text: question.text,
-          id_user: question.userId,
-          course: question.course,  // these are not setup yet
-          tag: question.tag,  // these are not setup yet
-          title: question.title
-        })
+        data: question
       });
     },
 
@@ -79,7 +73,7 @@ angular.module('boorish.services', [])
     removePost: function(postId){
       return $http({
         method: 'POST',
-        url: 'api/questions/removePost',
+        url: '/api/questions/removePost',
         data: { postId: postId }
       });
     },
@@ -87,7 +81,7 @@ angular.module('boorish.services', [])
     closePost: function(postId){
       return $http({
         method: 'POST',
-        url: 'api/questions/closePost',
+        url: '/api/questions/closePost',
         data: { postId: postId }
       });
     }
@@ -371,9 +365,4 @@ angular.module('boorish.services', [])
       });
     }
   };
-  signout: function () {
-    $rootScope.user = undefined;
-    $location.path('/signin');
-  }
-
-};
+});

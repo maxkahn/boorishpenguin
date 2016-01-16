@@ -61,5 +61,25 @@ module.exports = {
 					res.sendStatus(404);
 				}
 			});
+	},
+
+	removePost: function(req, res, next){
+		var postId = req.body.postId;
+		db.Post.findById(postId)
+			.then(function(post){
+				post.isDeleted = true;
+				post.save();
+				res.sendStatus(200);
+			});
+	},
+
+	closePost: function(req, res, next){
+		var postId = req.body.postId;
+		db.Post.findById(postId)
+			.then(function(post){
+				post.isClosed = true;
+				post.save();
+				res.sendStatus(200);
+			});
 	}
 };

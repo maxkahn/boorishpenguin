@@ -22,8 +22,8 @@ module.exports = function(app, express) {
   app.put('/api/questions/changeStatus/:id', questionControllers.toggleCloseQuestion);
   app.put('/api/questions/markAsGood/:id' , questionControllers.markAsGoodQuestion);
   app.put('/api/questions/vote/:id' , voteController.votePost);
-
-
+  app.post('/api/questions/removePost', questionControllers.removePost);
+  app.post('/api/questions/closePost', questionControllers.closePost);
 
   app.post('/api/answers', answerControllers.newAnswer);
   app.put('/api/answers/markAsCorrect/:id', answerControllers.markAsCorrectAnswer);
