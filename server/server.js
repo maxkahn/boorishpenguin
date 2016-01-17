@@ -54,7 +54,7 @@ passport.use(new GoogleStrategy({
     queryObject.username = queryObject.email;
     queryObject.picture = profile.photos ? profile.photos[0].value : "";
 
-    User.findOrCreate({where: queryObject}).spread(function(user, created) {
+    User.findOrCreate({where: {google_id: profile.id}}).spread(function(user, created) {
       User.update(queryObject, {where: {google_id: profile.id}});
       return done(null, user);
     });
